@@ -26,6 +26,34 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Reserve disk space on the disposable hosted runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "${GITHUB_ACTIONS:-}" == true && "${RUNNER_ENVIRONMENT:-}" == github-hosted ]] || {
+            echo 'Refusing SDK cleanup outside a disposable GitHub-hosted runner.' >&2
+            exit 1
+          }
+          available_kib() { df --output=avail -k "$GITHUB_WORKSPACE" | tail -n 1 | tr -d ' '; }
+          required_kib=$((24 * 1024 * 1024))
+          df -h "$GITHUB_WORKSPACE"
+          # Fixed image-owned SDK paths only. This Lean build uses neither SDK.
+          if (( $(available_kib) < required_kib )) && [[ -d /usr/local/lib/android/sdk ]]; then
+            [[ "$(realpath -e /usr/local/lib/android/sdk)" == /usr/local/lib/android/sdk ]]
+            [[ -d /usr/local/lib/android/sdk/platform-tools ]]
+            sudo rm -rf -- /usr/local/lib/android/sdk
+          fi
+          if (( $(available_kib) < required_kib )) && [[ -d /usr/share/dotnet ]]; then
+            [[ "$(realpath -e /usr/share/dotnet)" == /usr/share/dotnet ]]
+            [[ -x /usr/share/dotnet/dotnet && -d /usr/share/dotnet/sdk ]]
+            sudo rm -rf -- /usr/share/dotnet
+          fi
+          df -h "$GITHUB_WORKSPACE"
+          (( $(available_kib) >= required_kib )) || {
+            echo 'The pinned proof/docs build requires at least 24 GiB free before toolchain installation.' >&2
+            exit 1
+          }
+
       - name: Install pinned official Lean toolchain
         shell: bash
         run: |
@@ -44,6 +72,7 @@ jobs:
 
       - name: Restore pinned dependencies and build cache
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        continue-on-error: true # Optional optimization; all pin and build checks still run.
         with:
           path: |
             vendor
@@ -61,8 +90,10 @@ jobs:
       - name: Build and validate editable Blueprint
         working-directory: blueprint
         run: |
+          df -h .
           sh scripts/build.sh
           lake exe vbp check
+          df -h .
 
       - name: Export intended public website only
         working-directory: blueprint

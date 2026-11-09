@@ -6,10 +6,15 @@ import hashlib, html, json, re, shutil, subprocess, zipfile
 DOC = Path(__file__).resolve().parents[1]
 ROOT = DOC.parent
 SITE = DOC / '_out/site/html-multi'
+
+# Resolve snapshot paths without changing the historical manifest or exported names.
+def snapshot_path(relative):
+    return ROOT / ('docs/recovered/README.md' if str(relative) == 'README.md' else relative)
+
 manifest = json.loads((DOC / 'source-manifest.json').read_text())
 assert manifest['source_commit'] == (DOC / 'source-revision').read_text().strip()
 for entry in manifest['files']:
-    p = ROOT / entry['path']
+    p = snapshot_path(entry['path'])
     assert hashlib.sha256(p.read_bytes()).hexdigest() == entry['sha256'], f"Changed core: {p}"
 report = json.loads((ROOT / 'concrete/evidence/concrete-proof-report.json').read_text())
 assert report['status'] == 'checked_end_to_end_standard_DDH_reduction'
@@ -65,7 +70,7 @@ for page in SITE.rglob('*.html'):
 shutil.rmtree(SITE/'source',ignore_errors=True)
 for entry in manifest['files']:
     rel=Path(entry['path']); target=SITE/'source'/rel
-    target.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(ROOT/rel,target)
+    target.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(snapshot_path(rel),target)
     if rel.suffix in {'.lean','.rs'}:
         lines=target.read_text().splitlines()
         body='\n'.join(f'<span class="source-line" id="L{i}"><a class="line-number" href="#L{i}">{i}</a>{html.escape(line)}</span>' for i,line in enumerate(lines,1))

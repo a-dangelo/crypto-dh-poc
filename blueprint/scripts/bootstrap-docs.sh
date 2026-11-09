@@ -29,7 +29,8 @@ manifest = json.loads((root / "blueprint/source-manifest.json").read_text())
 assert manifest["source_commit"] == "a27d45ad02331a96279032a11872d6ec7af47860"
 assert len(manifest["files"]) == 67
 for record in manifest["files"]:
-    path = root / record["path"]
+    # The original README is archived separately from the current introduction.
+    path = root / ("docs/recovered/README.md" if record["path"] == "README.md" else record["path"])
     assert hashlib.sha256(path.read_bytes()).hexdigest() == record["sha256"], path
 blueprint = json.loads((root / "blueprint/lake-manifest.json").read_text())
 verso = next(p for p in blueprint["packages"] if p["name"] == "VersoBlueprint")

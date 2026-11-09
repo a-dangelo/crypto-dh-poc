@@ -4,7 +4,10 @@ Checked on 9 November 2026 against the recovered core snapshot
 `a27d45ad02331a96279032a11872d6ec7af47860`.
 
 - Fresh cloud concrete build passed (4,097 jobs). All 22 axiom closures match the
-  preserved audit exactly. All 67 source/evidence hashes remain unchanged.
+  preserved audit exactly. All 67 source/evidence contents remain hash-identical.
+  The original snapshot README is preserved at `docs/recovered/README.md`; the
+  current root README is revised documentation. Snapshot verification and private
+  export resolve this path explicitly and retain the original manifests.
 - Native VersoBlueprint build and `vbp check` passed: 26 preview manifest/cache
   entries, no errors. Private HTML checks passed for 39 pages and 1,979 links.
 - All 13 Lean panels are contiguous excerpts of the defining source commands.

@@ -26,10 +26,12 @@ def private_url(path):
     path = html.unescape(path)
     path = path.removeprefix('source/')
     path = re.sub(r'\.(lean|rs)\.html(?=#|$)',r'.\1',path)
-    path = {'manifest.json':'blueprint/source-manifest.json',
+    path, separator, fragment = path.partition('#')
+    path = {'README.md':'docs/recovered/README.md',
+            'manifest.json':'blueprint/source-manifest.json',
             'line-counts.json':'blueprint/source-line-counts.json',
             'documentation-manifest.json':'blueprint/README.md'}.get(path,path)
-    return blob+path
+    return blob+path+separator+fragment
 
 def rewrite(text):
     text = text.replace(str(ROOT)+"/", "")
