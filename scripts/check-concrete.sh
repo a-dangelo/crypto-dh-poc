@@ -12,7 +12,7 @@ if [[ "${1:-}" != '--proof-only' ]]; then
   python3 "$ROOT/scripts/slice-concrete.py" --check
 fi
 (cd "$ROOT/concrete" && lake build) 2>&1 | tee "$ROOT/concrete/evidence/final-build.log"
-(cd "$ROOT/concrete" && lake env lean Concrete/Audit.lean) > "$ROOT/concrete/evidence/axioms.log" 2>&1
+(cd "$ROOT/concrete" && lake env lean ../scripts/check-concrete-axioms.lean) > "$ROOT/concrete/evidence/axioms.log" 2>&1
 if [[ -d "$ROOT/vendor/dalek-extraction" ]]; then
   (cd "$ROOT/concrete/rust/smoke" && \
     RUSTFLAGS='--cfg curve25519_dalek_backend="serial"' cargo run --locked) \

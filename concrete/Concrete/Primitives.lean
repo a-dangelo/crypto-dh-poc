@@ -10,7 +10,8 @@ open Aeneas Aeneas.Std Result Aeneas.Std.WP
 open Curve25519Dalek curve25519
 namespace DhConcrete
 
-/-- Helper composition of extracted primitives; Native.lean proves equality to the extracted adapter. -/
+/-- Public-value computation composed from the extracted primitives.
+`Concrete.Native` proves equality with the extracted Rust wrapper. -/
 noncomputable def publicCompose (raw : Array U8 64#usize) : Result (Array U8 32#usize) := do
   let s ← scalar.Scalar.from_bytes_mod_order_wide raw
   let p ← ristretto.«RistrettoPointx86_64-no-tables».mul_base s
@@ -44,7 +45,8 @@ noncomputable def agreeCompose (raw : Array U8 64#usize) (peer : Array U8 32#usi
     let r ← ristretto.CompressedRistretto.to_bytes c
     pure (some r)
 
-/-- Agreement on every honest public encoding, irrespective of decoded representative. -/
+/-- Agreement computes the encoded shared secret for every honest public
+encoding, independently of the representative returned by decompression. -/
 theorem agreeCompose_spec (raw : Array U8 64#usize) (peer : Array U8 32#usize)
     (g : Group) (hpeer : peer.asNat 8 = encode g) :
     agreeCompose raw peer ⦃ r => ∃ bytes, r = some bytes ∧ bytes.asNat 8 =

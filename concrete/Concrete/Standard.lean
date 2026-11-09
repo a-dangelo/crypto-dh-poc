@@ -6,8 +6,8 @@ import Concrete.SamplingError
 namespace DhConcrete
 open Aeneas.Std OracleComp OracleSpec ENNReal
 
-/-- Standard uniform-scalar DDH controls the extracted Rust game, up to the
-proved bias of its two independent wide-reduced secret scalars in each branch. -/
+/-- The extracted session advantage is bounded by standard uniform-scalar DDH
+plus the error from four replacements of independently wide-reduced secret scalars. -/
 theorem wideAdvantage_le_standard
     (hTarget : target = "x86_64-no-tables")
     (adversary : Public → Public → Key → ProbComp Bool) :
@@ -26,8 +26,8 @@ theorem wideAdvantage_le_standard
   rw [heq] at hsum
   exact add_le_add le_rfl hsum
 
-/-- The standard-DDH corollary uses an explicit supplied hardness bound, plus
-an additive statistical error strictly below 2^-260. -/
+/-- A supplied standard-DDH bound gives a session bound of epsilon plus 2^-260.
+The proved statistical error is strictly smaller than this additive term. -/
 theorem wideAdvantage_le_of_standardDDH
     (hTarget : target = "x86_64-no-tables")
     (adversary : Public → Public → Key → ProbComp Bool) (ε : ℝ≥0∞)

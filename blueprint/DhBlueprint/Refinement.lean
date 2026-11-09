@@ -11,17 +11,25 @@ open Verso.Genre Verso.Genre.Manual Informal
 tag := "refinement"
 %%%
 
-The 31-line Rust wrapper takes explicit 64-byte secrets and exchanges
-canonical 32-byte public values. Agreement returns an optional encoding.
-The backend is patched BAIF dalek 5.0.0 at
+The Rust entry point is [`poc_dh::session`](source/concrete/rust/poc_dh.rs.html#L25).
+It calls `public` twice and `agree` twice, with explicit 64-byte secrets and
+canonical 32-byte public values. Charon and Aeneas extract this wrapper together
+with patched BAIF dalek 5.0.0 at
 `95b5831c63ff1c5f6287bd3a77569412a9afdbfb`.
+
+`Concrete.GeneratedAdapter` imports the retained `Curve25519Dalek.Funs`
+backend and contains the extracted `Curve25519Dalek.poc_dh.session` below.
+The [linkage report](source/concrete/evidence/linkage-comparison.json)
+checks the full extraction against the pinned backend declarations.
+The [extraction manifest](source/concrete/evidence/extraction-inputs.json)
+records the wrapper, patches and output hashes.
 
 ::::definition "extracted_session" (lean := "Curve25519Dalek.poc_dh.session")
 :::AnchorlessBlueprint.pair Curve25519Dalek.poc_dh.session -docstrings
-The session computes two public values and two local keys, propagating
-Aeneas failures. `GeneratedAdapter.lean` is a mechanical slice of the
-full extraction. The full extraction’s inherited backend declarations match
-the pinned proof source after removal of block comments.
+The extracted session computes two public values and two local keys,
+propagating Aeneas failures. This declaration is the entry called by
+{bpref "real_game"}[the native real experiment] and
+{bpref "ideal_game"}[the native ideal experiment].
 :::
 ::::
 
@@ -31,8 +39,9 @@ For every $`s\in\mathrm{Bytes}_{64}`, under the target configuration,
 
 $$`\mathrm{public}(s)=\mathrm{ok}(p(d(s)g)).`
 
-The generated wrapper is definitionally equal to the composition covered
-by the imported primitive specifications.
+`extracted_public_link` proves the selected generated wrapper equal to
+`publicCompose` by `rfl`. The composition's mathematical result follows
+from the imported BAIF specifications.
 :::
 ::::
 
@@ -42,9 +51,10 @@ Under the same target configuration, for every raw secret $`s` and $`P\in G`,
 
 $$`\mathrm{agree}(s,p(P))=\mathrm{ok}(k(d(s)P)).`
 
-The proof uses the BAIF decompression, multiplication and compression
-specifications. A decoded Edwards representative may differ from $`P`;
-the Ristretto relation suffices to identify the resulting encoding.
+`extracted_agree_link` is the corresponding definitional equality for
+`agreeCompose`. The proof uses the BAIF decompression, multiplication and
+compression specifications. The Ristretto relation identifies the encoding
+even when decoding chooses a different Edwards representative.
 :::
 ::::
 

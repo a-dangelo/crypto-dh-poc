@@ -1,8 +1,10 @@
 # Rust DH verification blueprint
 
-This is newly authored, editable VersoBlueprint documentation for the recovered,
-hash-verified PoC snapshot at a27d45ad02331a96279032a11872d6ec7af47860.
-It replaces the earlier documentation; it does not recover its Git history.
+This editable VersoBlueprint documents the Diffie–Hellman proof derived from
+the recovered snapshot at `a27d45ad02331a96279032a11872d6ec7af47860`.
+The current sources include revised docstrings and separate verification scripts.
+The recovered snapshot and its evidence remain available with their original hashes.
+The documentation does not reconstruct the lost Git history.
 
 The paired renderer adapts `verso-blueprint-declarations` from a-dangelo/scratchpad
 at 4b097e96e75f996d1228621bfc4b353aa803ed96. Mathematical prose appears on the
@@ -27,14 +29,30 @@ Use the committed Lake manifests. Do not run `lake update`: it can change the
 audited dependency graph. The bootstrap fetches pinned proof-library sources and
 Lean caches; it does not install Rust toolchains or repeat Charon/Aeneas extraction.
 A clean build needs several gigabytes of disk and RAM. Two Lean threads are the
-default. The first GitHub Actions run validates the complete bootstrap recipe.
+default. GitHub Actions runs the same source, proof and documentation checks.
+
+## Source versions and proof checks
+
+`source-manifest.json` records the 67 historical source and evidence files.
+`current-source-manifest.json` records the 66 current files and maps each changed
+historical file to its preserved text under `docs/recovered/`.
+The generated translations, Rust sources and original verification reports are
+unchanged. Current declaration panels and source links use the revised files.
+The private export includes the historical snapshot under `source/historical/`.
+
+The build checks both manifests, compiles `Concrete` and `DhPoc`, and runs
+`scripts/check-concrete-axioms.lean` and `scripts/check-generic-axioms.lean`.
+The latter also checks the arithmetic witness and failure regressions.
+Both scripts must reproduce the recorded axiom dependencies.
+`verification/current-source-replay.json` records the fresh cloud replay and
+states which historical checks were not repeated.
 
 ## Outputs and publication
 
 - `_out/site/html-multi`: complete private review output, including source and
   evidence. **Do not publish this directory publicly.**
-- `_out/site/pages-public`: the public website. It contains the prose and thirteen
-  declaration panels, native hovers and graph assets. Full source and evidence
+- `_out/site/pages-public`: the public website. It contains the prose and declaration
+  panels, native hovers and graph assets. Full source and evidence
   links point to the private GitHub repository. No source archive, raw proof files
   or logs are included.
 

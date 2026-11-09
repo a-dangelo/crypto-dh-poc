@@ -1,0 +1,40 @@
+⚠ [3091/3317] Replayed Concrete.Algebra
+warning: Concrete/Algebra.lean: imports `Mathlib.Algebra.Module.Torsion.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Algebra.lean:48:0: 'DhConcrete.agree_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Algebra.lean:49:0: 'DhConcrete.shared_secret_comm' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3626/3850] Replayed Concrete.Primitives
+info: Concrete/Primitives.lean:79:0: 'DhConcrete.publicCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Primitives.lean:80:0: 'DhConcrete.agreeCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+⚠ [3627/3850] Replayed Concrete.Bytes
+warning: Concrete/Bytes.lean: imports `Mathlib.Data.Nat.Digits.Lemmas` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Bytes.lean:39:0: 'DhConcrete.bytesOfNat_asNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Bytes.lean:40:0: 'DhConcrete.bytes_asNat_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [4034/4094] Replayed DhPoc.RawSecurity
+warning: ../lean/DhPoc/RawSecurity.lean:56:0: automatically included section variable(s) unused in theorem `DhPoc.sampledReal_eq_sampledDDHReal`:
+  [SampleableType F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SampleableType F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+ℹ [4035/4094] Replayed Concrete.Model
+info: Concrete/Model.lean:53:0: 'DhConcrete.model' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:54:0: 'DhConcrete.public_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:55:0: 'DhConcrete.agree_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+ℹ [4036/4094] Replayed Concrete.Security
+info: Concrete/Security.lean:15:0: 'DhConcrete.advantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+⚠ [4041/4094] Replayed Concrete.ModuloSampling
+warning: Concrete/ModuloSampling.lean: imports `Mathlib.Data.Nat.Periodic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/ModuloSampling.lean:131:0: 'DhConcrete.uniform_modulo_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/ModuloSampling.lean:132:0: 'DhConcrete.uniformWide_scalar_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [4091/4094] Replayed Concrete.SamplingError
+warning: Concrete/SamplingError.lean: imports `Mathlib.Basic.ENNReal.Real` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Concrete/SamplingError.lean: imports `Mathlib.Tactic.NormNum` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+Build completed successfully (4094 jobs).
+⚠ [3132/3134] Replayed DhPoc.RawSecurity
+warning: ../lean/DhPoc/RawSecurity.lean:56:0: automatically included section variable(s) unused in theorem `DhPoc.sampledReal_eq_sampledDDHReal`:
+  [SampleableType F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SampleableType F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Build completed successfully (3134 jobs).

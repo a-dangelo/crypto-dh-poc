@@ -33,3 +33,21 @@ class Page(HTMLParser):
             self.blocks.append((''.join(self.parts).strip(),self.hovers));self.parts=None
         if self.card_depth:self.card_depth-=1
 
+
+VCVIO_SOURCE_URL = 'https://github.com/Verified-zkEVM/VCVio/blob/88efe9715a9fa9e7d89635c38cf70259836766c2/'
+EXPECTED_PAIRS = 17
+
+def declaration_source(link, repository_root, *, source_directory=None, private_blob=None):
+    """Resolve only the pinned dependency or an explicitly rendered local declaration."""
+    from pathlib import Path
+    from urllib.parse import unquote
+    path = unquote(link.split('#', 1)[0])
+    if path.startswith(VCVIO_SOURCE_URL):
+        return repository_root / 'vendor/VCVio' / path.removeprefix(VCVIO_SOURCE_URL)
+    if private_blob and path.startswith(private_blob):
+        return repository_root / path.removeprefix(private_blob)
+    if path.startswith('source/'):
+        relative = path.removeprefix('source/').removesuffix('.html')
+        assert '..' not in Path(relative).parts, link
+        return (source_directory if source_directory is not None else repository_root) / relative
+    raise AssertionError(f'Unexpected declaration source: {link}')

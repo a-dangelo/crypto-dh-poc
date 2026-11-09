@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
-"""Prepare the private Blueprint without changing the audited source snapshot."""
+"""Prepare current review sources and preserve the historical evidence separately."""
 from pathlib import Path
 import hashlib, html, json, re, shutil, subprocess, zipfile
+from site_checks import declaration_source
 
 DOC = Path(__file__).resolve().parents[1]
 ROOT = DOC.parent
 SITE = DOC / '_out/site/html-multi'
 
-# Resolve snapshot paths without changing the historical manifest or exported names.
+# Verify the current sources and the original snapshot independently.
+import importlib.util
+spec = importlib.util.spec_from_file_location('check_sources', DOC / 'scripts/check-sources.py')
+checks = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(checks)
+historical, manifest = checks.check_sources()
 def snapshot_path(relative):
-    return ROOT / ('docs/recovered/README.md' if str(relative) == 'README.md' else relative)
+    return ROOT / manifest['historical_path_overrides'].get(str(relative), str(relative))
 
-manifest = json.loads((DOC / 'source-manifest.json').read_text())
-assert manifest['source_commit'] == (DOC / 'source-revision').read_text().strip()
-for entry in manifest['files']:
-    p = snapshot_path(entry['path'])
-    assert hashlib.sha256(p.read_bytes()).hexdigest() == entry['sha256'], f"Changed core: {p}"
 report = json.loads((ROOT / 'concrete/evidence/concrete-proof-report.json').read_text())
 assert report['status'] == 'checked_end_to_end_standard_DDH_reduction'
 required = {'DhConcrete.wideAdvantage_le_of_standardDDH',
@@ -26,7 +27,14 @@ allowed = {'propext', 'Classical.choice', 'Quot.sound', 'RustAx.core', 'RustAx.s
 for name, axioms in report['audited_declarations'].items():
     assert set(axioms) <= allowed, name
 for name, entry in report['files'].items():
-    assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest() == entry['sha256'], name
+    assert hashlib.sha256(snapshot_path(name).read_bytes()).hexdigest() == entry['sha256'], name
+replay = json.loads((DOC / 'verification/current-source-replay.json').read_text())
+assert replay['source_manifest_sha256'] == checks.sha(DOC / 'current-source-manifest.json')
+assert replay['concrete_build_exit_code'] == replay['concrete_audit_exit_code'] == replay['generic_audit_exit_code'] == 0
+for name, digest in replay['log_sha256'].items():
+    assert checks.sha(DOC / 'verification' / name) == digest, name
+checks.check_axioms(DOC / 'verification/current-concrete-axioms.log',
+                    DOC / 'verification/current-generic-axioms.log')
 
 assert (SITE/'index.html').exists()
 xref = json.loads((SITE/'xref.json').read_text())
@@ -56,13 +64,13 @@ for page in SITE.rglob('*.html'):
         href = html.unescape(re.search(r'href="([^"]+)"',tag)[1])
         name = html.unescape(re.search(r'data-declaration="([^"]+)"',tag)[1])
         base_href = href.split('#',1)[0]
-        rel = base_href.removeprefix('source/').removesuffix('.html')
-        lines = (ROOT/rel).read_text().splitlines()
+        source_file = declaration_source(base_href, ROOT)
+        lines = source_file.read_text().splitlines()
         short = name.split('.')[-1]
         pattern = re.compile(r'^\s*(?:(?:private|protected|noncomputable|partial|unsafe)\s+)*(?:theorem|def|abbrev|structure|class|inductive)\s+([^\s:(]+)')
         candidates = [i+1 for i,line in enumerate(lines)
                       if (hit := pattern.search(line)) and hit[1].split('.')[-1] == short]
-        assert len(candidates) == 1, (rel,name,candidates)
+        assert len(candidates) == 1, (source_file,name,candidates)
         return tag.replace(f'href="{href}"',f'href="{base_href}#L{candidates[0]}"')
     content = re.sub(r'<a\b[^>]*class="bp_source_link"[^>]*>',source_link,content)
     page.write_text(content)
@@ -70,7 +78,7 @@ for page in SITE.rglob('*.html'):
 shutil.rmtree(SITE/'source',ignore_errors=True)
 for entry in manifest['files']:
     rel=Path(entry['path']); target=SITE/'source'/rel
-    target.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(snapshot_path(rel),target)
+    target.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(ROOT/rel,target)
     if rel.suffix in {'.lean','.rs'}:
         lines=target.read_text().splitlines()
         body='\n'.join(f'<span class="source-line" id="L{i}"><a class="line-number" href="#L{i}">{i}</a>{html.escape(line)}</span>' for i,line in enumerate(lines,1))
@@ -79,7 +87,15 @@ for entry in manifest['files']:
         Path(str(target)+'.html').write_text(page)
 
 (SITE/'source/manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
-shutil.copyfile(DOC/'source-line-counts.json',SITE/'source/line-counts.json')
+# Preserve the recovered snapshot under a separate historical prefix.
+for entry in historical['files']:
+    target = SITE/'source/historical'/entry['path']
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(snapshot_path(entry['path']), target)
+(SITE/'source/historical/manifest.json').write_text(json.dumps(historical, indent=2)+'\n')
+shutil.copyfile(DOC/'source-line-counts.json', SITE/'source/historical/line-counts.json')
+# Existing links to line counts describe the original snapshot explicitly.
+shutil.copyfile(DOC/'source-line-counts.json', SITE/'source/line-counts.json')
 # Persist editable documentation too. Keep its provenance separate from the original core.
 docfiles = [p for p in DOC.rglob('*') if p.is_file() and
             not any(part in {'.git','.lake','_out','__pycache__'} for part in p.relative_to(DOC).parts)]
@@ -93,7 +109,7 @@ try:
 except subprocess.CalledProcessError:
     doccommit=None
 docmanifest={'provenance':'Newly reconstructed and revised documentation; not recovered original Git history.',
-             'core_source_commit':manifest['source_commit'],'documentation_commit':doccommit,'files':entries}
+             'historical_core_source_commit':historical['source_commit'],'documentation_commit':doccommit,'files':entries}
 (SITE/'source/documentation-manifest.json').write_text(json.dumps(docmanifest,indent=2)+'\n')
 with zipfile.ZipFile(SITE/'source-snapshot.zip','w',zipfile.ZIP_DEFLATED) as archive:
     for p in sorted((SITE/'source').rglob('*')):

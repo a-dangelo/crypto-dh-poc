@@ -1,14 +1,15 @@
 import DhPoc.RawSecurity
 import VCVio.EvalDist.MeasureTVDist.Bind
 
-/-! Replacing two independently sampled public scalars in both DDH branches.
-The distance is absolute acceptance-probability difference, not twice that value. -/
+/-! Replacement of two independent secret-scalar distributions in both DDH branches.
+The Boolean distance is the absolute difference of acceptance probabilities. -/
 
 namespace DhPoc
 open OracleComp OracleSpec MeasureTheory ENNReal
 
-/-- Two independent prefix replacements cost the sum of their TV distances.
-No additional losslessness hypothesis beyond the ProbComp interface is needed. -/
+/-- Replacing two independent samples changes the output distribution by at most
+the sum of their total variation distances. The bound holds for `ProbComp`
+without an additional losslessness hypothesis. -/
 theorem pair_bind_distance {α β γ : Type} [MeasurableSpace α] [DiscreteMeasurableSpace α]
     [MeasurableSpace β] [DiscreteMeasurableSpace β] [MeasurableSpace γ]
     (μ μ' : ProbComp α) (ν ν' : ProbComp β) (f : α → β → ProbComp γ) :
@@ -23,14 +24,15 @@ theorem pair_bind_distance {α β γ : Type} [MeasurableSpace α] [DiscreteMeasu
   rw [lintegral_const]
   exact add_le_add le_rfl (mul_le_of_le_one_right' (evalDist_apply_univ_le_one μ'))
 
-/-- A Boolean observation is bounded by TV distance on all measurable events. -/
+/-- The difference of acceptance probabilities is bounded by total variation distance. -/
 theorem bool_distance_le_tv (μ ν : ProbComp Bool) :
     𝒟[μ].boolDist 𝒟[ν] ≤ measureETVDist μ ν :=
   Measure.absDiff_apply_le_etvDist _ _ (measurableSet_singleton true)
 
 variable {S F G : Type} [Field F] [AddCommGroup G] [Module F G]
 
-/-- Decoding a raw sample is a deterministic map, preserving the two independent draws. -/
+/-- The real sampled-DDH experiment commutes with deterministic scalar decoding
+of the two independent samples. -/
 theorem sampled_real_decoded (decode : S → F) (g : G) (μ ν : ProbComp S)
     (A : DiffieHellman.DDHAdversary F G) :
     sampledDDHReal decode g μ ν A =
@@ -47,8 +49,9 @@ theorem sampled_random_decoded (decode : S → F) (g : G) (μ ν : ProbComp S)
           A g (a • g) (b • g) (c • g)) := by
   simp only [sampledDDHRandom, bind_map_left]
 
-/-- Four replacements: two public scalars in each of the real and random branches.
-The independent uniform challenge of the random branch is not replaced. -/
+/-- Replacing the two secret-scalar distributions in each DDH branch bounds the
+advantage by standard DDH plus four statistical errors. The independent uniform
+challenge in the random branch remains unchanged. -/
 theorem sampledDDHAdvantage_le_standard
     (decode : S → F) (g : G) (μ ν : ProbComp S)
     (A : DiffieHellman.DDHAdversary F G) :

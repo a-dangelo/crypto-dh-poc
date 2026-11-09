@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Copy exact generated wrapper blocks, and compare every retained backend block."""
+"""Copy generated wrapper declarations exactly and compare all retained backend declarations."""
 from pathlib import Path
 import hashlib
 import json
@@ -42,7 +42,7 @@ for filename in ['Types.lean', 'Funs.lean']:
         if '::poc_dh::' in k:
             selected.append(block)
     if missing or changed or any('::poc_dh::' not in k for k in extra):
-        # Record details, but never emit a supposedly aligned adapter.
+        # Record the differences and stop before writing an adapter.
         (root/'concrete/evidence/linkage-comparison.json').write_text(json.dumps(summary, indent=2)+'\n')
         raise SystemExit(f'Backend alignment failed for {filename}: {len(missing)} missing, {len(changed)} changed, {len(extra)} extra')
 

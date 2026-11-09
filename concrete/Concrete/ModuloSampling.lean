@@ -3,8 +3,8 @@ import VCVio.EvalDist.MeasureTVDist.Basic
 import VCVio.OracleComp.Constructions.SampleableType.Measure
 import Mathlib.Data.Nat.Periodic
 
-/-! Quantitative distance between wide modular reduction and a uniform scalar.
-The proof counts arbitrary events, with no enumeration of the 512-bit tape. -/
+/-! Total variation bounds for modular reduction of a uniform integer.
+The proof counts arbitrary events without enumerating the 512-bit input space. -/
 
 namespace DhConcrete
 open OracleComp OracleSpec MeasureTheory ProbabilityTheory
@@ -91,8 +91,8 @@ private theorem ratio_discrepancy_le (n m q r a b : ℕ)
     rw [← add_div, div_le_div_iff₀ hmR hnR]
     nlinarith [mul_le_mul_of_nonneg_right haR (Nat.cast_nonneg r : (0 : ℝ) ≤ r)]
 
-/-- Reducing a uniform integer in `[0,n)` modulo `m` is within `(n % m)/n`
-of uniform `ZMod m`, in total variation. No divisibility assumption is needed. -/
+/-- Reduction of a uniform integer in `[0,n)` modulo `m` has total variation
+distance at most `(n % m)/n` from uniform `ZMod m`. No divisibility hypothesis is required. -/
 theorem uniform_modulo_measureETVDist_le (n m : ℕ) [NeZero n] [NeZero m] :
     letI : MeasurableSpace (ZMod m) := ⊤
     measureETVDist ((fun x : Fin n => (x.val : ZMod m)) <$> ($ᵗ Fin n))
@@ -118,7 +118,7 @@ theorem uniform_modulo_measureETVDist_le (n m : ℕ) [NeZero n] [NeZero m] :
   · exact Nat.count_le p
   · exact Nat.count_le p
 
-/-- Proven bias bound for the actual 64-byte sampler after scalar decoding. -/
+/-- The decoded uniform 64-byte sampler satisfies the modular-reduction bias bound. -/
 theorem uniformWide_scalar_measureETVDist_le :
     letI : MeasurableSpace Scalar := ⊤
     measureETVDist (decodeScalar <$> uniformWide) ($ᵗ Scalar) ≤

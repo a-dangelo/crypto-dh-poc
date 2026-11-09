@@ -48,7 +48,7 @@ The axiom closure is Lean's standard three axioms together with
 selected backend in Aeneas semantics. {ref "trust"}[Trust and provenance]
 records the extraction boundary and excluded runtime claims.
 
-Proof snapshot: `a27d45ad02331a96279032a11872d6ec7af47860`.
+Original proof revision: `a27d45ad02331a96279032a11872d6ec7af47860`.
 [Source manifest](source/manifest.json) · [Download source](source-snapshot.zip)
 
 {include 0 DhBlueprint.Refinement}

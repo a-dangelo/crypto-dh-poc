@@ -3,8 +3,8 @@ import Concrete.Model
 namespace DhConcrete
 open OracleComp OracleSpec
 
-/-- Concrete real/ideal distinguishing advantage equals sampled-DDH advantage.
-The raw input distributions are unchanged; no uniform-secret replacement is made. -/
+/-- The concrete model's session advantage equals its sampled-DDH advantage.
+The correspondence preserves the raw-secret distributions. -/
 theorem advantage_eq (μ ν : ProbComp Secret)
     (adversary : Public → Public → Key → ProbComp Bool) :
     DhPoc.sampledSessionAdvantage model μ ν adversary =

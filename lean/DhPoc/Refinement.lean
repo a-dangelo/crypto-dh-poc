@@ -2,11 +2,18 @@ import DhPoc.Generated.DhCore
 import VCVio.CryptoFoundations.HardnessAssumptions.DiffieHellman
 
 /-!
-# The explicit boundary between extracted control flow and group arithmetic
+# Refinement from extracted control flow to group operations
 
-The two equations below are hypotheses, not axioms. The native Ristretto adapter
-has not yet been proved to satisfy them. The theorem checks every protocol call
-in the Aeneas output. It does not identify the Rust code with a handwritten spec.
+The structure `PrimitiveModel` records the representation maps and the two
+primitive contracts used by `session_refines`. These contracts are hypotheses
+of the generic theorem. The proof follows the calls in the Aeneas translation
+`dh_core.session`.
+
+The concrete construction in `Concrete.Model` proves the corresponding
+`RawPrimitiveModel` contracts for the pinned Ristretto backend.
+`Concrete.Native` then relates those operations to the extracted Rust wrapper
+for the selected backend configuration. The earlier adapter in `rust/native`
+remains outside that extraction proof.
 -/
 
 namespace DhPoc
@@ -15,7 +22,7 @@ open Aeneas Aeneas.Std
 
 variable (D S P K F G : Type) [Field F] [AddCommGroup G] [Module F G]
 
-/-- Contracts required from a concrete group backend and its representations. -/
+/-- Representation maps and correctness contracts for a group implementation. -/
 structure PrimitiveModel where
   operations : dh_core.Dh D S P K
   secret : F → S
@@ -29,8 +36,8 @@ structure PrimitiveModel where
 
 variable {D S P K F G : Type} [Field F] [AddCommGroup G] [Module F G]
 
-/-- Exact successful output of the generated Rust program, under primitive contracts.
-No probability or cryptographic hardness assumption is used here. -/
+/-- The extracted session returns the stated public values and shared keys under
+the primitive contracts. The theorem uses no probability or hardness hypothesis. -/
 theorem session_refines (M : PrimitiveModel D S P K F G) (a b : F) :
     dh_core.session M.operations (M.secret a) (M.secret b) =
       .ok { alice_public := M.point (a • M.generator),
@@ -40,7 +47,7 @@ theorem session_refines (M : PrimitiveModel D S P K F G) (a b : F) :
   simp only [dh_core.session, M.public_spec, Aeneas.Std.bind_ok,
     M.agree_spec, smul_smul, mul_comm b a]
 
-/-- Both honest parties return the same encoded group element. -/
+/-- Both honest participants obtain the same encoded group element. -/
 theorem honest_agreement (M : PrimitiveModel D S P K F G) (a b : F) :
     ∃ out, dh_core.session M.operations (M.secret a) (M.secret b) = .ok out ∧
       out.alice_key = out.bob_key := by

@@ -11,47 +11,117 @@ open Verso.Genre Verso.Genre.Manual Informal
 tag := "games"
 %%%
 
-Let $`\mu,\nu` be laws on raw secrets. The experiments draw independently
-from $`\mu` and $`\nu` and run the extracted session. The adversary observes
-both public encodings and one key. Advantage is the absolute difference
-of the two acceptance probabilities.
+# Model and origin
+
+The local [model](source/concrete/Concrete/Model.lean.html) instantiates
+`DhPoc.RawPrimitiveModel` with the extracted primitive compositions, scalar
+reduction, canonical encoding, and proved public-value and agreement contracts.
+Its [algebra](source/concrete/Concrete/Algebra.lean.html) is
+$`F=\mathbb Z/L\mathbb Z` and $`G=E[L]`, with the Edwards basepoint $`g`.
+The curve definitions and Ristretto codec come from
+[BAIF's pinned dalek development](https://github.com/Beneficial-AI-Foundation/curve25519-dalek-fork/tree/95b5831c63ff1c5f6287bd3a77569412a9afdbfb/Curve25519).
+The local wire model converts `Ristretto.encodeRep` to 32 bytes and wraps
+shared encodings in `some`.
+
+[VCVio at `88efe971`](https://github.com/Verified-zkEVM/VCVio/tree/88efe9715a9fa9e7d89635c38cf70259836766c2)
+supplies `ProbComp`, distribution semantics, acceptance-probability distance,
+and the standard DDH experiments below. The native protocol experiments and
+the raw-sampler DDH experiments are local definitions. They model one completed
+honest exchange, with a passive adversary that receives two public values and one key.
+
+# Extracted implementation experiments
+
+Let $`\mu,\nu` be laws on raw secrets. Both experiments draw independently
+from these laws and evaluate the Aeneas declaration
+`Curve25519Dalek.poc_dh.session`. The adversary returns a `ProbComp Bool` computation.
 
 ::::definition "real_game" (lean := "DhConcrete.nativeReal") (uses := "extracted_session")
 :::AnchorlessBlueprint.pair DhConcrete.nativeReal -docstrings
-The real experiment supplies Alice's computed key. A non-success result
-maps to `false`; {bpref "session_refinement"}[session refinement] excludes
-that branch under the selected configuration.
+The real experiment supplies Alice's computed key. The code matches on
+`(poc_dh.session a b).match` and maps a non-success result to `false`.
+{bpref "session_refinement"}[Session refinement] excludes that branch under
+`x86_64-no-tables`, for every pair of raw inputs.
 :::
 ::::
 
 ::::definition "ideal_game" (lean := "DhConcrete.nativeIdeal") (uses := "extracted_session")
 :::AnchorlessBlueprint.pair DhConcrete.nativeIdeal -docstrings
-The ideal experiment retains the native public outputs and supplies
-$`k(cg)` for an independent uniform $`c\in\mathbb Z/L\mathbb Z`.
-Thus the ideal challenge is an encoded group element, rather than a
-uniform byte string.
+The ideal experiment executes the same extracted session and retains its
+public outputs. It supplies $`k(cg)` for an independent uniform
+$`c\in F`. The challenge is an encoded group element, not a uniform byte string.
+:::
+::::
+
+# Exact implementation bridge
+
+Write $`M` for `DhConcrete.model`. The following are equalities of
+`ProbComp` terms. They preserve $`A`, $`\mu`, and $`\nu`. They do not condition
+on a successful run or introduce an abort-probability loss.
+
+::::theorem "real_transport" (lean := "DhConcrete.nativeReal_eq") (uses := "real_game, session_refinement")
+:::AnchorlessBlueprint.pair DhConcrete.nativeReal_eq -docstrings
+Under the selected target configuration,
+
+$$`\mathrm{nativeReal}(\mu,\nu,A)=\mathrm{sampledReal}(M,\mu,\nu,A).`
+
+Substitute the complete successful-output equation into each definition.
+The remaining computation is definitionally equal.
+:::
+::::
+
+::::theorem "ideal_transport" (lean := "DhConcrete.nativeIdeal_eq") (uses := "ideal_game, session_refinement")
+:::AnchorlessBlueprint.pair DhConcrete.nativeIdeal_eq -docstrings
+Under the same configuration,
+
+$$`\mathrm{nativeIdeal}(\mu,\nu,A)=\mathrm{sampledIdeal}(M,\mu,\nu,A).`
+
+The independent uniform challenge is unchanged.
+:::
+::::
+
+# Standard DDH and the encoding reduction
+
+Instantiate VCVio's scalar action with $`F,G,g` as above and the uniform
+sampler on $`F`. These are the imported reference experiments.
+
+::::definition "ddh_real" (lean := "DiffieHellman.ddhRealExperiment")
+:::AnchorlessBlueprint.pair DiffieHellman.ddhRealExperiment -docstrings
+Draw independent uniform $`x,y\in F` and return
+$`R(g,xg,yg,(xy)g)`.
+:::
+::::
+
+::::definition "ddh_random" (lean := "DiffieHellman.ddhRandomExperiment")
+:::AnchorlessBlueprint.pair DiffieHellman.ddhRandomExperiment -docstrings
+Draw independent uniform $`x,y,z\in F` and return
+$`R(g,xg,yg,zg)`.
 :::
 ::::
 
 ::::definition "encoding_reduction" (lean := "DhPoc.rawReduction")
 :::AnchorlessBlueprint.pair DhPoc.rawReduction -docstrings
-For the concrete model, the reduction is
+For the concrete model, define
 
 $$`R_A(g,X,Y,Z)=A(p(X),p(Y),k(Z)).`
 
-It applies the canonical encodings and invokes $`A` once.
+The reduction computes three canonical encodings and invokes $`A` once.
+A computational-cost claim must account for these encodings.
 :::
 ::::
 
-::::theorem "game_transport" (lean := "DhConcrete.nativeAdvantage_eq") (uses := "session_refinement, real_game, ideal_game, encoding_reduction")
+::::theorem "game_transport" (lean := "DhConcrete.nativeAdvantage_eq") (uses := "real_transport, ideal_transport, encoding_reduction")
 :::AnchorlessBlueprint.pair DhConcrete.nativeAdvantage_eq -docstrings
-For the selected backend and arbitrary raw-secret laws,
+For the selected target and arbitrary raw-secret laws,
 
 $$`\operatorname{Adv}_{\rm native}(\mu,\nu,A)
 =\operatorname{Adv}_{\rm sampledDDH}(d,g,\mu,\nu,R_A).`
 
-The equality preserves the input distributions. It follows from the
-real and ideal game equalities, each obtained by substituting the
-session refinement.
+The proof first applies the two native game equalities, then
+[`DhConcrete.advantage_eq`](source/concrete/Concrete/Security.lean.html), which
+instantiates `DhPoc.sampledSessionAdvantage_eq`.
+The local [sampled-DDH games](source/lean/DhPoc/RawSecurity.lean.html)
+preserve $`\mu,\nu` and decode their samples. This equality alone gives
+no hardness bound for these laws. {ref "sampling"}[Sampling comparison]
+relates the wide-input law to the standard uniform-scalar experiments.
 :::
 ::::

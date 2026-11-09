@@ -279,7 +279,10 @@ def declaration : CodeBlockExpanderOf DeclarationConfig
       $(quote hl) $(quote ({} : CodeConfig)))
     let sourcePrefix := if modName.toString.startsWith "Concrete." then "concrete/"
       else if modName.toString.startsWith "DhPoc" then "lean/" else ""
-    let sourcePath := "source/" ++ sourcePrefix ++ modName.toString.replace "." "/" ++ ".lean.html"
+    let sourcePath := if modName.toString.startsWith "VCVio." then
+      "https://github.com/Verified-zkEVM/VCVio/blob/88efe9715a9fa9e7d89635c38cf70259836766c2/" ++
+        modName.toString.replace "." "/" ++ ".lean"
+      else "source/" ++ sourcePrefix ++ modName.toString.replace "." "/" ++ ".lean.html"
     ``(Verso.Doc.Block.other
       (Block.declarationCard $(quote cfg.name.toString) $(quote cfg.part) $(quote sourcePath)) #[$source])
 

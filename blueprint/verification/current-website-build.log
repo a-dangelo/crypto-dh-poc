@@ -1,0 +1,148 @@
+⚠ [482/622] Replayed VersoBlueprint.Data
+warning: src/VersoBlueprint/Data.lean:512:0: `instFromJsonExcept_versoBlueprint.fromJson`: universes `u_1`, `u_2` only occur together. This usually means there is a `max` expression in the type where none of these universes appear on their own.
+
+Note: This linter can be disabled with `set_option linter.checkUnivs false`
+warning: src/VersoBlueprint/Data.lean:512:0: `instFromJsonExcept_versoBlueprint`: universes `u_1`, `u_2` only occur together. This usually means there is a `max` expression in the type where none of these universes appear on their own.
+
+Note: This linter can be disabled with `set_option linter.checkUnivs false`
+⚠ [789/837] Replayed VersoBlueprint.Slides.Node
+warning: src/VersoBlueprint/Slides/Node.lean: imports `VersoSlides` from package `verso-slides`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [798/837] Replayed VersoBlueprint.Graft
+warning: src/VersoBlueprint/Graft.lean: imports `VersoSlides` from package `verso-slides`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [3909/3975] Replayed Concrete.Algebra
+warning: Concrete/Algebra.lean: imports `Mathlib.Algebra.Module.Torsion.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Algebra.lean:48:0: 'DhConcrete.agree_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Algebra.lean:49:0: 'DhConcrete.shared_secret_comm' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [4444/4471] Replayed Concrete.Primitives
+info: Concrete/Primitives.lean:79:0: 'DhConcrete.publicCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Primitives.lean:80:0: 'DhConcrete.agreeCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+⚠ [4445/4471] Replayed Concrete.Bytes
+warning: Concrete/Bytes.lean: imports `Mathlib.Data.Nat.Digits.Lemmas` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Bytes.lean:39:0: 'DhConcrete.bytesOfNat_asNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Bytes.lean:40:0: 'DhConcrete.bytes_asNat_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [4851/4883] Replayed DhPoc.RawSecurity
+warning: ../lean/DhPoc/RawSecurity.lean:56:0: automatically included section variable(s) unused in theorem `DhPoc.sampledReal_eq_sampledDDHReal`:
+  [SampleableType F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SampleableType F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+ℹ [4852/4883] Replayed Concrete.Model
+info: Concrete/Model.lean:53:0: 'DhConcrete.model' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:54:0: 'DhConcrete.public_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:55:0: 'DhConcrete.agree_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+ℹ [4853/4883] Replayed Concrete.Security
+info: Concrete/Security.lean:15:0: 'DhConcrete.advantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+⚠ [4858/4883] Replayed Concrete.ModuloSampling
+warning: Concrete/ModuloSampling.lean: imports `Mathlib.Data.Nat.Periodic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/ModuloSampling.lean:131:0: 'DhConcrete.uniform_modulo_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/ModuloSampling.lean:132:0: 'DhConcrete.uniformWide_scalar_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [4909/4922] Replayed Concrete.SamplingError
+warning: Concrete/SamplingError.lean: imports `Mathlib.Basic.ENNReal.Real` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Concrete/SamplingError.lean: imports `Mathlib.Tactic.NormNum` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+✔ [4919/4922] Built DhBlueprint.Refinement (29s)
+✔ [4920/4922] Built DhBlueprint.Blueprint (45s)
+✔ [4921/4922] Built DhBlueprint (3.0s)
+Build completed successfully (4922 jobs).
+{"historical_files": 67, "current_files": 66}
+⚠ [3091/3178] Replayed Concrete.Algebra
+warning: Concrete/Algebra.lean: imports `Mathlib.Algebra.Module.Torsion.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Algebra.lean:48:0: 'DhConcrete.agree_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Algebra.lean:49:0: 'DhConcrete.shared_secret_comm' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3626/3695] Replayed Concrete.Primitives
+info: Concrete/Primitives.lean:79:0: 'DhConcrete.publicCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Primitives.lean:80:0: 'DhConcrete.agreeCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+⚠ [3627/3695] Replayed Concrete.Bytes
+warning: Concrete/Bytes.lean: imports `Mathlib.Data.Nat.Digits.Lemmas` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Bytes.lean:39:0: 'DhConcrete.bytesOfNat_asNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Bytes.lean:40:0: 'DhConcrete.bytes_asNat_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [4034/4097] Replayed DhPoc.RawSecurity
+warning: ../lean/DhPoc/RawSecurity.lean:56:0: automatically included section variable(s) unused in theorem `DhPoc.sampledReal_eq_sampledDDHReal`:
+  [SampleableType F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SampleableType F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+ℹ [4035/4097] Replayed Concrete.Model
+info: Concrete/Model.lean:53:0: 'DhConcrete.model' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:54:0: 'DhConcrete.public_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:55:0: 'DhConcrete.agree_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+ℹ [4036/4097] Replayed Concrete.Security
+info: Concrete/Security.lean:15:0: 'DhConcrete.advantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+⚠ [4041/4097] Replayed Concrete.ModuloSampling
+warning: Concrete/ModuloSampling.lean: imports `Mathlib.Data.Nat.Periodic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/ModuloSampling.lean:131:0: 'DhConcrete.uniform_modulo_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/ModuloSampling.lean:132:0: 'DhConcrete.uniformWide_scalar_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [4091/4097] Replayed Concrete.SamplingError
+warning: Concrete/SamplingError.lean: imports `Mathlib.Basic.ENNReal.Real` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Concrete/SamplingError.lean: imports `Mathlib.Tactic.NormNum` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+Build completed successfully (4097 jobs).
+{"historical_files": 67, "current_files": 66, "concrete_axiom_closures": 22, "generic_axiom_closures": 16}
+⚠ [481/649] Replayed VersoBlueprint.Data
+warning: src/VersoBlueprint/Data.lean:512:0: `instFromJsonExcept_versoBlueprint.fromJson`: universes `u_1`, `u_2` only occur together. This usually means there is a `max` expression in the type where none of these universes appear on their own.
+
+Note: This linter can be disabled with `set_option linter.checkUnivs false`
+warning: src/VersoBlueprint/Data.lean:512:0: `instFromJsonExcept_versoBlueprint`: universes `u_1`, `u_2` only occur together. This usually means there is a `max` expression in the type where none of these universes appear on their own.
+
+Note: This linter can be disabled with `set_option linter.checkUnivs false`
+⚠ [798/821] Replayed VersoBlueprint.Slides.Node
+warning: src/VersoBlueprint/Slides/Node.lean: imports `VersoSlides` from package `verso-slides`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [804/821] Replayed VersoBlueprint.Graft
+warning: src/VersoBlueprint/Graft.lean: imports `VersoSlides` from package `verso-slides`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [483/519] Replayed VersoBlueprint.Data
+warning: src/VersoBlueprint/Data.lean:512:0: `instFromJsonExcept_versoBlueprint.fromJson`: universes `u_1`, `u_2` only occur together. This usually means there is a `max` expression in the type where none of these universes appear on their own.
+
+Note: This linter can be disabled with `set_option linter.checkUnivs false`
+warning: src/VersoBlueprint/Data.lean:512:0: `instFromJsonExcept_versoBlueprint`: universes `u_1`, `u_2` only occur together. This usually means there is a `max` expression in the type where none of these universes appear on their own.
+
+Note: This linter can be disabled with `set_option linter.checkUnivs false`
+⚠ [789/866] Replayed VersoBlueprint.Slides.Node
+warning: src/VersoBlueprint/Slides/Node.lean: imports `VersoSlides` from package `verso-slides`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [798/866] Replayed VersoBlueprint.Graft
+warning: src/VersoBlueprint/Graft.lean: imports `VersoSlides` from package `verso-slides`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [3909/4017] Replayed Concrete.Algebra
+warning: Concrete/Algebra.lean: imports `Mathlib.Algebra.Module.Torsion.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Algebra.lean:48:0: 'DhConcrete.agree_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Algebra.lean:49:0: 'DhConcrete.shared_secret_comm' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [4444/4526] Replayed Concrete.Primitives
+info: Concrete/Primitives.lean:79:0: 'DhConcrete.publicCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Primitives.lean:80:0: 'DhConcrete.agreeCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+⚠ [4445/4526] Replayed Concrete.Bytes
+warning: Concrete/Bytes.lean: imports `Mathlib.Data.Nat.Digits.Lemmas` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Bytes.lean:39:0: 'DhConcrete.bytesOfNat_asNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Bytes.lean:40:0: 'DhConcrete.bytes_asNat_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [4852/4916] Replayed DhPoc.RawSecurity
+warning: ../lean/DhPoc/RawSecurity.lean:56:0: automatically included section variable(s) unused in theorem `DhPoc.sampledReal_eq_sampledDDHReal`:
+  [SampleableType F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SampleableType F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+ℹ [4853/4916] Replayed Concrete.Model
+info: Concrete/Model.lean:53:0: 'DhConcrete.model' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:54:0: 'DhConcrete.public_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:55:0: 'DhConcrete.agree_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+ℹ [4854/4916] Replayed Concrete.Security
+info: Concrete/Security.lean:15:0: 'DhConcrete.advantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+⚠ [4859/4916] Replayed Concrete.ModuloSampling
+warning: Concrete/ModuloSampling.lean: imports `Mathlib.Data.Nat.Periodic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/ModuloSampling.lean:131:0: 'DhConcrete.uniform_modulo_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/ModuloSampling.lean:132:0: 'DhConcrete.uniformWide_scalar_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [4909/4916] Replayed Concrete.SamplingError
+warning: Concrete/SamplingError.lean: imports `Mathlib.Basic.ENNReal.Real` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Concrete/SamplingError.lean: imports `Mathlib.Tactic.NormNum` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+{"core_hashes": 66, "documentation_files": 34}
+{"status": "passed", "html_pages": 38, "links": 2129, "pairs": 17, "core_hashes": 66, "source_hovers": 613}
+⚠ [481/515] Replayed VersoBlueprint.Data
+warning: src/VersoBlueprint/Data.lean:512:0: `instFromJsonExcept_versoBlueprint.fromJson`: universes `u_1`, `u_2` only occur together. This usually means there is a `max` expression in the type where none of these universes appear on their own.
+
+Note: This linter can be disabled with `set_option linter.checkUnivs false`
+warning: src/VersoBlueprint/Data.lean:512:0: `instFromJsonExcept_versoBlueprint`: universes `u_1`, `u_2` only occur together. This usually means there is a `max` expression in the type where none of these universes appear on their own.
+
+Note: This linter can be disabled with `set_option linter.checkUnivs false`
+⚠ [798/821] Replayed VersoBlueprint.Slides.Node
+warning: src/VersoBlueprint/Slides/Node.lean: imports `VersoSlides` from package `verso-slides`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [804/821] Replayed VersoBlueprint.Graft
+warning: src/VersoBlueprint/Graft.lean: imports `VersoSlides` from package `verso-slides`, which is designed for use with the module system; consider adding `module` to the start of this file
+{"apiStability":"unstable","errors":[],"htmlCacheEntries":34,"manifestEntries":34,"ok":true}
+{"status": "passed", "output": "/workspace/shared/dh-poc-redesign/blueprint/_out/site/pages-public", "html_pages": 9, "local_links": 467, "declaration_pairs": 17, "source_hovers": 613, "files": 143, "repository_revision": "main", "whole_source_published": false}

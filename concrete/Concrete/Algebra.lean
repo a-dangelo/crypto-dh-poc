@@ -21,15 +21,17 @@ theorem coe_scalar_mul (n : ℕ) (g : Group) :
   rw [Nat.cast_smul_eq_nsmul]
   rfl
 
-/-- The canonical integer represents the efficient RFC 9496 wire encoding. -/
+/-- The canonical integer representation of the RFC 9496 encoding. -/
 noncomputable def encode (g : Group) : ℕ := Ristretto.encodeRep g.val
 
-/-- Decoding need not return the same Edwards point, only a Ristretto-equivalent one. -/
+/-- Decoding returns an Edwards point equivalent to the original point under
+the Ristretto relation. It need not return the same representative. -/
 theorem decode_encode (g : Group) :
     ∃ q, Ristretto.decodeRep (encode g) = some q ∧ edwards.Rel g.val q :=
   Ristretto.decodeRep_encodeRep (even_point g)
 
-/-- Multiplication of a decoded representative preserves the encoded shared secret. -/
+/-- Scalar multiplication of a decoded representative gives the same encoded
+shared secret as scalar multiplication of the original point. -/
 theorem agree_decode (g : Group) (n : ℕ) (q : edwards.Point)
     (hq : Ristretto.decodeRep (encode g) = some q) :
     Ristretto.encodeRep (n • q) = Ristretto.encodeRep (n • g.val) := by

@@ -10,6 +10,7 @@ html { scroll-padding-top: 4rem; }
 .content-wrapper > main > p, .content-wrapper > section > p { max-width: 78ch; }
 .content-wrapper p, .content-wrapper li { line-height: 1.6; }
 .bp_build_metadata { display: none; }
+.bp_heading_title_row .bp_label { white-space: nowrap; min-width: max-content; }
 .page-top-anchor { display: block; position: relative; top: -4rem; height: 0; }
 .page-top-anchor:target { background: transparent !important; }
 .bp_math_code .bp_pair_prose,

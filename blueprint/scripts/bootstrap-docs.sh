@@ -18,25 +18,15 @@ done
 elan run "$TOOLCHAIN" lean --version
 
 check_snapshot() {
-  python3 - "$ROOT" <<'PY'
-import hashlib
+  python3 "$ROOT/blueprint/scripts/check-sources.py"
+  python3 - "$ROOT/blueprint/lake-manifest.json" <<'PY_PIN'
 import json
-from pathlib import Path
 import sys
-
-root = Path(sys.argv[1])
-manifest = json.loads((root / "blueprint/source-manifest.json").read_text())
-assert manifest["source_commit"] == "a27d45ad02331a96279032a11872d6ec7af47860"
-assert len(manifest["files"]) == 67
-for record in manifest["files"]:
-    # The original README is archived separately from the current introduction.
-    path = root / ("docs/recovered/README.md" if record["path"] == "README.md" else record["path"])
-    assert hashlib.sha256(path.read_bytes()).hexdigest() == record["sha256"], path
-blueprint = json.loads((root / "blueprint/lake-manifest.json").read_text())
-verso = next(p for p in blueprint["packages"] if p["name"] == "VersoBlueprint")
-assert verso["rev"] == "4943d3335ffa9221a39949e60836a8ad5dc2a456"
-print("Verified all 67 core source/evidence hashes and the Blueprint dependency pin.")
-PY
+manifest = json.load(open(sys.argv[1]))
+verso = next(p for p in manifest['packages'] if p['name'] == 'VersoBlueprint')
+assert verso['rev'] == '4943d3335ffa9221a39949e60836a8ad5dc2a456'
+print('Verified the Blueprint dependency pin.')
+PY_PIN
 }
 
 clone_pin() {

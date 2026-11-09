@@ -6,7 +6,7 @@ from urllib.parse import urlparse, unquote
 import hashlib,json,re
 DOC=Path(__file__).resolve().parents[1]
 ROOT=DOC/'_out/site/html-multi'
-from site_checks import Page
+from site_checks import Page, declaration_source, EXPECTED_PAIRS
 
 pages={}
 for p in ROOT.rglob('*.html'):
@@ -26,7 +26,7 @@ for p,parser in pages.items():
     if parser.cards:
         assert parser.cards==parser.open_cards==len(parser.blocks)==len(parser.card_sources),(p,parser.cards,len(parser.blocks))
         for (source,hovers),link in zip(parser.blocks,parser.card_sources):
-            path=(ROOT/urlparse(link).path).with_suffix('')
+            path=declaration_source(link,DOC.parent,source_directory=ROOT/'source')
             assert source in path.read_text(),f'Rendered source differs from file: {link}'
             assert hovers>0,f'Missing source hovers: {link}'
 for name in ['manifest.json','documentation-manifest.json']:
@@ -34,10 +34,15 @@ for name in ['manifest.json','documentation-manifest.json']:
     for e in data['files']:
         if hashlib.sha256((ROOT/'source'/e['path']).read_bytes()).hexdigest()!=e['sha256']:
             errors.append(f'Changed source snapshot: {e["path"]}')
+historical = json.loads((ROOT/'source/historical/manifest.json').read_text())
+for entry in historical['files']:
+    path = ROOT/'source/historical'/entry['path']
+    if hashlib.sha256(path.read_bytes()).hexdigest() != entry['sha256']:
+        errors.append(f'Changed historical snapshot: {entry["path"]}')
 allhtml='\n'.join(p.read_text() for p in pages if '/source/' not in str(p))
 assert 'class="katex-error"' not in allhtml,'Invalid mathematics'
 cards=sum(p.cards for p in pages.values());pairs=sum(p.pairs for p in pages.values())
-assert cards==pairs==13,(cards,pairs)
+assert cards==pairs==EXPECTED_PAIRS,(cards,pairs)
 assert allhtml.count('<span class="tactic-state">')>0,'Missing tactic-state data'
 # The DOM order, not just visual CSS, places prose before Lean.
 for p in pages:

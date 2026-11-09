@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail closed on unexpected theorem axioms; record exact source hashes and size."""
+"""Reject unexpected theorem axioms and record source hashes and line counts."""
 import hashlib
 import json
 import pathlib

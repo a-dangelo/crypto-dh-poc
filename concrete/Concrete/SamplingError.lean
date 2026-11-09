@@ -5,11 +5,12 @@ import Mathlib.Tactic.NormNum
 namespace DhConcrete
 open scoped ENNReal
 
-/-- A rigorous upper bound used below, not the exact total variation distance. -/
+/-- An upper bound on the total variation distance caused by wide modular reduction.
+This definition does not assert the exact distance. -/
 noncomputable def wideSamplingError : ℝ≥0∞ :=
   ((256 ^ 64 % curve25519.L : ℕ) : ℝ≥0∞) / ((256 ^ 64 : ℕ) : ℝ≥0∞)
 
-/-- Four replacements still give an additive loss smaller than 2^-260. -/
+/-- The total error bound for four scalar replacements is strictly below 2^-260. -/
 theorem four_wideSamplingError_lt :
     4 * wideSamplingError < ((2 : ℝ≥0∞) ^ (260 : ℕ))⁻¹ := by
   apply (ENNReal.toReal_lt_toReal

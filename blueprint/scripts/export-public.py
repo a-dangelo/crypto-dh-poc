@@ -3,7 +3,7 @@
 from pathlib import Path
 from urllib.parse import urlparse, unquote
 import argparse, hashlib, html, json, re, shutil
-from site_checks import Page
+from site_checks import Page, declaration_source, EXPECTED_PAIRS
 
 DOC = Path(__file__).resolve().parents[1]
 ROOT = DOC.parent
@@ -27,10 +27,16 @@ def private_url(path):
     path = path.removeprefix('source/')
     path = re.sub(r'\.(lean|rs)\.html(?=#|$)',r'.\1',path)
     path, separator, fragment = path.partition('#')
-    path = {'README.md':'docs/recovered/README.md',
-            'manifest.json':'blueprint/source-manifest.json',
+    path = {'README.md':'README.md',
+            'manifest.json':'blueprint/current-source-manifest.json',
             'line-counts.json':'blueprint/source-line-counts.json',
             'documentation-manifest.json':'blueprint/README.md'}.get(path,path)
+    if path.startswith('historical/'):
+        historical = path.removeprefix('historical/')
+        current = json.loads((DOC/'current-source-manifest.json').read_text())
+        path = {'manifest.json':'blueprint/source-manifest.json',
+                'line-counts.json':'blueprint/source-line-counts.json'}.get(
+                    historical, current['historical_path_overrides'].get(historical, historical))
     return blob+path+separator+fragment
 
 def rewrite(text):
@@ -90,16 +96,15 @@ for p,q in pages.items():
     if q.cards:
         assert q.cards==q.open_cards==len(q.blocks)==len(q.card_sources),p
         for (code,n),href in zip(q.blocks,q.card_sources):
-            assert href.startswith(blob),href
-            path=ROOT/unquote(href.removeprefix(blob).split('#',1)[0])
+            path=declaration_source(href,ROOT,private_blob=blob)
             assert code in path.read_text(),path
             assert n>0,path
             hovers+=n
 assert not errors,'\n'.join(errors)
-assert sum(q.cards for q in pages.values())==sum(q.pairs for q in pages.values())==13
+assert sum(q.cards for q in pages.values())==sum(q.pairs for q in pages.values())==EXPECTED_PAIRS
 assert not (destination/'source').exists()
 assert not (destination/'source-snapshot.zip').exists()
 print(json.dumps({'status':'passed','output':str(destination),
- 'html_pages':len(pages),'local_links':links,'declaration_pairs':13,'source_hovers':hovers,
+ 'html_pages':len(pages),'local_links':links,'declaration_pairs':EXPECTED_PAIRS,'source_hovers':hovers,
  'files':sum(p.is_file() for p in destination.rglob('*')),
  'repository_revision':args.repository_revision,'whole_source_published':False}))

@@ -14,5 +14,5 @@ trap 'rm -rf "$TMP"' EXIT
 diff -u "$ROOT/lean/DhPoc/Generated/DhCore.lean" "$TMP/DhCore.lean"
 cd "$ROOT/lean"
 lake build 2>&1 | tee "$ROOT/evidence/lean-build.log"
-lake env lean DhPoc/Audit.lean | tee "$ROOT/evidence/axioms.log"
+lake env lean ../scripts/check-generic-axioms.lean | tee "$ROOT/evidence/axioms.log"
 python3 "$ROOT/scripts/check-evidence.py"

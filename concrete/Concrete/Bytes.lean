@@ -5,7 +5,7 @@ import Mathlib.Data.Nat.Digits.Lemmas
 open Aeneas Aeneas.Std
 namespace DhConcrete
 
-/-- Canonical, fixed-width, little-endian wire representation. -/
+/-- The canonical 32-byte little-endian representation of a bounded integer. -/
 def bytesOfNat (n : ℕ) (hn : n < 256 ^ 32) : Array U8 32#usize :=
   Array.from ((Nat.digitsAppend 256 32 n).pmap
     (fun d hd => U8.ofNatCore d hd)

@@ -1,0 +1,46 @@
+{
+  "kind": "fresh-cloud-proof-only-replay-after-prose-and-check-layout-revision",
+  "historical_source_commit": "a27d45ad02331a96279032a11872d6ec7af47860",
+  "source_manifest": "../current-source-manifest.json",
+  "source_manifest_sha256": "84e916f828b74ca3e4044aad01ea9c4c8a334348b85103a56ba24431cbd77687",
+  "concrete_build_exit_code": 0,
+  "generic_build_exit_code": 0,
+  "concrete_audit_exit_code": 0,
+  "generic_audit_exit_code": 0,
+  "concrete_axiom_closures_matched": 22,
+  "generic_axiom_closures_matched": 16,
+  "regression_declarations_preserved": [
+    "DhPoc.Examples.arithmeticModel",
+    "DhPoc.Examples.session_two_three",
+    "DhPoc.Examples.session_preserves_failure",
+    "DhPoc.Examples.failing_public_not_ok"
+  ],
+  "non_comment_text_unchanged_in_retained_modules": 16,
+  "relocated_regression_non_comment_text_unchanged": true,
+  "relocated_axiom_commands_unchanged": true,
+  "removed_modules": [
+    "concrete/Concrete/Audit.lean",
+    "lean/DhPoc/Audit.lean",
+    "lean/DhPoc/Examples.lean"
+  ],
+  "counts": {
+    "retained_local_lean_modules": 1281,
+    "standard_endpoint_import_path": 1178,
+    "largest_local_lean_file": 195,
+    "relocated_check_scripts": 115
+  },
+  "generated_source_files_changed": false,
+  "rust_source_files_changed": false,
+  "historical_manifests_and_reports_modified": false,
+  "rust_extraction_rerun": false,
+  "rust_native_checks_rerun": false,
+  "existing_warnings": [
+    "Mathlib module-system import warnings",
+    "Unused section variable warning in DhPoc.RawSecurity"
+  ],
+  "log_sha256": {
+    "current-source-build.log": "f947d516471904f60cce4e837b756e62e5aed0eafcc4145610d169ab7d1f7fd0",
+    "current-concrete-axioms.log": "22780f4012bbe7f2ccad0e43f0a5818be400040051dc8b51128263d78545dcbd",
+    "current-generic-axioms.log": "32779e88dac6c2f53804846595c5bf2ebe45c40109899a63ed0f691fa84bb9ff"
+  }
+}

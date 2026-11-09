@@ -1,9 +1,9 @@
 # Concrete Rust → Aeneas → Lean → VCVio DH proof
 
-**Checked endpoints:** `DhConcrete.nativeAdvantage_eq` in `Concrete/Native.lean`
+**Main theorems:** `DhConcrete.nativeAdvantage_eq` in `Concrete/Native.lean`
 and `DhConcrete.wideAdvantage_le_of_standardDDH` in `Concrete/Standard.lean`.
-The earlier exact wide-sampler endpoint remains in `Concrete/Wide.lean`.
-The real and ideal games both call the actual extracted Rust `poc_dh.session`.
+The earlier exact wide-sampler bound remains in `Concrete/Wide.lean`.
+The real and ideal games both call the extracted Rust `poc_dh.session`.
 The proof discharges the native primitive contracts using the pinned BAIF dalek
 proofs. It is separate from the small generic proof package in `../lean`.
 
@@ -21,7 +21,7 @@ primitive-correctness hypotheses. The raw samplers and adversary are universally
 quantified. The ideal challenge is a canonical encoding of an independent
 uniform scalar multiple of the generator, wrapped in `some`.
 
-The standard-DDH corollary keeps the actual wide-byte sampler and bounds its
+The standard-DDH corollary retains the wide-byte sampler and bounds its
 distance from uniform scalar sampling. For `r = 2^512 mod L`, the proved bound
 is `r/2^512`. Two independent scalar replacements in each game branch cost
 at most `4r/2^512 < 2^-260`. Thus a standard DDH bound `ε` implies native
@@ -45,11 +45,11 @@ a KDF, an asymptotic security bound, or uniform 32-byte keys.
   dispatch, actual extracted-session correctness, and native security games.
 - `Concrete/Sampler.lean`: explicit uniform 512-bit tape and exact scalar reduction.
 - `Concrete/Wide.lean`: the native security endpoint instantiated with that sampler.
-- `Concrete/ModuloSampling.lean`: all-event TV bound from quotient/remainder counting.
+- `Concrete/ModuloSampling.lean`: total variation bound from quotient and remainder counts for arbitrary events.
 - `Concrete/SamplingHybrids.lean`: four replacements in VCVio's absolute acceptance-probability distance.
 - `Concrete/SamplingError.lean`: exact arithmetic proves the loss is below `2^-260`.
 - `Concrete/Standard.lean`: standard uniform-scalar DDH corollary for the native game.
-- `Concrete/Audit.lean`: full dependency closures and endpoint statements.
+- `../scripts/check-concrete-axioms.lean`: transitive axiom dependencies and endpoint statements.
 
 The helper compositions are handwritten, but their equality to the actual
 extracted target-specific Rust wrappers is proved by `rfl`. The native security
@@ -60,7 +60,7 @@ block comments; it preserves executable text and whitespace. See `evidence/linka
 
 ## Selected Rust target
 
-The target is the pinned BAIF dalek 5.0.0 source **with its translation patches applied**,
+The selected program uses the pinned BAIF dalek 5.0.0 source with its translation patches,
 plus `rust/poc_dh.rs`. Equivalence to unpatched dalek is outside the checked chain.
 The executable smoke tests use the same patched source.
 
@@ -68,8 +68,8 @@ The executable smoke tests use the same patched source.
 
 The native theorems' full axiom closure is:
 `propext`, `Classical.choice`, `Quot.sound`, `RustAx.core`, `RustAx.subtle`.
-The last two are inherited runtime/library assumptions from the BAIF development.
-They are not removed or hidden by this proof. There is no `sorry` or added axiom.
+The last two are runtime and library assumptions from the BAIF development.
+The proof uses no `sorry` or additional axiom.
 
 The result concerns the Aeneas semantics. It relies on the extraction toolchain,
 the pinned upstream definitions/contracts, and the normal Lean kernel trust
@@ -79,9 +79,13 @@ exact Aeneas dependency in this package's independent output cache.
 
 ## Reproduce
 
-From the repository root, run `scripts/bootstrap-lean.sh`, then
-`scripts/bootstrap-concrete.sh` and `scripts/check-concrete.sh`.
-The full check includes regeneration. Use `--proof-only` for a later proof iteration.
+From the repository root:
+
+1. Run `scripts/bootstrap-lean.sh`.
+2. Run `scripts/bootstrap-concrete.sh`.
+3. Run `scripts/check-concrete.sh`.
+
+The full check regenerates extraction. For a later proof iteration, use `--proof-only`.
 
 Lean is pinned to 4.35.0 and Aeneas to `nightly-2026.10.30-de16f3c`.
 EllipticCurve is pinned to `4015c7cfab714640e77500bdbde6e64face3fbaa`.

@@ -29,14 +29,14 @@ The decoded law satisfies
 
 $$`\operatorname{TV}(d_*\Omega,U_{\mathbb Z/L\mathbb Z})\le r/N.`
 
-The underlying modulo-sampling lemma counts arbitrary events by quotient
-and remainder. The bound therefore controls total variation, not merely
+The modulo-sampling lemma bounds arbitrary events through quotient
+and remainder counts. The bound therefore controls total variation, not merely
 point probabilities. We use this upper bound, without claiming the sharp
 distance formula.
 :::
 ::::
 
-::::theorem "hybrid_bound" (lean := "DhPoc.sampledDDHAdvantage_le_standard")
+::::theorem "hybrid_bound" (lean := "DhPoc.sampledDDHAdvantage_le_standard") (uses := "ddh_real, ddh_random")
 :::AnchorlessBlueprint.pair DhPoc.sampledDDHAdvantage_le_standard -docstrings
 Replacing the two secret laws in each experiment gives
 

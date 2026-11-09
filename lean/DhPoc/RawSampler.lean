@@ -1,12 +1,12 @@
 import DhPoc.Refinement
 
 /-!
-# Preserve the caller's actual secret distribution
+# Refinement with caller-supplied secret distributions
 
-Wide-byte reduction is not exactly uniform modulo the group order. This layer
-therefore samples the raw secret type and records its mathematical scalar value.
-It proves exact implementation correspondence for that distribution, without a
-claim that the distribution is uniform or that the resulting game satisfies DDH.
+Reduction of uniform wide bytes need not give a uniform scalar. We therefore
+sample the raw secret type and record the scalar decoder. The correspondence
+preserves the supplied distributions. It assumes neither uniform decoded
+scalars nor a DDH bound for the resulting experiments.
 -/
 
 namespace DhPoc
@@ -15,7 +15,8 @@ open OracleComp OracleSpec Aeneas.Std
 
 variable (D S P K F G : Type) [Field F] [AddCommGroup G] [Module F G]
 
-/-- Concrete-backend obligations for every raw secret, including noncanonical input. -/
+/-- Representation maps and primitive contracts for every raw secret, including
+noncanonical inputs. -/
 structure RawPrimitiveModel where
   operations : dh_core.Dh D S P K
   scalar : S → F
@@ -27,7 +28,8 @@ structure RawPrimitiveModel where
 
 variable {D S P K F G : Type} [Field F] [AddCommGroup G] [Module F G]
 
-/-- The same extracted function refines pointwise for all raw input values. -/
+/-- The extracted session satisfies the group specification for every pair of
+raw inputs under the primitive contracts. -/
 theorem raw_session_refines (M : RawPrimitiveModel D S P K F G) (a b : S) :
     dh_core.session M.operations a b =
       .ok { alice_public := M.point (M.scalar a • M.generator),
@@ -37,8 +39,8 @@ theorem raw_session_refines (M : RawPrimitiveModel D S P K F G) (a b : S) :
   simp only [dh_core.session, M.public_spec, bind_ok, M.agree_spec, smul_smul,
     mul_comm (M.scalar b) (M.scalar a)]
 
-/-- Each caller supplies a sampler on its actual Rust secret representation.
-Using two samplers does not assert that the samples are uniform. -/
+/-- The real experiment samples each secret from its supplied distribution on
+the Rust representation. Neither distribution is required to be uniform. -/
 noncomputable def sampledReal (M : RawPrimitiveModel D S P K F G)
     (aliceSampler bobSampler : ProbComp S) (adversary : P → P → K → ProbComp Bool) :
     ProbComp Bool := do
@@ -48,7 +50,7 @@ noncomputable def sampledReal (M : RawPrimitiveModel D S P K F G)
   | .ok out => adversary out.alice_public out.bob_public out.alice_key
   | _ => pure false
 
-/-- Group-level DH with the same raw samples and the exact scalar decoder. -/
+/-- The group-level real experiment uses the same raw samplers and scalar decoder. -/
 def decodedReal (M : RawPrimitiveModel D S P K F G)
     (aliceSampler bobSampler : ProbComp S) (adversary : P → P → K → ProbComp Bool) :
     ProbComp Bool := do
@@ -58,7 +60,7 @@ def decodedReal (M : RawPrimitiveModel D S P K F G)
     (M.point (M.scalar b • M.generator))
     (M.key ((M.scalar a * M.scalar b) • M.generator))
 
-/-- No ideal-uniform substitution occurs in this exact game equality. -/
+/-- The extracted and group-level experiments are equal with the supplied samplers. -/
 theorem sampledReal_eq_decodedReal (M : RawPrimitiveModel D S P K F G)
     (aliceSampler bobSampler : ProbComp S) (adversary : P → P → K → ProbComp Bool) :
     sampledReal M aliceSampler bobSampler adversary =

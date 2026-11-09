@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Experimental port. Keep its evidence separate from the checked generic slice.
+# Extract the patched concrete backend and retain its evidence separately from the generic proof.
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 SRC="$ROOT/vendor/dalek-proof"

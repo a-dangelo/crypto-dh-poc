@@ -1,0 +1,136 @@
+{
+  "kind": "cloud-website-validation-after-source-and-prose-revision",
+  "checked_at_utc": "2026-11-09T07:50:29.339073+00:00",
+  "source_manifest_sha256": "84e916f828b74ca3e4044aad01ea9c4c8a334348b85103a56ba24431cbd77687",
+  "proof_replay": "current-source-replay.json",
+  "commands": [
+    "lake build DhBlueprint vbp",
+    "sh scripts/build.sh",
+    "lake exe vbp check",
+    "python3 scripts/export-public.py --repository-revision main"
+  ],
+  "command_exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "vbp_check": {
+    "manifest_entries": 34,
+    "html_cache_entries": 34,
+    "errors": []
+  },
+  "private_output": {
+    "html_pages": 38,
+    "local_links": 2129,
+    "current_source_hashes": 66,
+    "historical_source_hashes": 67
+  },
+  "public_output": {
+    "html_pages": 9,
+    "files": 143,
+    "local_links": 467,
+    "declaration_pairs": 17,
+    "source_hovers": 613,
+    "repository_revision": "main (local preview only)",
+    "full_source_published": false,
+    "build_machine_paths_present": false
+  },
+  "browser": {
+    "desktop": {
+      "viewport_width": 1180,
+      "page_width": 1165,
+      "paired_columns": 2
+    },
+    "narrow": {
+      "viewport_width": 500,
+      "page_width": 485,
+      "paired_columns": 1,
+      "prose_before_source": true
+    },
+    "math_errors": 0,
+    "keyboard_disclosure_checked": true,
+    "native_real_bridge_tactic_state_checked": true,
+    "narrow_numbering_checked": true
+  },
+  "earlier_live_release": {
+    "repository_commit": "5e29bb0f5f0c6628c84a4616f70b9282eb244e56",
+    "actions_run": 42574657160,
+    "declaration_pairs": 13,
+    "url": "https://a-dangelo.com/crypto-dh-poc/"
+  },
+  "current_revision_deployment": "Pending source commit and normal Actions deployment; not established by this local report.",
+  "rust_extraction_rerun": false,
+  "rust_native_checks_rerun": false,
+  "build_log_sha256": "e579e9bcd1120d798ab85a8824da740274806b53961b62f64f6e36e0f8227927",
+  "authoring_files": [
+    {
+      "path": ".github/workflows/blueprint-pages.yml",
+      "sha256": "541d9290616def9cd96946fbce97a46f4746da1bc6263b1691ece0e317f54a44"
+    },
+    {
+      "path": "blueprint/DhBlueprint/Blueprint.lean",
+      "sha256": "a5ab893cb3c8c3530e5c63c99630303c30b947b7ecdf7283268e3f686c40b2c9"
+    },
+    {
+      "path": "blueprint/DhBlueprint/Code.lean",
+      "sha256": "cbb50831490df4a1012b38c40dcc99609037a617649a51a46f5c8b70239f78c9"
+    },
+    {
+      "path": "blueprint/DhBlueprint/Games.lean",
+      "sha256": "a48773700c499871ba22c53a2fb3828e55429fa77c9daebc4260912e28613eee"
+    },
+    {
+      "path": "blueprint/DhBlueprint/Refinement.lean",
+      "sha256": "0e856fbd0816bbcb8c3387636427131d894c8df8fb729b5955b12d68243d9d3d"
+    },
+    {
+      "path": "blueprint/DhBlueprint/Sampling.lean",
+      "sha256": "82e6bc971b3fe1e104d9d5cda70c6c73f5ecce16427c9cdb9b065608345ae178"
+    },
+    {
+      "path": "blueprint/DhBlueprint/Trust.lean",
+      "sha256": "363f597a38d07ee46d73888750c86242838c43ce812263f772e724a270a36a6b"
+    },
+    {
+      "path": "blueprint/DhBlueprint.lean",
+      "sha256": "db948740449d8daad21d22fe22048c996142f04624933d3b0651a166304eefe0"
+    },
+    {
+      "path": "blueprint/DhBlueprintMain.lean",
+      "sha256": "86c334eba5e201086b2d320c3043854ae78821b051ffd62f1f56347c2c0aa46f"
+    },
+    {
+      "path": "blueprint/assets/review.css",
+      "sha256": "780c3a7290f8aab7adf59a2d8055f50999ad30eb5d257cd020c3c563309a7338"
+    },
+    {
+      "path": "blueprint/scripts/bootstrap-docs.sh",
+      "sha256": "cdfc0c8bd991d991237da1278cd16b27700b44a61c258d5703b2bc29856215dd"
+    },
+    {
+      "path": "blueprint/scripts/build.sh",
+      "sha256": "fce33299ee74350bd44a1937253f3ab4fce5224f8b8a6e645e25af1d4121fdd8"
+    },
+    {
+      "path": "blueprint/scripts/check-site.py",
+      "sha256": "4ec67720b79a33d9b489c9002610892764367403d6a11349fc635f67ce75934e"
+    },
+    {
+      "path": "blueprint/scripts/check-sources.py",
+      "sha256": "00c91faeca242ef777a5d7e6142a3d5cad9ff1fbd1b6fdd33ab1547228bd8dee"
+    },
+    {
+      "path": "blueprint/scripts/export-public.py",
+      "sha256": "e58f397b0bdd651a534ad446b21771abe5169d0761c8e3b00caf09627f897b8a"
+    },
+    {
+      "path": "blueprint/scripts/prepare-site.py",
+      "sha256": "45d4609e945ccb645bcf6c88faec78c8b72cc8f03090e2a8736ea686ab0dd675"
+    },
+    {
+      "path": "blueprint/scripts/site_checks.py",
+      "sha256": "e9ab68bbdbea8201daf3bcc721cf83d7de939a8b9b98892b9d194dc94354a7eb"
+    }
+  ]
+}

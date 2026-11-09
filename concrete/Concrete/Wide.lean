@@ -4,8 +4,8 @@ import Concrete.Sampler
 namespace DhConcrete
 open Aeneas.Std OracleComp OracleSpec ENNReal
 
-/-- End-to-end equality for two independent, explicit ideal 512-bit random tapes.
-The corresponding sampled-DDH hypothesis retains wide reduction modulo L. -/
+/-- The extracted session advantage for two independent ideal 512-bit inputs
+equals the corresponding sampled-DDH advantage after reduction modulo L. -/
 theorem wideAdvantage_eq (hTarget : target = "x86_64-no-tables")
     (adversary : Public → Public → Key → ProbComp Bool) :
     nativeAdvantage uniformWide uniformWide adversary =
@@ -13,7 +13,7 @@ theorem wideAdvantage_eq (hTarget : target = "x86_64-no-tables")
         (DhPoc.rawReduction model adversary) :=
   nativeAdvantage_eq hTarget uniformWide uniformWide adversary
 
-/-- A bound on the explicit wide-sampler DDH game transfers without loss. -/
+/-- A supplied bound on wide-sampler DDH also bounds the extracted session advantage. -/
 theorem wideAdvantage_le (hTarget : target = "x86_64-no-tables")
     (adversary : Public → Public → Key → ProbComp Bool) (ε : ℝ≥0∞)
     (hDDH : DhPoc.sampledDDHAdvantage decodeScalar generator uniformWide uniformWide

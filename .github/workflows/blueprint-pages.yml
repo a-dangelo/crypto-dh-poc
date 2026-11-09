@@ -71,7 +71,8 @@ jobs:
           elan toolchain install "$(cat blueprint/lean-toolchain)"
 
       - name: Restore pinned dependencies and build cache
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: lean-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         continue-on-error: true # Optional optimization; all pin and build checks still run.
         with:
           path: |
@@ -83,9 +84,36 @@ jobs:
           key: blueprint-${{ runner.os }}-${{ hashFiles('blueprint/lean-toolchain', 'lean/lake-manifest.json', 'concrete/lake-manifest.json', 'blueprint/lake-manifest.json', 'blueprint/scripts/bootstrap-docs.sh') }}-${{ hashFiles('lean/**/*.lean', 'concrete/**/*.lean', 'blueprint/**/*.lean') }}
           restore-keys: |
             blueprint-${{ runner.os }}-${{ hashFiles('blueprint/lean-toolchain', 'lean/lake-manifest.json', 'concrete/lake-manifest.json', 'blueprint/lake-manifest.json', 'blueprint/scripts/bootstrap-docs.sh') }}-
+            blueprint-Linux-832a57cbdc27de4b35fcbbaada090b0c7109387088bdf321e9711099f3107aa8-39174fee3e164a528c4d2fb176c887ed6cf3c49c8e62ed483caefb422d29d75a
 
       - name: Bootstrap pinned documentation dependencies
         run: bash blueprint/scripts/bootstrap-docs.sh
+
+      - name: Report restored cache
+        env:
+          CACHE_HIT: ${{ steps.lean-cache.outputs.cache-hit }}
+          CACHE_MATCH: ${{ steps.lean-cache.outputs.cache-matched-key }}
+          CACHE_KEY: ${{ steps.lean-cache.outputs.cache-primary-key }}
+        run: |
+          printf 'Exact cache hit: %s\nRestored key: %s\nRequested key: %s\n' "$CACHE_HIT" "$CACHE_MATCH" "$CACHE_KEY"
+
+      - name: Compile proof and documentation targets
+        run: |
+          (cd concrete && lake build Concrete DhPoc)
+          (cd blueprint && lake build DhBlueprint vbp)
+
+      - name: Save compiled targets before rendering
+        if: steps.lean-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        continue-on-error: true
+        with:
+          path: |
+            vendor
+            lean/.lake
+            concrete/vendor
+            concrete/.lake
+            blueprint/.lake
+          key: ${{ steps.lean-cache.outputs.cache-primary-key }}
 
       - name: Build and validate editable Blueprint
         working-directory: blueprint

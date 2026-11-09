@@ -12,7 +12,8 @@ abbrev Key := Option Public
 def decodeScalar (raw : Secret) : Scalar := (raw.asNat 8 % L : ℕ)
 noncomputable def key (g : Group) : Key := some (point g)
 
-/-- Helper composition model; Native.lean checks linkage to the actual extracted Rust session. -/
+/-- Operations composed from the extracted Ristretto primitives.
+`Concrete.Native` proves equality with the extracted Rust wrapper. -/
 noncomputable def operations : dh_core.Dh Unit Secret Public Key where
   «public» := publicCompose
   agree := agreeCompose
