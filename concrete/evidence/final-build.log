@@ -1,0 +1,238 @@
+⚠ [3091/3319] Replayed Concrete.Algebra
+warning: Concrete/Algebra.lean: imports `Mathlib.Algebra.Module.Torsion.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Algebra.lean:46:0: 'DhConcrete.agree_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Algebra.lean:47:0: 'DhConcrete.shared_secret_comm' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3626/3687] Replayed Concrete.Primitives
+info: Concrete/Primitives.lean:77:0: 'DhConcrete.publicCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Primitives.lean:78:0: 'DhConcrete.agreeCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+⚠ [3627/3687] Replayed Concrete.Bytes
+warning: Concrete/Bytes.lean: imports `Mathlib.Data.Nat.Digits.Lemmas` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Bytes.lean:39:0: 'DhConcrete.bytesOfNat_asNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Bytes.lean:40:0: 'DhConcrete.bytes_asNat_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [4033/4042] Replayed DhPoc.RawSecurity
+warning: ../lean/DhPoc/RawSecurity.lean:51:0: automatically included section variable(s) unused in theorem `DhPoc.sampledReal_eq_sampledDDHReal`:
+  [SampleableType F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SampleableType F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+ℹ [4034/4042] Replayed Concrete.Model
+info: Concrete/Model.lean:52:0: 'DhConcrete.model' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:53:0: 'DhConcrete.public_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:54:0: 'DhConcrete.agree_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+ℹ [4035/4042] Replayed Concrete.Security
+info: Concrete/Security.lean:15:0: 'DhConcrete.advantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+⚠ [4090/4095] Replayed Concrete.SamplingError
+warning: Concrete/SamplingError.lean: imports `Mathlib.Basic.ENNReal.Real` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Concrete/SamplingError.lean: imports `Mathlib.Tactic.NormNum` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [4091/4095] Built Concrete.ModuloSampling (4.1s)
+warning: Concrete/ModuloSampling.lean: imports `Mathlib.Data.Nat.Periodic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/ModuloSampling.lean:131:0: 'DhConcrete.uniform_modulo_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/ModuloSampling.lean:132:0: 'DhConcrete.uniformWide_scalar_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+✔ [4092/4095] Built Concrete.Standard (3.1s)
+ℹ [4093/4095] Built Concrete.Audit (3.1s)
+info: Concrete/Audit.lean:4:0: 'DhConcrete.extracted_public_link' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:5:0: 'DhConcrete.extracted_agree_link' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:6:0: 'DhConcrete.native_public_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:7:0: 'DhConcrete.native_agree_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:8:0: 'DhConcrete.native_session_refines' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RustAx.core,
+ RustAx.subtle]
+info: Concrete/Audit.lean:9:0: 'DhConcrete.nativeReal_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:10:0: 'DhConcrete.nativeIdeal_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:11:0: 'DhConcrete.nativeAdvantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:12:0: 'DhConcrete.nativeAdvantage_le' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:13:0: 'DhConcrete.bytesOfNat_asNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:14:0: 'DhConcrete.bytes_asNat_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:15:0: theorem DhConcrete.nativeAdvantage_eq : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (μ ν : ProbComp DhConcrete.Secret)
+    (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool),
+    DhConcrete.nativeAdvantage μ ν adversary =
+      DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator μ ν
+        (DhPoc.rawReduction DhConcrete.model adversary) :=
+fun hTarget μ ν adversary =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          _a =
+            DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator μ ν
+              (DhPoc.rawReduction DhConcrete.model adversary))
+        (DhConcrete.nativeAdvantage.eq_1 μ ν adversary)))
+    (Eq.mpr
+      (id
+        (congrArg
+          (fun _a =>
+            𝒟[_a].boolDist 𝒟[DhConcrete.nativeIdeal μ ν adversary] =
+              DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator μ ν
+                (DhPoc.rawReduction DhConcrete.model adversary))
+          (DhConcrete.nativeReal_eq hTarget μ ν adversary)))
+      (Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              𝒟[DhPoc.sampledReal DhConcrete.model μ ν adversary].boolDist 𝒟[_a] =
+                DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator μ ν
+                  (DhPoc.rawReduction DhConcrete.model adversary))
+            (DhConcrete.nativeIdeal_eq hTarget μ ν adversary)))
+        (DhConcrete.advantage_eq μ ν adversary)))
+info: Concrete/Audit.lean:16:0: theorem DhConcrete.nativeAdvantage_le : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (μ ν : ProbComp DhConcrete.Secret)
+    (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool) (ε : ENNReal),
+    DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator μ ν
+          (DhPoc.rawReduction DhConcrete.model adversary) ≤
+        ε →
+      DhConcrete.nativeAdvantage μ ν adversary ≤ ε :=
+fun hTarget μ ν adversary ε hDDH =>
+  Eq.mpr (id (congrArg (fun _a => _a ≤ ε) (DhConcrete.nativeAdvantage_eq hTarget μ ν adversary))) hDDH
+info: Concrete/Audit.lean:18:0: 'DhConcrete.rawOfNat_asNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:19:0: 'DhConcrete.decode_rawOfNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:20:0: 'DhConcrete.uniformWide_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:21:0: 'DhConcrete.wideAdvantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:22:0: 'DhConcrete.wideAdvantage_le' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:23:0: theorem DhConcrete.wideAdvantage_eq : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool),
+    DhConcrete.nativeAdvantage DhConcrete.uniformWide DhConcrete.uniformWide adversary =
+      DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator DhConcrete.uniformWide
+        DhConcrete.uniformWide (DhPoc.rawReduction DhConcrete.model adversary) :=
+fun hTarget adversary => DhConcrete.nativeAdvantage_eq hTarget DhConcrete.uniformWide DhConcrete.uniformWide adversary
+info: Concrete/Audit.lean:24:0: theorem DhConcrete.wideAdvantage_le : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool) (ε : ENNReal),
+    DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator DhConcrete.uniformWide DhConcrete.uniformWide
+          (DhPoc.rawReduction DhConcrete.model adversary) ≤
+        ε →
+      DhConcrete.nativeAdvantage DhConcrete.uniformWide DhConcrete.uniformWide adversary ≤ ε :=
+fun hTarget adversary ε hDDH =>
+  DhConcrete.nativeAdvantage_le hTarget DhConcrete.uniformWide DhConcrete.uniformWide adversary ε hDDH
+info: Concrete/Audit.lean:26:0: 'DhConcrete.uniform_modulo_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:27:0: 'DhConcrete.uniformWide_scalar_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:28:0: 'DhPoc.sampledDDHAdvantage_le_standard' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:29:0: 'DhConcrete.four_wideSamplingError_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:30:0: 'DhConcrete.wideAdvantage_le_standard' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RustAx.core,
+ RustAx.subtle]
+info: Concrete/Audit.lean:31:0: 'DhConcrete.wideAdvantage_le_of_standardDDH' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RustAx.core,
+ RustAx.subtle]
+info: Concrete/Audit.lean:32:0: theorem DhConcrete.wideAdvantage_le_standard : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool),
+    DhConcrete.nativeAdvantage DhConcrete.uniformWide DhConcrete.uniformWide adversary ≤
+      DiffieHellman.ddhAdvantage DhConcrete.generator (DhPoc.rawReduction DhConcrete.model adversary) +
+        4 * DhConcrete.wideSamplingError :=
+fun hTarget adversary =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          _a ≤
+            DiffieHellman.ddhAdvantage DhConcrete.generator (DhPoc.rawReduction DhConcrete.model adversary) +
+              4 * DhConcrete.wideSamplingError)
+        (DhConcrete.wideAdvantage_eq hTarget adversary)))
+    (LE.le.trans
+      (DhPoc.sampledDDHAdvantage_le_standard DhConcrete.decodeScalar DhConcrete.generator DhConcrete.uniformWide
+        DhConcrete.uniformWide (DhPoc.rawReduction DhConcrete.model adversary))
+      (have h :=
+        Eq.mpr
+          (id
+            (congrArg
+              (LE.le (measureETVDist (DhConcrete.decodeScalar <$> DhConcrete.uniformWide) ($ᵗ DhConcrete.Scalar)))
+              (congrArg (HDiv.hDiv ↑(256 ^ 64 % curve25519.L)) (Nat.cast_pow 256 64))))
+          (Eq.mp
+            (congrArg
+              (LE.le (measureETVDist (DhConcrete.decodeScalar <$> DhConcrete.uniformWide) ($ᵗ DhConcrete.Scalar)))
+              (congrArg (HDiv.hDiv ↑(256 ^ 64 % curve25519.L)) (Nat.cast_pow 256 64)))
+            DhConcrete.uniformWide_scalar_measureETVDist_le);
+      have hsum :=
+        mul_le_mul
+          (have this := le_rfl;
+          this)
+          (add_le_add h h) bot_le bot_le;
+      have heq :=
+        Mathlib.Tactic.Ring.of_eq
+          (Mathlib.Tactic.Ring.Common.mul_congr
+            (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ENNReal (Eq.refl 2)))
+            (Mathlib.Tactic.Ring.Common.add_congr
+              (Mathlib.Tactic.Ring.Common.atom_pf DhConcrete.wideSamplingError rfl
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                          DhConcrete.wideSamplingError ^ Nat.rawCast 1 * _a)
+                      (Eq.symm rfl)))
+                  (Eq.refl (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1))))
+              (Mathlib.Tactic.Ring.Common.atom_pf DhConcrete.wideSamplingError rfl
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                          DhConcrete.wideSamplingError ^ Nat.rawCast 1 * _a)
+                      (Eq.symm rfl)))
+                  (Eq.refl (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1))))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_overlap
+                (Mathlib.Tactic.Ring.Common.add_overlap_pf DhConcrete.wideSamplingError (Nat.rawCast 1)
+                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                    (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1)
+                      (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1) (Eq.refl 2))))
+                (Mathlib.Tactic.Ring.Common.add_pf_zero_add 0)))
+            (Mathlib.Tactic.Ring.Common.add_mul
+              (Mathlib.Tactic.Ring.Common.mul_add
+                (Mathlib.Tactic.Ring.Common.mul_pf_right DhConcrete.wideSamplingError (Nat.rawCast 1)
+                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                    (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 2)
+                      (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 2) (Eq.refl 4))))
+                (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 2))
+                (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                  (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 4 + 0)))
+              (Mathlib.Tactic.Ring.Common.zero_mul (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 2 + 0))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 4 + 0))))
+          (Mathlib.Tactic.Ring.Common.mul_congr
+            (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ENNReal (Eq.refl 4)))
+            (Mathlib.Tactic.Ring.Common.atom_pf DhConcrete.wideSamplingError rfl
+              (Eq.mpr
+                (id
+                  (congrArg
+                    (fun _a =>
+                      DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                        DhConcrete.wideSamplingError ^ Nat.rawCast 1 * _a)
+                    (Eq.symm rfl)))
+                (Eq.refl (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1))))
+            (Mathlib.Tactic.Ring.Common.add_mul
+              (Mathlib.Tactic.Ring.Common.mul_add
+                (Mathlib.Tactic.Ring.Common.mul_pf_right DhConcrete.wideSamplingError (Nat.rawCast 1)
+                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                    (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 4)
+                      (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1) (Eq.refl 4))))
+                (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 4))
+                (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                  (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 4 + 0)))
+              (Mathlib.Tactic.Ring.Common.zero_mul (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 4 + 0))));
+      add_le_add le_rfl
+        (Eq.mp
+          (congrArg
+            (fun _a =>
+              2 *
+                  (measureETVDist (DhConcrete.decodeScalar <$> DhConcrete.uniformWide) ($ᵗ DhConcrete.Scalar) +
+                    measureETVDist (DhConcrete.decodeScalar <$> DhConcrete.uniformWide) ($ᵗ DhConcrete.Scalar)) ≤
+                _a)
+            heq)
+          hsum)))
+info: Concrete/Audit.lean:33:0: theorem DhConcrete.wideAdvantage_le_of_standardDDH : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool) (ε : ENNReal),
+    DiffieHellman.ddhAdvantage DhConcrete.generator (DhPoc.rawReduction DhConcrete.model adversary) ≤ ε →
+      DhConcrete.nativeAdvantage DhConcrete.uniformWide DhConcrete.uniformWide adversary ≤ ε + (2 ^ 260)⁻¹ :=
+fun hTarget adversary ε hDDH =>
+  LE.le.trans (DhConcrete.wideAdvantage_le_standard hTarget adversary)
+    (add_le_add hDDH (LT.lt.le DhConcrete.four_wideSamplingError_lt))
+✔ [4094/4095] Built Concrete (2.9s)
+Build completed successfully (4095 jobs).

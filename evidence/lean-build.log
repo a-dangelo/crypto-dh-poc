@@ -1,0 +1,11 @@
+⚠ [3139/3142] Replayed DhPoc.Examples
+warning: DhPoc/Examples.lean: imports `Mathlib.Algebra.Field.ZMod` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [3140/3142] Built DhPoc.RawSecurity (7.0s)
+warning: DhPoc/RawSecurity.lean:51:0: automatically included section variable(s) unused in theorem `DhPoc.sampledReal_eq_sampledDDHReal`:
+  [SampleableType F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SampleableType F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+✔ [3141/3142] Built DhPoc (2.6s)
+Build completed successfully (3142 jobs).

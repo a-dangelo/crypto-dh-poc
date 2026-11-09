@@ -1,0 +1,32 @@
+{
+  "Types.lean": {
+    "upstream_blocks": 129,
+    "generated_blocks": 130,
+    "missing": [],
+    "changed": [],
+    "extra": [
+      "/-- [curve25519_dalek::poc_dh::Session]"
+    ]
+  },
+  "Funs.lean": {
+    "upstream_blocks": 2731,
+    "generated_blocks": 2742,
+    "missing": [],
+    "changed": [],
+    "extra": [
+      "/-- [curve25519_dalek::poc_dh::agree::i686-no-tables]:",
+      "/-- [curve25519_dalek::poc_dh::agree::i686-tables]:",
+      "/-- [curve25519_dalek::poc_dh::agree::x86_64-no-tables]:",
+      "/-- [curve25519_dalek::poc_dh::agree::x86_64-tables]:",
+      "/-- [curve25519_dalek::poc_dh::agree]:",
+      "/-- [curve25519_dalek::poc_dh::public::i686-no-tables]:",
+      "/-- [curve25519_dalek::poc_dh::public::i686-tables]:",
+      "/-- [curve25519_dalek::poc_dh::public::x86_64-no-tables]:",
+      "/-- [curve25519_dalek::poc_dh::public::x86_64-tables]:",
+      "/-- [curve25519_dalek::poc_dh::public]:",
+      "/-- [curve25519_dalek::poc_dh::session]:"
+    ]
+  },
+  "adapter_sha256": "025e3bc65062dd30b839fb64c2ec8ae1a31b763689a00ea57d1ec96b432b3035",
+  "adapter_lines": 195
+}

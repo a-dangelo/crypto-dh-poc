@@ -1,0 +1,13 @@
+# Build outputs and fetched dependencies
+.DS_Store
+**/.lake/
+**/target/
+/vendor/
+/concrete/vendor/
+/concrete/evidence/generated/
+*.llbc
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example

@@ -1,0 +1,73 @@
+{
+  "status": "checked_conditional_vertical_slice",
+  "concrete_end_to_end_security_proved": false,
+  "checks": [
+    "native Rust tests",
+    "regeneration matches",
+    "Lean build",
+    "axiom closure"
+  ],
+  "audited_declarations": [
+    "DhPoc.session_refines",
+    "DhPoc.honest_agreement",
+    "DhPoc.realExperiment_eq_ddhRealExperiment",
+    "DhPoc.idealExperiment_eq_ddhRandomExperiment",
+    "DhPoc.sessionAdvantage_eq_ddhAdvantage",
+    "DhPoc.sessionAdvantage_le_of_ddh",
+    "DhPoc.raw_session_refines",
+    "DhPoc.sampledReal_eq_decodedReal",
+    "DhPoc.Examples.arithmeticModel",
+    "DhPoc.Examples.session_two_three",
+    "DhPoc.Examples.session_preserves_failure",
+    "DhPoc.Examples.failing_public_not_ok",
+    "DhPoc.sampledReal_eq_sampledDDHReal",
+    "DhPoc.sampledIdeal_eq_sampledDDHRandom",
+    "DhPoc.sampledSessionAdvantage_eq",
+    "DhPoc.sampledSessionAdvantage_le"
+  ],
+  "allowed_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "lean_lines_including_generated_and_audit": 446,
+  "largest_lean_file_lines": 99,
+  "files": {
+    "lean/DhPoc/Audit.lean": {
+      "lines": 24,
+      "sha256": "7bf2db17a18f799ae11f30e6a5f7c084f90cd0cfeaf24a2f14ca56fdecb10d41"
+    },
+    "lean/DhPoc/Examples.lean": {
+      "lines": 60,
+      "sha256": "358368577cb141c54baff8fc213b1441610cb4db826153091b5d48df65d3f9f4"
+    },
+    "lean/DhPoc/Games.lean": {
+      "lines": 99,
+      "sha256": "268763d6b2f551e8276285b51815c54f83f8916b2c5450399617a6a6d1bb212d"
+    },
+    "lean/DhPoc/Generated/DhCore.lean": {
+      "lines": 55,
+      "sha256": "9e339f22ba27bab91171c85600aba6ffeea74f100cd90f577f55b61ada8d09b1"
+    },
+    "lean/DhPoc/RawSampler.lean": {
+      "lines": 68,
+      "sha256": "c58a3cb6c3c3c5a0f04b68a301e602e96053ad15295b3b8a4e7f8475ff217a9f"
+    },
+    "lean/DhPoc/RawSecurity.lean": {
+      "lines": 91,
+      "sha256": "1344d3d838d6ed35956050ccac9cff2026486e4160d3212135052e92da8a26c2"
+    },
+    "lean/DhPoc/Refinement.lean": {
+      "lines": 49,
+      "sha256": "726bb4cd226281fea84b3b6e1bbe2234e1206c0b27591e99de45ebe881c5c923"
+    }
+  },
+  "open_obligations": [
+    "Concrete Ristretto primitive and representation refinement",
+    "Runtime randomness and exact raw-secret sampling law",
+    "Optional relation to standard DDH: wide reduction bias and game transfer",
+    "DDH hypothesis for the chosen group and efficient reduction"
+  ],
+  "scope": "earlier_generic_prototype_only",
+  "authoritative_concrete_report": "concrete/evidence/concrete-proof-report.json"
+}

@@ -1,0 +1,404 @@
+{
+  "status": "checked_end_to_end_standard_DDH_reduction",
+  "pins": {
+    "lean": "v4.35.0",
+    "aeneas": "de16f3cf877976e966906dc890f63dcb418884fa",
+    "aeneas_release": "nightly-2026.10.30-de16f3c",
+    "aeneas_bundle_sha256": "0963dc77cab890de16b213b903091721961afca6303b9b0ea05ff8d76013f624",
+    "charon": "373d84044d80f6eb44285c2c349bae1453f5b6ca",
+    "rust_extraction": "nightly-2026-09-17",
+    "dalek_proof": "95b5831c63ff1c5f6287bd3a77569412a9afdbfb",
+    "elliptic_curve": "4015c7cfab714640e77500bdbde6e64face3fbaa",
+    "vcvio": "88efe9715a9fa9e7d89635c38cf70259836766c2",
+    "mathlib": "56a005855ea17e0b0958f73ec801ae140b0a1679"
+  },
+  "latest_check_mode": "--proof-only",
+  "extraction_input_manifest": "extraction-inputs.json",
+  "verified_program": "Rust DH wrapper plus patched pinned BAIF dalek 5.0.0, serial x86_64 without precomputed tables",
+  "endpoint": "DhConcrete.nativeAdvantage_eq",
+  "wide_endpoint": "DhConcrete.wideAdvantage_le",
+  "standard_endpoint": "DhConcrete.wideAdvantage_le_of_standardDDH",
+  "standard_bound": "epsilon + 2^(-260)",
+  "sampler_bound": "TV(decoded uniformWide, uniform ZMod L) <= r / 2^512, r = 2^512 mod L",
+  "hybrid_loss": "Two independent scalar replacements in each branch: 4*r/2^512 < 2^(-260)",
+  "advantage_normalization": "Absolute difference of true-event probabilities (VCVio boolDist)",
+  "actual_generated_session": "Curve25519Dalek.poc_dh.session",
+  "configuration_premise": "Aeneas.Std.target = \"x86_64-no-tables\"",
+  "hardness_premise": "Standard uniform-scalar DDH advantage for the explicit encoding reduction is at most epsilon",
+  "alternative_hardness_premise": "The original exact wide endpoint retains its separate sampled-DDH premise",
+  "wide_sampler": "Two independent uniform integers below 256^64, encoded little-endian and reduced modulo L",
+  "primitive_contract_hypotheses": [],
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "RustAx.core",
+    "RustAx.subtle",
+    "propext"
+  ],
+  "audited_declarations": {
+    "DhConcrete.extracted_public_link": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhConcrete.extracted_agree_link": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhConcrete.native_public_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ],
+    "DhConcrete.native_agree_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ],
+    "DhConcrete.native_session_refines": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ],
+    "DhConcrete.nativeReal_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ],
+    "DhConcrete.nativeIdeal_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ],
+    "DhConcrete.nativeAdvantage_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ],
+    "DhConcrete.nativeAdvantage_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ],
+    "DhConcrete.bytesOfNat_asNat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhConcrete.bytes_asNat_injective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhConcrete.rawOfNat_asNat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhConcrete.decode_rawOfNat": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhConcrete.uniformWide_decode": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhConcrete.wideAdvantage_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ],
+    "DhConcrete.wideAdvantage_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ],
+    "DhConcrete.uniform_modulo_measureETVDist_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhConcrete.uniformWide_scalar_measureETVDist_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhPoc.sampledDDHAdvantage_le_standard": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhConcrete.four_wideSamplingError_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "DhConcrete.wideAdvantage_le_standard": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ],
+    "DhConcrete.wideAdvantage_le_of_standardDDH": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound",
+      "RustAx.core",
+      "RustAx.subtle"
+    ]
+  },
+  "counts": {
+    "generic_modules": 446,
+    "concrete_modules": 915,
+    "all_local_lean_modules": 1361,
+    "generated_lean": 250,
+    "handwritten_lean": 1111,
+    "wide_endpoint_import_path": 867,
+    "standard_endpoint_import_path": 1145,
+    "largest_file": 195
+  },
+  "files": {
+    "concrete/Concrete/Algebra.lean": {
+      "sha256": "05aa0fe65ad4a0dd7f66cdff3d0d4ec0e6c123287dbe26aee8337add223427d1",
+      "lines": 48
+    },
+    "concrete/Concrete/Audit.lean": {
+      "sha256": "88330349797a10cae85044e68fd6551ecdd4261e73a6543e5ff98c18822d8810",
+      "lines": 33
+    },
+    "concrete/Concrete/Bytes.lean": {
+      "sha256": "5fd740f2cd17c01f9a816428d06d226fa569a1b9f401d7119de4d52f0515f5da",
+      "lines": 40
+    },
+    "concrete/Concrete/GeneratedAdapter.lean": {
+      "sha256": "025e3bc65062dd30b839fb64c2ec8ae1a31b763689a00ea57d1ec96b432b3035",
+      "lines": 195
+    },
+    "concrete/Concrete/Model.lean": {
+      "sha256": "11ee1ad176e4c01cd6b9f01898def94b8dccc12cc3ddc5ca62cbc9e75aac17c8",
+      "lines": 55
+    },
+    "concrete/Concrete/ModuloSampling.lean": {
+      "sha256": "b64eba36f96d95a5ad2563c315ca3644688248328233b3aba7ca8ae5d8f6dec6",
+      "lines": 134
+    },
+    "concrete/Concrete/Native.lean": {
+      "sha256": "1ba8ea0e199245baa4197da72688f8caabe6a553ef38274f398a472fdcda0131",
+      "lines": 90
+    },
+    "concrete/Concrete/Primitives.lean": {
+      "sha256": "ed7db6b392014405ddedb1b0515228d2fce5402cfb9951f70faedd1e4e968d1e",
+      "lines": 79
+    },
+    "concrete/Concrete/Sampler.lean": {
+      "sha256": "0d715095d19ff46640c192df7258495dc8cd8993e8a4e5ec7e928a9e34fa9d61",
+      "lines": 39
+    },
+    "concrete/Concrete/SamplingError.lean": {
+      "sha256": "39197a2681b75e916234b26acfcd11e2c056aa0f61cdff01248a0798e8c8c307",
+      "lines": 22
+    },
+    "concrete/Concrete/SamplingHybrids.lean": {
+      "sha256": "70c90d2779b502f149b04582fa4d10e1258f7b1841e4439d6db78dbd661d64d9",
+      "lines": 83
+    },
+    "concrete/Concrete/Security.lean": {
+      "sha256": "9d16160d0494954aff809a8dd983d8bb59722219686fdb1d1def25700fd30d59",
+      "lines": 16
+    },
+    "concrete/Concrete/Standard.lean": {
+      "sha256": "ecb60b0521c38572ccf55eae149221dd47edbb5da2941d41e91d16baa9253ced",
+      "lines": 39
+    },
+    "concrete/Concrete/Wide.lean": {
+      "sha256": "9d00bdd29e7bd4592438d126c521802aaaa93b296ebf4e57f60ae7849c07acfb",
+      "lines": 24
+    },
+    "concrete/Concrete/Wire.lean": {
+      "sha256": "27569851ecbb435e0a905f8e473dc71496550e054b0cb0d429ff03dc33905c43",
+      "lines": 18
+    },
+    "lean/DhPoc/Audit.lean": {
+      "sha256": "7bf2db17a18f799ae11f30e6a5f7c084f90cd0cfeaf24a2f14ca56fdecb10d41",
+      "lines": 24
+    },
+    "lean/DhPoc/Examples.lean": {
+      "sha256": "358368577cb141c54baff8fc213b1441610cb4db826153091b5d48df65d3f9f4",
+      "lines": 60
+    },
+    "lean/DhPoc/Games.lean": {
+      "sha256": "268763d6b2f551e8276285b51815c54f83f8916b2c5450399617a6a6d1bb212d",
+      "lines": 99
+    },
+    "lean/DhPoc/Generated/DhCore.lean": {
+      "sha256": "9e339f22ba27bab91171c85600aba6ffeea74f100cd90f577f55b61ada8d09b1",
+      "lines": 55
+    },
+    "lean/DhPoc/RawSampler.lean": {
+      "sha256": "c58a3cb6c3c3c5a0f04b68a301e602e96053ad15295b3b8a4e7f8475ff217a9f",
+      "lines": 68
+    },
+    "lean/DhPoc/RawSecurity.lean": {
+      "sha256": "1344d3d838d6ed35956050ccac9cff2026486e4160d3212135052e92da8a26c2",
+      "lines": 91
+    },
+    "lean/DhPoc/Refinement.lean": {
+      "sha256": "726bb4cd226281fea84b3b6e1bbe2234e1206c0b27591e99de45ebe881c5c923",
+      "lines": 49
+    },
+    "concrete/rust/poc_dh.rs": {
+      "sha256": "57344501f6e8976a79b640eb29fe772431cdf9186f11c912239bf47c0b326424",
+      "lines": 31
+    }
+  },
+  "translation_patches": {
+    "curve25519-dalek/translation-patches/constants-RISTRETTO_BASEPOINT_TABLE.patch": {
+      "sha256": "79acf241b391c34f32e48e793fa5e893d63aed8d845ee616fb09a63195aa402e",
+      "lines": 31
+    },
+    "curve25519-dalek/translation-patches/edwards-EdwardsBasepointTable-mul_base.patch": {
+      "sha256": "35f0156684006ddbc1a3576a12e32a9e7589c06b3c6ffa1c445a4e7a92971739",
+      "lines": 76
+    },
+    "curve25519-dalek/translation-patches/edwards-EdwardsPoint-sum.patch": {
+      "sha256": "875c296a4c4b13fc62209eb40f07c430990b4816c35684a9e475bc10d47e61f2",
+      "lines": 30
+    },
+    "curve25519-dalek/translation-patches/edwards-compress_batch_alloc.patch": {
+      "sha256": "bfa7ebbfbc20d645b39677e524f9d31c0d13c51b16ae25845cb5ebfcda05b263",
+      "lines": 49
+    },
+    "curve25519-dalek/translation-patches/edwards-multiscalar_mul.patch": {
+      "sha256": "994c41c7819e377547f93a6c73c461df3ba1e7858f80033049e2601bf2f9e3c9",
+      "lines": 46
+    },
+    "curve25519-dalek/translation-patches/edwards-optional_multiscalar_mul.patch": {
+      "sha256": "01dd3c9724e1449f8970f79542afc5ebf2a7acbd903e547bc97d2dfd9c6c503f",
+      "lines": 57
+    },
+    "curve25519-dalek/translation-patches/edwards-to_montgomery_batch.patch": {
+      "sha256": "00dd0497c494363d20c47fe865b75215ca95952491c748bd1214b00fc1933f9c",
+      "lines": 42
+    },
+    "curve25519-dalek/translation-patches/field-internal_invert_batch.patch": {
+      "sha256": "c5eeb9f7307f149412149da388acec57ca515689e009521e4789124cf79fa0f9",
+      "lines": 69
+    },
+    "curve25519-dalek/translation-patches/montgomery-MontgomeryPoint-mul.patch": {
+      "sha256": "8dbc74616fe8496169113e23bc09e225257d55cb0e0fe2ab58e5641d821bbeb0",
+      "lines": 221
+    },
+    "curve25519-dalek/translation-patches/pippenger-optional_multiscalar_mul.patch": {
+      "sha256": "b0486e08b58457860775ccd10b4c5ba364f48d2cad412bd56cad8490f6cdd25d",
+      "lines": 158
+    },
+    "curve25519-dalek/translation-patches/precomputed_straus-new.patch": {
+      "sha256": "1410653416ad89fc8467055c53d738b8c922b5c48374fd27c50ac94f910e6528",
+      "lines": 30
+    },
+    "curve25519-dalek/translation-patches/precomputed_straus-optional_mixed_multiscalar_mul.patch": {
+      "sha256": "dcf89978bb2ced774e8756567986ed39bf58c7e84476f84d18e5425af6c62da0",
+      "lines": 88
+    },
+    "curve25519-dalek/translation-patches/ristretto-double_and_compress_batch.patch": {
+      "sha256": "7895e694c897b673a4a0ea3cfd13056284aceed5de212f27a122a7b2a83e3e9c",
+      "lines": 121
+    },
+    "curve25519-dalek/translation-patches/ristretto-multiscalar_mul.patch": {
+      "sha256": "4691cb3ddfcb706194deefd9194b2c9fc08fd33916a6153b2d0c9989d3c0624e",
+      "lines": 30
+    },
+    "curve25519-dalek/translation-patches/ristretto-new.patch": {
+      "sha256": "5792af69c5013759506fe11aa3273587f0192c70b8f076a0834a7af5923039c8",
+      "lines": 26
+    },
+    "curve25519-dalek/translation-patches/ristretto-optional_mixed_multiscalar_mul.patch": {
+      "sha256": "2b60d633340c4a9c6670e4986a56a1865981e57e1308824071925a6adc42d6c7",
+      "lines": 40
+    },
+    "curve25519-dalek/translation-patches/ristretto-optional_multiscalar_mul.patch": {
+      "sha256": "f9f91dc55e379c750ee8ca590f39c54e34cf3c38a6b91768072d9a1414e1d043",
+      "lines": 40
+    },
+    "curve25519-dalek/translation-patches/ristretto-sum.patch": {
+      "sha256": "a502903a5ca321c6a1a247761020e2fe812058289a1fb9a56255b11130ff2667",
+      "lines": 27
+    },
+    "curve25519-dalek/translation-patches/scalar-div_by_2.patch": {
+      "sha256": "b6509124edb4c2d152428945bd1e88c140d97588ddc734b67136b73cbd3f31d9",
+      "lines": 31
+    },
+    "curve25519-dalek/translation-patches/scalar-invert_batch_internal.patch": {
+      "sha256": "4f6e9ecf535792f0cddc7377de6a72e9393efb6e97fb15202b19c7604a87e42c",
+      "lines": 65
+    },
+    "curve25519-dalek/translation-patches/scalar-product.patch": {
+      "sha256": "4a1794a2a603d153b7e2395e6d818a3631538a0ed3ad6170b2437d86d78949f0",
+      "lines": 27
+    },
+    "curve25519-dalek/translation-patches/scalar-read_le_u64_into.patch": {
+      "sha256": "3eee08098090caff59be4a44b999cc0873e483bae391a61711a2ad03426fa52b",
+      "lines": 71
+    },
+    "curve25519-dalek/translation-patches/scalar-sum.patch": {
+      "sha256": "6a428662a1b0cd2da647ca49f6ed9f66ece71a6ba59d25a1a6e287ada7a67009",
+      "lines": 27
+    },
+    "curve25519-dalek/translation-patches/scalar-try_from.patch": {
+      "sha256": "01289c11c41c4412b1a902b4c2416f0ef18b3b8d909477dba97414f00ab51e49",
+      "lines": 28
+    },
+    "curve25519-dalek/translation-patches/straus-multiscalar_mul.patch": {
+      "sha256": "544f46ce8a04d96d06638e115d1acfb42e00bba9ebec1b5ebaa97afd3748c93e",
+      "lines": 118
+    },
+    "curve25519-dalek/translation-patches/straus-optional_multiscalar_mul.patch": {
+      "sha256": "3fa4fcb4f54ed47673e3c60dba5f62812df2279e0014cf16b7964e84f0b7242c",
+      "lines": 72
+    },
+    "curve25519-dalek/translation-patches/variable_base-mul.patch": {
+      "sha256": "7f00df2d5875d6ccdd60ee052c683e6c6825e5bf390acb6996578280359d27d7",
+      "lines": 54
+    }
+  },
+  "checks": [
+    "full Rust extraction exits 0",
+    "all upstream generated backend declarations match",
+    "default concrete Lean build includes Sampler, Wide, and Standard",
+    "proved modulo-sampling TV bound, standard-DDH hybrids, and exact numeric loss",
+    "fresh full axiom audit",
+    "128 native deterministic differential sessions and malformed-input rejection"
+  ],
+  "not_claimed": [
+    "unpatched-source equivalence",
+    "sharp exact total-variation formula",
+    "OS RNG verification",
+    "compiler or machine-code verification",
+    "authentication",
+    "active or multisession security",
+    "side-channel security",
+    "KDF or uniform byte-string keys"
+  ]
+}

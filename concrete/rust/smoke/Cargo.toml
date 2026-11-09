@@ -1,0 +1,10 @@
+[workspace]
+
+[package]
+name = "concrete-dh-smoke"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+curve25519-dalek = { path = "../../../vendor/dalek-extraction/curve25519-dalek", default-features = false, features = ["alloc", "zeroize"] }
+ristretto255-dh = "=0.3.0"

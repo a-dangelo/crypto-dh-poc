@@ -1,0 +1,41 @@
+{
+  "inputs": {
+    "concrete/rust/poc_dh.rs": "57344501f6e8976a79b640eb29fe772431cdf9186f11c912239bf47c0b326424"
+  },
+  "patches": {
+    "curve25519-dalek/translation-patches/constants-RISTRETTO_BASEPOINT_TABLE.patch": "79acf241b391c34f32e48e793fa5e893d63aed8d845ee616fb09a63195aa402e",
+    "curve25519-dalek/translation-patches/edwards-EdwardsBasepointTable-mul_base.patch": "35f0156684006ddbc1a3576a12e32a9e7589c06b3c6ffa1c445a4e7a92971739",
+    "curve25519-dalek/translation-patches/edwards-EdwardsPoint-sum.patch": "875c296a4c4b13fc62209eb40f07c430990b4816c35684a9e475bc10d47e61f2",
+    "curve25519-dalek/translation-patches/edwards-compress_batch_alloc.patch": "bfa7ebbfbc20d645b39677e524f9d31c0d13c51b16ae25845cb5ebfcda05b263",
+    "curve25519-dalek/translation-patches/edwards-multiscalar_mul.patch": "994c41c7819e377547f93a6c73c461df3ba1e7858f80033049e2601bf2f9e3c9",
+    "curve25519-dalek/translation-patches/edwards-optional_multiscalar_mul.patch": "01dd3c9724e1449f8970f79542afc5ebf2a7acbd903e547bc97d2dfd9c6c503f",
+    "curve25519-dalek/translation-patches/edwards-to_montgomery_batch.patch": "00dd0497c494363d20c47fe865b75215ca95952491c748bd1214b00fc1933f9c",
+    "curve25519-dalek/translation-patches/field-internal_invert_batch.patch": "c5eeb9f7307f149412149da388acec57ca515689e009521e4789124cf79fa0f9",
+    "curve25519-dalek/translation-patches/montgomery-MontgomeryPoint-mul.patch": "8dbc74616fe8496169113e23bc09e225257d55cb0e0fe2ab58e5641d821bbeb0",
+    "curve25519-dalek/translation-patches/pippenger-optional_multiscalar_mul.patch": "b0486e08b58457860775ccd10b4c5ba364f48d2cad412bd56cad8490f6cdd25d",
+    "curve25519-dalek/translation-patches/precomputed_straus-new.patch": "1410653416ad89fc8467055c53d738b8c922b5c48374fd27c50ac94f910e6528",
+    "curve25519-dalek/translation-patches/precomputed_straus-optional_mixed_multiscalar_mul.patch": "dcf89978bb2ced774e8756567986ed39bf58c7e84476f84d18e5425af6c62da0",
+    "curve25519-dalek/translation-patches/ristretto-double_and_compress_batch.patch": "7895e694c897b673a4a0ea3cfd13056284aceed5de212f27a122a7b2a83e3e9c",
+    "curve25519-dalek/translation-patches/ristretto-multiscalar_mul.patch": "4691cb3ddfcb706194deefd9194b2c9fc08fd33916a6153b2d0c9989d3c0624e",
+    "curve25519-dalek/translation-patches/ristretto-new.patch": "5792af69c5013759506fe11aa3273587f0192c70b8f076a0834a7af5923039c8",
+    "curve25519-dalek/translation-patches/ristretto-optional_mixed_multiscalar_mul.patch": "2b60d633340c4a9c6670e4986a56a1865981e57e1308824071925a6adc42d6c7",
+    "curve25519-dalek/translation-patches/ristretto-optional_multiscalar_mul.patch": "f9f91dc55e379c750ee8ca590f39c54e34cf3c38a6b91768072d9a1414e1d043",
+    "curve25519-dalek/translation-patches/ristretto-sum.patch": "a502903a5ca321c6a1a247761020e2fe812058289a1fb9a56255b11130ff2667",
+    "curve25519-dalek/translation-patches/scalar-div_by_2.patch": "b6509124edb4c2d152428945bd1e88c140d97588ddc734b67136b73cbd3f31d9",
+    "curve25519-dalek/translation-patches/scalar-invert_batch_internal.patch": "4f6e9ecf535792f0cddc7377de6a72e9393efb6e97fb15202b19c7604a87e42c",
+    "curve25519-dalek/translation-patches/scalar-product.patch": "4a1794a2a603d153b7e2395e6d818a3631538a0ed3ad6170b2437d86d78949f0",
+    "curve25519-dalek/translation-patches/scalar-read_le_u64_into.patch": "3eee08098090caff59be4a44b999cc0873e483bae391a61711a2ad03426fa52b",
+    "curve25519-dalek/translation-patches/scalar-sum.patch": "6a428662a1b0cd2da647ca49f6ed9f66ece71a6ba59d25a1a6e287ada7a67009",
+    "curve25519-dalek/translation-patches/scalar-try_from.patch": "01289c11c41c4412b1a902b4c2416f0ef18b3b8d909477dba97414f00ab51e49",
+    "curve25519-dalek/translation-patches/straus-multiscalar_mul.patch": "544f46ce8a04d96d06638e115d1acfb42e00bba9ebec1b5ebaa97afd3748c93e",
+    "curve25519-dalek/translation-patches/straus-optional_multiscalar_mul.patch": "3fa4fcb4f54ed47673e3c60dba5f62812df2279e0014cf16b7964e84f0b7242c",
+    "curve25519-dalek/translation-patches/variable_base-mul.patch": "7f00df2d5875d6ccdd60ee052c683e6c6825e5bf390acb6996578280359d27d7"
+  },
+  "outputs": {
+    "concrete/evidence/curve25519_dalek.llbc": "dc354a56bde4fe44ef063f9b49e589292d3358450bce38f052724e1e2c4a5669",
+    "concrete/evidence/generated/Curve25519Dalek/Funs.lean": "dad7866fbb967be788a8221222e0b076f8f8028f67e2e0ad0f3fa53373111538",
+    "concrete/evidence/generated/Curve25519Dalek/Types.lean": "9cf32afa43973db8b2b610bd09c578476048f637fa74561339749d38100ce846"
+  },
+  "dalek_revision": "95b5831c63ff1c5f6287bd3a77569412a9afdbfb",
+  "aeneas_release": "nightly-2026.10.30-de16f3c"
+}

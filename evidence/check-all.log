@@ -1,0 +1,73 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.07s
+     Running unittests src/lib.rs (target/debug/deps/dh_core-6bdff30d62b42274)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (target/debug/deps/dh_native-7e32e7a23b07e406)
+
+running 3 tests
+test tests::malformed_public_encoding_is_rejected ... ok
+test tests::deterministic_edges_and_zero_secret_are_not_hidden ... ok
+test tests::agreement_for_128_real_sessions ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.21s
+
+   Doc-tests dh_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests dh_native
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling dh-core v0.1.0 (/workspace/shared/crypto-dh-poc/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.15s
+[[92mInfo[39m ] Imported: /workspace/shared/crypto-dh-poc/evidence/dh_core.llbc
+[?25lApplied prepasses:  [--------------------------------------------------]  0/20 ⠋Applied prepasses:  [##------------------------------------------------]  1/20 ⠋Applied prepasses:  [##################################################] 20/20 ⠙Applied prepasses:  [##################################################] 20/20 ✔️
+[?25h[?25lTranslated globals:  [---------------------------------------------------] 0/0 ⠋Translated globals:  [---------------------------------------------------] 0/0 ✔️
+[?25h[?25lTranslated opaque functions:  [------------------------------------------] 0/0 ⠋Translated opaque functions:  [------------------------------------------] 0/0 ✔️
+[?25h[?25lTranslated transparent functions:  [-------------------------------------] 0/1 ⠋Translated transparent functions:  [#####################################] 1/1 ⠙Translated transparent functions:  [#####################################] 1/1 ✔️
+[?25h[?25lTranslated trait declarations:  [----------------------------------------] 0/5 ⠋Translated trait declarations:  [########--------------------------------] 1/5 ✔️
+[?25h[?25lTranslated trait impls:  [-----------------------------------------------] 0/6 ⠋Translated trait impls:  [-----------------------------------------------] 0/6 ✔️
+[?25h[?25lPost-processed translated opaque functions:  [---------------------------] 0/0 ⠋Post-processed translated opaque functions:  [---------------------------] 0/0 ✔️
+[?25h[?25lPost-processed translated transparent functions:  [----------------------] 0/1 ⠋Post-processed translated transparent functions:  [######################] 1/1 ⠋Post-processed translated transparent functions:  [######################] 1/1 ✔️
+[?25h[[92mInfo[39m ] Generated: /tmp/tmp.5UwZh26fjw/DhCore.lean
+[[92mInfo[39m ] Total execution time: 0.558307 seconds
+⚠ [3139/3142] Replayed DhPoc.Examples
+warning: DhPoc/Examples.lean: imports `Mathlib.Algebra.Field.ZMod` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [3140/3142] Built DhPoc.RawSecurity (7.0s)
+warning: DhPoc/RawSecurity.lean:51:0: automatically included section variable(s) unused in theorem `DhPoc.sampledReal_eq_sampledDDHReal`:
+  [SampleableType F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SampleableType F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+✔ [3141/3142] Built DhPoc (2.6s)
+Build completed successfully (3142 jobs).
+'DhPoc.session_refines' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.honest_agreement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.realExperiment_eq_ddhRealExperiment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.idealExperiment_eq_ddhRandomExperiment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.sessionAdvantage_eq_ddhAdvantage' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.sessionAdvantage_le_of_ddh' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.raw_session_refines' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.sampledReal_eq_decodedReal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.Examples.arithmeticModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.Examples.session_two_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.Examples.session_preserves_failure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.Examples.failing_public_not_ok' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.sampledReal_eq_sampledDDHReal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.sampledIdeal_eq_sampledDDHRandom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.sampledSessionAdvantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.sampledSessionAdvantage_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+{
+  "status": "checked_conditional_vertical_slice",
+  "lean_lines_including_generated_and_audit": 446,
+  "largest_lean_file_lines": 99
+}

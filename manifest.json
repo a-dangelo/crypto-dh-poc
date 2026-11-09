@@ -1,0 +1,408 @@
+{
+  "source_commit": "a27d45ad02331a96279032a11872d6ec7af47860",
+  "description": "Source and evidence snapshot served with this Blueprint.",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "e66b65185fbc24f410da76c6dbd683fba571c688db318418e8f5ecb4cb2145d4",
+      "lines": 61,
+      "bytes": 5037
+    },
+    {
+      "path": "concrete/Concrete.lean",
+      "sha256": "050422f32f44f3096f74e4fafcd2fdb7c0a656218038f06a47171827276a9dd5",
+      "lines": 1,
+      "bytes": 22
+    },
+    {
+      "path": "concrete/Concrete/Algebra.lean",
+      "sha256": "05aa0fe65ad4a0dd7f66cdff3d0d4ec0e6c123287dbe26aee8337add223427d1",
+      "lines": 48,
+      "bytes": 1892
+    },
+    {
+      "path": "concrete/Concrete/Audit.lean",
+      "sha256": "88330349797a10cae85044e68fd6551ecdd4261e73a6543e5ff98c18822d8810",
+      "lines": 33,
+      "bytes": 1372
+    },
+    {
+      "path": "concrete/Concrete/Bytes.lean",
+      "sha256": "5fd740f2cd17c01f9a816428d06d226fa569a1b9f401d7119de4d52f0515f5da",
+      "lines": 40,
+      "bytes": 1438
+    },
+    {
+      "path": "concrete/Concrete/GeneratedAdapter.lean",
+      "sha256": "025e3bc65062dd30b839fb64c2ec8ae1a31b763689a00ea57d1ec96b432b3035",
+      "lines": 195,
+      "bytes": 7505
+    },
+    {
+      "path": "concrete/Concrete/Model.lean",
+      "sha256": "11ee1ad176e4c01cd6b9f01898def94b8dccc12cc3ddc5ca62cbc9e75aac17c8",
+      "lines": 55,
+      "bytes": 1774
+    },
+    {
+      "path": "concrete/Concrete/ModuloSampling.lean",
+      "sha256": "b64eba36f96d95a5ad2563c315ca3644688248328233b3aba7ca8ae5d8f6dec6",
+      "lines": 134,
+      "bytes": 6159
+    },
+    {
+      "path": "concrete/Concrete/Native.lean",
+      "sha256": "1ba8ea0e199245baa4197da72688f8caabe6a553ef38274f398a472fdcda0131",
+      "lines": 90,
+      "bytes": 4604
+    },
+    {
+      "path": "concrete/Concrete/Primitives.lean",
+      "sha256": "ed7db6b392014405ddedb1b0515228d2fce5402cfb9951f70faedd1e4e968d1e",
+      "lines": 79,
+      "bytes": 3082
+    },
+    {
+      "path": "concrete/Concrete/Sampler.lean",
+      "sha256": "0d715095d19ff46640c192df7258495dc8cd8993e8a4e5ec7e928a9e34fa9d61",
+      "lines": 39,
+      "bytes": 1581
+    },
+    {
+      "path": "concrete/Concrete/SamplingError.lean",
+      "sha256": "39197a2681b75e916234b26acfcd11e2c056aa0f61cdff01248a0798e8c8c307",
+      "lines": 22,
+      "bytes": 830
+    },
+    {
+      "path": "concrete/Concrete/SamplingHybrids.lean",
+      "sha256": "70c90d2779b502f149b04582fa4d10e1258f7b1841e4439d6db78dbd661d64d9",
+      "lines": 83,
+      "bytes": 4035
+    },
+    {
+      "path": "concrete/Concrete/Security.lean",
+      "sha256": "9d16160d0494954aff809a8dd983d8bb59722219686fdb1d1def25700fd30d59",
+      "lines": 16,
+      "bytes": 614
+    },
+    {
+      "path": "concrete/Concrete/Standard.lean",
+      "sha256": "ecb60b0521c38572ccf55eae149221dd47edbb5da2941d41e91d16baa9253ced",
+      "lines": 39,
+      "bytes": 1956
+    },
+    {
+      "path": "concrete/Concrete/Wide.lean",
+      "sha256": "9d00bdd29e7bd4592438d126c521802aaaa93b296ebf4e57f60ae7849c07acfb",
+      "lines": 24,
+      "bytes": 1162
+    },
+    {
+      "path": "concrete/Concrete/Wire.lean",
+      "sha256": "27569851ecbb435e0a905f8e473dc71496550e054b0cb0d429ff03dc33905c43",
+      "lines": 18,
+      "bytes": 550
+    },
+    {
+      "path": "concrete/README.md",
+      "sha256": "b84120c6d5c5d3d8520b7d85fd8962fd5850f3d7f1cb39104e04907d509ddf3c",
+      "lines": 90,
+      "bytes": 5278
+    },
+    {
+      "path": "concrete/evidence/axioms.log",
+      "sha256": "22780f4012bbe7f2ccad0e43f0a5818be400040051dc8b51128263d78545dcbd",
+      "lines": 203,
+      "bytes": 12543
+    },
+    {
+      "path": "concrete/evidence/concrete-proof-report.json",
+      "sha256": "89f1fd87c1a5c3b933af822db14ff94ffc7790283bb93381b4dfb2a4737e99bb",
+      "lines": 404,
+      "bytes": 14432
+    },
+    {
+      "path": "concrete/evidence/extract.log",
+      "sha256": "e4b2b5d9a759241abf0b71c18a0ee7301b8c7f6bfb72ad19a622f25c0c24d318",
+      "lines": 2688,
+      "bytes": 114275
+    },
+    {
+      "path": "concrete/evidence/extraction-inputs.json",
+      "sha256": "6a17ac6e65b755850f4d38d5d42c21f58d961290c10cd6f633ce8f7c5b0a0e14",
+      "lines": 41,
+      "bytes": 4563
+    },
+    {
+      "path": "concrete/evidence/final-build.log",
+      "sha256": "0969c849661b9566f0965bddccd0693bc8c688fd7fe0c188aef4fc28170313b6",
+      "lines": 238,
+      "bytes": 17031
+    },
+    {
+      "path": "concrete/evidence/linkage-comparison.json",
+      "sha256": "adc67624967dc2c9054b3b285a67e7f636a38d5ff66d0329837f6ba7c3524abd",
+      "lines": 32,
+      "bytes": 1100
+    },
+    {
+      "path": "concrete/evidence/smoke.log",
+      "sha256": "fdd2d4b95bea630bac914721c54f9a6d2542c1bb937c9579e0c09113df78f595",
+      "lines": 66,
+      "bytes": 2806
+    },
+    {
+      "path": "concrete/lake-manifest.json",
+      "sha256": "2e36d39c6c7b1cf65a737c26eda781132ca9146cb2ac6b41a87990e3ef73394a",
+      "lines": 146,
+      "bytes": 4542
+    },
+    {
+      "path": "concrete/lakefile.lean",
+      "sha256": "b705e5433c37dc27aea275a6ed90703a0d0335dc07a655aaf87cf46b78246918",
+      "lines": 11,
+      "bytes": 387
+    },
+    {
+      "path": "concrete/lean-toolchain",
+      "sha256": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c",
+      "lines": 1,
+      "bytes": 25
+    },
+    {
+      "path": "concrete/rust/poc_dh.rs",
+      "sha256": "57344501f6e8976a79b640eb29fe772431cdf9186f11c912239bf47c0b326424",
+      "lines": 31,
+      "bytes": 1099
+    },
+    {
+      "path": "concrete/rust/smoke/Cargo.lock",
+      "sha256": "6e75b7c56d58aba5bc82a8d15fb57833b8fa48e46befb0bd92484d9f12f5c24d",
+      "lines": 247,
+      "bytes": 6262
+    },
+    {
+      "path": "concrete/rust/smoke/Cargo.toml",
+      "sha256": "e798a6e3261f85eef79606c1f2e72da469c37575594996e348b0f749c91e3ab7",
+      "lines": 10,
+      "bytes": 269
+    },
+    {
+      "path": "concrete/rust/smoke/src/main.rs",
+      "sha256": "fc94b3f639176ecc1fcbd4de364920076cd76f8011be7fafbeee3d326376982d",
+      "lines": 21,
+      "bytes": 942
+    },
+    {
+      "path": "docs/TRUST-BOUNDARY.md",
+      "sha256": "9e7db4e1c78d5c194c6d79b22aaa7f63d2290c8b4ff784f009e83f9363eec0ef",
+      "lines": 69,
+      "bytes": 7607
+    },
+    {
+      "path": "evidence/axioms.log",
+      "sha256": "32779e88dac6c2f53804846595c5bf2ebe45c40109899a63ed0f691fa84bb9ff",
+      "lines": 16,
+      "bytes": 1522
+    },
+    {
+      "path": "evidence/check-all.log",
+      "sha256": "67170a0d2f6eaa717263fe191b686ee907c0bd2cfbb33e148ac5ea2f2283b811",
+      "lines": 89,
+      "bytes": 5453
+    },
+    {
+      "path": "evidence/extraction-check.log",
+      "sha256": "5311c4dbb2430d6d73c203b68f39cf3e308847b4f967f5b74024ac671094f8a9",
+      "lines": 29,
+      "bytes": 2131
+    },
+    {
+      "path": "evidence/lean-build.log",
+      "sha256": "911b042a9d503fe592ba0bd69bdc4f7084ec97374c0450f7f43aa190d964eb2b",
+      "lines": 11,
+      "bytes": 756
+    },
+    {
+      "path": "evidence/rust-tests.log",
+      "sha256": "707687cec4a32e6f730b9b51cf8047b8cd2b25f52acd98979595de80b1faab72",
+      "lines": 28,
+      "bytes": 907
+    },
+    {
+      "path": "evidence/status.json",
+      "sha256": "e4c109bf3b1a31d94e03bfe6617c1e20e0f87dc2e77a53b4d0e81f5634ab0b85",
+      "lines": 73,
+      "bytes": 2524
+    },
+    {
+      "path": "evidence/versions.json",
+      "sha256": "179385c6c923aebcc84b27432f2da1b38e378fe3357ef860a1119f7961fe6974",
+      "lines": 13,
+      "bytes": 492
+    },
+    {
+      "path": "lean/DhPoc.lean",
+      "sha256": "cfee9c16bd95b4ba44f9bc9f42c190f50e21086a0dc32af75ee7e3cb7ee28291",
+      "lines": 5,
+      "bytes": 114
+    },
+    {
+      "path": "lean/DhPoc/Audit.lean",
+      "sha256": "7bf2db17a18f799ae11f30e6a5f7c084f90cd0cfeaf24a2f14ca56fdecb10d41",
+      "lines": 24,
+      "bytes": 942
+    },
+    {
+      "path": "lean/DhPoc/Examples.lean",
+      "sha256": "358368577cb141c54baff8fc213b1441610cb4db826153091b5d48df65d3f9f4",
+      "lines": 60,
+      "bytes": 2122
+    },
+    {
+      "path": "lean/DhPoc/Games.lean",
+      "sha256": "268763d6b2f551e8276285b51815c54f83f8916b2c5450399617a6a6d1bb212d",
+      "lines": 99,
+      "bytes": 4678
+    },
+    {
+      "path": "lean/DhPoc/Generated/DhCore.lean",
+      "sha256": "9e339f22ba27bab91171c85600aba6ffeea74f100cd90f577f55b61ada8d09b1",
+      "lines": 55,
+      "bytes": 1825
+    },
+    {
+      "path": "lean/DhPoc/RawSampler.lean",
+      "sha256": "c58a3cb6c3c3c5a0f04b68a301e602e96053ad15295b3b8a4e7f8475ff217a9f",
+      "lines": 68,
+      "bytes": 2998
+    },
+    {
+      "path": "lean/DhPoc/RawSecurity.lean",
+      "sha256": "1344d3d838d6ed35956050ccac9cff2026486e4160d3212135052e92da8a26c2",
+      "lines": 91,
+      "bytes": 4235
+    },
+    {
+      "path": "lean/DhPoc/Refinement.lean",
+      "sha256": "726bb4cd226281fea84b3b6e1bbe2234e1206c0b27591e99de45ebe881c5c923",
+      "lines": 49,
+      "bytes": 1943
+    },
+    {
+      "path": "lean/lake-manifest.json",
+      "sha256": "8a4391bff8ba65b526e92e7b83e0fca6df4991c7012300f62015b89d5f2884f9",
+      "lines": 132,
+      "bytes": 4212
+    },
+    {
+      "path": "lean/lakefile.lean",
+      "sha256": "ddc88f3494f3207c54d8676d5abc655899484faf6728c398457eec06239c3b6f",
+      "lines": 11,
+      "bytes": 303
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c",
+      "lines": 1,
+      "bytes": 25
+    },
+    {
+      "path": "rust/Cargo.lock",
+      "sha256": "680ef593b924467152193326f980c31527d474731960d3c1411aafe8f12ad4df",
+      "lines": 187,
+      "bytes": 4745
+    },
+    {
+      "path": "rust/Cargo.toml",
+      "sha256": "7651aed9234ddeb47f0571e5ae72ecef321fbdfefa89856bb18996d57a4a0b29",
+      "lines": 12,
+      "bytes": 168
+    },
+    {
+      "path": "rust/native/Cargo.toml",
+      "sha256": "2d5a17a472573507a205a1727d2da2531b1bfa5011cfe083c43686bc34879ead",
+      "lines": 10,
+      "bytes": 224
+    },
+    {
+      "path": "rust/native/src/lib.rs",
+      "sha256": "9a9a98ef74be6f0520090ca2497d2b6bc08b4b71bf5eab4e57fb2eed8976eca2",
+      "lines": 61,
+      "bytes": 1901
+    },
+    {
+      "path": "rust/src/lib.rs",
+      "sha256": "9d61c6d537e9456f2cff31c29e0a17ba21a09805a05bebbddfbbb57e9c3299e0",
+      "lines": 35,
+      "bytes": 1148
+    },
+    {
+      "path": "scripts/bootstrap-concrete.sh",
+      "sha256": "1febf74165d39da04f2022d86436950641301a9b966dcf4b7a19c10452b986b2",
+      "lines": 30,
+      "bytes": 1471
+    },
+    {
+      "path": "scripts/bootstrap-lean.sh",
+      "sha256": "f7b0809e448da4890b8e2d62bd0a11ba40ae3c20075992acdde5ebaf981054cd",
+      "lines": 35,
+      "bytes": 1376
+    },
+    {
+      "path": "scripts/check-concrete-evidence.py",
+      "sha256": "ae2892237448e5183892edf4b85fde8ef833db78c945b4d0f7cf64c8126cf04e",
+      "lines": 117,
+      "bytes": 7437
+    },
+    {
+      "path": "scripts/check-concrete.sh",
+      "sha256": "055678539fe4135037ee2cafbea20b7c7b32c16a01aac5b69c02517ac0fa2058",
+      "lines": 21,
+      "bytes": 1044
+    },
+    {
+      "path": "scripts/check-evidence.py",
+      "sha256": "62e13f85064d14d141e6d8e28a79a16b042428d174434b47d76df5ff0ba76027",
+      "lines": 49,
+      "bytes": 2420
+    },
+    {
+      "path": "scripts/check-generic.sh",
+      "sha256": "8b7f6477ef4ba1697d7fb3c4a32dbf29413cb35dc1010a4723886a7150dea8ef",
+      "lines": 18,
+      "bytes": 723
+    },
+    {
+      "path": "scripts/check.sh",
+      "sha256": "827b9a5e128d1611f51cd8ad10ab62526c1124a94b32e0e097d497a9a5ff3baf",
+      "lines": 5,
+      "bytes": 149
+    },
+    {
+      "path": "scripts/extract-concrete.sh",
+      "sha256": "44dc90aebbc883b7eac2d795f40471aba6aa9b889a13cd8c419fa4925918b51a",
+      "lines": 50,
+      "bytes": 2680
+    },
+    {
+      "path": "scripts/extract.sh",
+      "sha256": "2ae61204192d1ecdd638ec679b42567cc72e24c7ea060d52f2f5d92fadf99bd6",
+      "lines": 11,
+      "bytes": 497
+    },
+    {
+      "path": "scripts/record-extraction.py",
+      "sha256": "3284ff0d999893a544f403af4ccc002c233db9bba8c2f177f495defe9f072b87",
+      "lines": 25,
+      "bytes": 1273
+    },
+    {
+      "path": "scripts/slice-concrete.py",
+      "sha256": "b1aaef6c1239e5a7e469bdc6a8cd51e1f540c04c9712b8e5d97b8a9254c61516",
+      "lines": 65,
+      "bytes": 2877
+    }
+  ]
+}
