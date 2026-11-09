@@ -1,0 +1,27 @@
+{
+  "kind": "fresh-cloud-proof-only-replay",
+  "source_commit_reference": "a27d45ad02331a96279032a11872d6ec7af47860",
+  "source_files_verified": 67,
+  "concrete_build_exit_code": 0,
+  "concrete_build_jobs": 4097,
+  "audit_exit_code": 0,
+  "audited_declaration_closures_matched": 22,
+  "sorryAx_found": false,
+  "upstream_pins": {
+    "vendor/VCVio": "88efe9715a9fa9e7d89635c38cf70259836766c2",
+    "vendor/dalek-proof": "95b5831c63ff1c5f6287bd3a77569412a9afdbfb",
+    "concrete/vendor/EllipticCurve": "4015c7cfab714640e77500bdbde6e64face3fbaa",
+    "vendor/aeneas-dalek": "de16f3cf877976e966906dc890f63dcb418884fa",
+    "lean/.lake/packages/mathlib": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+    "blueprint/.lake/packages/VersoBlueprint": "4943d3335ffa9221a39949e60836a8ad5dc2a456"
+  },
+  "rust_extraction_rerun": false,
+  "rust_native_checks_rerun": false,
+  "milestone_evidence_modified": false,
+  "logs": [
+    "concrete-build.log",
+    "concrete-axioms.log",
+    "mathlib-cache.log",
+    "blueprint-environment.log"
+  ]
+}

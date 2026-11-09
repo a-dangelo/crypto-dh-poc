@@ -1,0 +1,112 @@
+name: Build and deploy Blueprint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: blueprint-pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      LEAN_NUM_THREADS: '2'
+    steps:
+      - name: Check out private sources
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Install pinned official Lean toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/elan.tar.gz"
+          curl --fail --location --retry 3 \
+            https://github.com/leanprover/elan/releases/download/v4.2.4/elan-x86_64-unknown-linux-gnu.tar.gz \
+            --output "$archive"
+          echo "42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63  $archive" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/elan-installer"
+          tar -xzf "$archive" -C "$RUNNER_TEMP/elan-installer"
+          "$RUNNER_TEMP/elan-installer/elan-init" -y --default-toolchain none --no-modify-path
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          elan toolchain install "$(cat blueprint/lean-toolchain)"
+
+      - name: Restore pinned dependencies and build cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            vendor
+            lean/.lake
+            concrete/vendor
+            concrete/.lake
+            blueprint/.lake
+          key: blueprint-${{ runner.os }}-${{ hashFiles('blueprint/lean-toolchain', 'lean/lake-manifest.json', 'concrete/lake-manifest.json', 'blueprint/lake-manifest.json', 'blueprint/scripts/bootstrap-docs.sh') }}-${{ hashFiles('lean/**/*.lean', 'concrete/**/*.lean', 'blueprint/**/*.lean') }}
+          restore-keys: |
+            blueprint-${{ runner.os }}-${{ hashFiles('blueprint/lean-toolchain', 'lean/lake-manifest.json', 'concrete/lake-manifest.json', 'blueprint/lake-manifest.json', 'blueprint/scripts/bootstrap-docs.sh') }}-
+
+      - name: Bootstrap pinned documentation dependencies
+        run: bash blueprint/scripts/bootstrap-docs.sh
+
+      - name: Build and validate editable Blueprint
+        working-directory: blueprint
+        run: |
+          sh scripts/build.sh
+          lake exe vbp check
+
+      - name: Export intended public website only
+        working-directory: blueprint
+        run: python3 scripts/export-public.py --repository-revision "$GITHUB_SHA"
+
+      - name: Enforce publication boundary
+        shell: python
+        run: |
+          from pathlib import Path
+          root = Path('blueprint/_out/site/pages-public')
+          assert (root / 'index.html').is_file(), 'Missing public entry point'
+          allowed = {'.html', '.css', '.js', '.mjs', '.map', '.json', '.svg', '.woff', '.woff2',
+                     '.ttf', '.otf', '.png', '.jpg', '.jpeg', '.gif', '.ico', '.txt'}
+          for path in root.rglob('*'):
+              rel = path.relative_to(root)
+              assert not path.is_symlink(), f'Symlink in public output: {rel}'
+              assert not set(rel.parts) & {'source', '.git', '.lake', 'vendor'}, rel
+              if path.is_file():
+                  assert (path.suffix.lower() in allowed or path.name == '.nojekyll'
+                          or (rel.parts[0] == '-verso-search'
+                              and (path.name.endswith('.d.ts') or path.name == 'licenses.md'))), rel
+                  if path.suffix == '.html':
+                      text = path.read_text()
+                      assert 'name="robots"' in text and 'noindex' in text, rel
+          assert not (root / 'source-snapshot.zip').exists()
+
+      - name: Upload only the sanitized Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: blueprint/_out/site/pages-public
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy public website from private repository
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

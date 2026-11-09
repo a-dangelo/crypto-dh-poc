@@ -1,0 +1,683 @@
+✔ [2685/2793] Built EllipticCurve.Mathlib.Algebra.Group.Even (1.7s)
+✔ [2958/2971] Built Curve25519.Basic (2.0s)
+✔ [2960/2975] Built EllipticCurve.Field.AwayFromSix (1.3s)
+✔ [2961/2976] Built Curve25519.Proofs.Prime.Certs (3.6s)
+✔ [2962/2976] Built EllipticCurve.Mathlib.AlgebraicGeometry.EllipticCurve.ModelsWithC (1.8s)
+✔ [2963/2976] Built EllipticCurve.Mathlib.AlgebraicGeometry.EllipticCurve.IsomOfInvariants (2.0s)
+✔ [2964/2977] Built EllipticCurve.Curve.Defs (1.9s)
+✔ [2965/3016] Built EllipticCurve.Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point (2.9s)
+✔ [3007/3048] Built Curve25519.Prime (1.1s)
+✔ [3008/3048] Built EllipticCurve.FunctionField.Place (3.3s)
+✔ [3009/3050] Built EllipticCurve.Curve.Lemmas (1.9s)
+✔ [3010/3050] Built Curve25519.Squares (2.3s)
+✔ [3011/3050] Built EllipticCurve.PlaneModel.EdwardsFormula (2.8s)
+✔ [3012/3052] Built EllipticCurve.Curve.Twist (1.1s)
+✔ [3013/3055] Built EllipticCurve.Curve.Impl (1.7s)
+✔ [3014/3055] Built EllipticCurve.Weierstrass.Coordinates (2.0s)
+✔ [3015/3055] Built EllipticCurve.Curve.Realization (1.6s)
+✔ [3016/3055] Built EllipticCurve.PlaneModel.Local (5.6s)
+✔ [3017/3055] Built EllipticCurve.Curve.Fiber (2.8s)
+✔ [3018/3055] Built EllipticCurve.Weierstrass.AutConstants (2.8s)
+✔ [3019/3055] Built EllipticCurve.Weierstrass.Subst (3.1s)
+✔ [3020/3058] Built EllipticCurve.Montgomery.Defs (2.8s)
+✔ [3021/3058] Built EllipticCurve.Weierstrass.Infinity (4.9s)
+✔ [3022/3059] Built EllipticCurve.Weierstrass.Affine (5.7s)
+✔ [3023/3059] Built EllipticCurve.Weierstrass.Normal (5.9s)
+✔ [3024/3059] Built EllipticCurve.Curve.JD (1.4s)
+✔ [3025/3059] Built EllipticCurve.PlaneModel.Kernel (2.0s)
+✔ [3026/3059] Built EllipticCurve.Curve.Mass (1.9s)
+✔ [3027/3061] Built EllipticCurve.Curve.Weierstrass (3.3s)
+✔ [3028/3062] Built EllipticCurve.TwistedEdwards.Defs (1.6s)
+✔ [3030/3067] Built EllipticCurve.FunctionField.Constants (1.7s)
+✔ [3031/3069] Built EllipticCurve.Montgomery.Lemmas (3.2s)
+✔ [3032/3070] Built EllipticCurve.TwistedEdwards.Formula (2.1s)
+✔ [3033/3070] Built Curve25519.Models.Field.Sign (1.5s)
+✔ [3034/3070] Built EllipticCurve.Montgomery.XOnly.Defs (967ms)
+✔ [3035/3071] Built EllipticCurve.Montgomery.Count (1.6s)
+✔ [3036/3071] Built EllipticCurve.Montgomery.HasModel (1.6s)
+✔ [3037/3073] Built EllipticCurve.Montgomery.Rescale (1.2s)
+✔ [3038/3092] Built EllipticCurve.Montgomery.Ladder.Defs (1.0s)
+✔ [3039/3092] Built EllipticCurve.Montgomery.XOnly.Lemmas (1.7s)
+✔ [3040/3094] Built EllipticCurve.Weierstrass.Iso (5.2s)
+✔ [3041/3094] Built Curve25519.ToEllipticCurve.TwistedEdwards.Defs (908ms)
+✔ [3042/3094] Built Curve25519.Proofs.Ristretto.DescentCert (1.2s)
+✔ [3043/3094] Built EllipticCurve.Montgomery.Ladder.Lemmas (2.2s)
+✔ [3044/3094] Built Curve25519.Models.TwistedEdwards.Encoding.Defs (1.0s)
+✔ [3045/3094] Built EllipticCurve.Weierstrass.Places (7.3s)
+✔ [3046/3094] Built EllipticCurve.PlaneModel.Basic (2.4s)
+✔ [3047/3094] Built EllipticCurve.Weierstrass.Translation (2.6s)
+✔ [3048/3094] Built EllipticCurve.Weierstrass.Bridge (3.2s)
+✔ [3049/3094] Built EllipticCurve.Weierstrass.TranslationPlaces (3.0s)
+✔ [3050/3094] Built EllipticCurve.PlaneModel.Translation (3.7s)
+✔ [3051/3094] Built EllipticCurve.Weierstrass.Generic (2.2s)
+✔ [3052/3094] Built EllipticCurve.Weierstrass.Rigidity (1.8s)
+✔ [3053/3094] Built EllipticCurve.PlaneModel.Linear (2.7s)
+✔ [3054/3094] Built EllipticCurve.PlaneModel.Montgomery (1.4s)
+✔ [3055/3094] Built EllipticCurve.PlaneModel.GroupLaw (4.6s)
+✔ [3056/3305] Built EllipticCurve.PlaneModel.Edwards (3.4s)
+✔ [3372/3422] Built Proofs.Helpers.Radix (1.1s)
+✔ [3373/3436] Built EllipticCurve.PlaneModel.EdwardsPoints (2.2s)
+✔ [3374/3436] Built Subtle.Types (2.4s)
+✔ [3375/3439] Built Defs.Array (2.6s)
+✔ [3376/3439] Built Proofs.Helpers.Array (2.6s)
+✔ [3377/3440] Built Curve25519Dalek.TypesExternal (1.8s)
+✔ [3378/3440] Built Proofs.Helpers.Bitwise (2.1s)
+✔ [3379/3442] Built EllipticCurve.PlaneModel.EdwardsAddition (2.5s)
+✔ [3380/3447] Built Proofs.Helpers.StepSpecs (1.6s)
+✔ [3381/3448] Built Proofs.Helpers.AsNat (2.4s)
+✔ [3382/3450] Built Curve25519Dalek.Types (2.6s)
+✔ [3383/3450] Built EllipticCurve.PlaneModel.EdwardsIdentities (2.6s)
+✔ [3384/3450] Built Proofs.Helpers.Bytes (1.9s)
+✔ [3385/3450] Built Proofs.Helpers.Target (1.9s)
+✔ [3386/3450] Built Defs.FieldElement51 (1.9s)
+✔ [3387/3450] Built Defs.Scalar52 (1.8s)
+✔ [3388/3450] Built Defs.Scalar (1.5s)
+✔ [3389/3450] Built Defs.Scalar29 (1.8s)
+✔ [3390/3450] Built Zeroize.Contract (1.6s)
+✔ [3391/3452] Built EllipticCurve.TwistedEdwards.Group (1.5s)
+✔ [3392/3453] Built Subtle.Contract (2.0s)
+✔ [3393/3453] Built EllipticCurve.PlaneModel.EdwardsGroupLaw (2.5s)
+✔ [3394/3453] Built Proofs.Helpers.Limbs (1.6s)
+✔ [3395/3454] Built Curve25519.Models.TwistedEdwards.Decaf.Defs (1.3s)
+✔ [3396/3455] Built Proofs.Helpers.Montgomery (1.6s)
+✔ [3397/3456] Built Curve25519Dalek.FunsExternal (1.7s)
+✔ [3398/3456] Built Subtle.Lemmas (1.8s)
+✔ [3399/3475] Built EllipticCurve.TwistedEdwards.Lemmas (2.2s)
+✔ [3400/3475] Built Proofs.Helpers.Scalar52 (1.0s)
+✔ [3402/3475] Built Proofs.Helpers.Scalar (1.8s)
+✔ [3403/3476] Built Defs.Ristretto (1.6s)
+✔ [3404/3476] Built Defs.FieldElement2625 (1.9s)
+✔ [3405/3476] Built EllipticCurve.TwistedEdwards.Even (1.8s)
+✔ [3406/3476] Built Curve25519.ToEllipticCurve.TwistedEdwards.Lemmas (1.4s)
+✔ [3407/3476] Built EllipticCurve.TwistedEdwards.HasModel (2.4s)
+✔ [3408/3476] Built Curve25519.ToEllipticCurve.TwistedEdwards.Even (1.4s)
+✔ [3409/3478] Built EllipticCurve.TwistedEdwards.Coords.Defs (2.4s)
+✔ [3410/3478] Built Curve25519.Models.TwistedEdwards.Decaf.Lemmas (1.9s)
+✔ [3411/3482] Built Curve25519.Models.TwistedEdwards.Encoding.Lemmas (1.8s)
+✔ [3412/3484] Built Curve25519.Models.TwistedEdwards.Coords.Defs (1.8s)
+✔ [3413/3484] Built Proofs.Helpers.ZMod (1.2s)
+✔ [3414/3484] Built EllipticCurve.TwistedEdwards.Coords.Lemmas (1.0s)
+✔ [3415/3486] Built Curve25519.Models.TwistedEdwards.Formulas.Defs (1.5s)
+✔ [3416/3511] Built Curve25519.Models.TwistedEdwards.Coords.Lemmas (2.2s)
+✔ [3417/3529] Built Proofs.Helpers.FieldElement2625 (3.9s)
+✔ [3418/3529] Built EllipticCurve.TwistedEdwards.Formulas.Defs (1.9s)
+✔ [3419/3556] Built Zeroize.Lemmas (1.7s)
+✔ [3420/3557] Built EllipticCurve.TwistedEdwards.Formulas.Lemmas (2.2s)
+✔ [3421/3557] Built Proofs.Helpers.AsInt (1.7s)
+✔ [3422/3557] Built EllipticCurve (1.5s)
+✔ [3423/3557] Built Curve25519.Models.TwistedEdwards.Formulas.Lemmas (1.8s)
+✔ [3424/3591] Built Proofs.Helpers.FieldMul (4.7s)
+✔ [3425/3610] Built Curve25519.ToEllipticCurve.TwistedEdwards.Formulas.Lemmas (1.5s)
+✔ [3426/3611] Built Curve25519.Models (1.3s)
+✔ [3427/3611] Built Defs.Iterator (1.4s)
+✔ [3428/3630] Built Proofs.Helpers.Field (1.1s)
+✔ [3429/3630] Built Curve25519.Edwards.Basic (1.6s)
+✔ [3430/3630] Built Proofs.Helpers.Iterator (1.0s)
+✔ [3431/3630] Built Curve25519.X25519 (1.9s)
+✔ [3432/3630] Built Defs.CurveModels (2.7s)
+⚠ [3433/3632] Built Concrete.Bytes (5.4s)
+warning: Concrete/Bytes.lean: imports `Mathlib.Data.Nat.Digits.Lemmas` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Bytes.lean:39:0: 'DhConcrete.bytesOfNat_asNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Bytes.lean:40:0: 'DhConcrete.bytes_asNat_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+✔ [3434/3632] Built Curve25519.Proofs.Ristretto.Algebra (2.8s)
+✔ [3435/3632] Built Curve25519.Proofs.Edwards.Certs (2.1s)
+✔ [3436/3632] Built Defs.Montgomery (1.0s)
+✔ [3438/3632] Built Defs.Window (2.2s)
+✔ [3439/3632] Built DhPoc.Generated.DhCore (1.8s)
+✔ [3440/3632] Built Curve25519.Edwards.Basepoint (1.5s)
+✔ [3441/3632] Built Curve25519.Ristretto.Encoding.Defs (1.9s)
+✔ [3442/3632] Built Curve25519.Edwards.Torsion (1.6s)
+✔ [3443/3632] Built Proofs.Helpers.EdwardsOps (2.2s)
+✔ [3444/3632] Built Defs.Edwards (2.7s)
+✔ [3445/3632] Built Proofs.Helpers.Backend (2.4s)
+✔ [3446/3632] Built Curve25519.Proofs.Ristretto.Certs (1.7s)
+✔ [3447/3634] Built Proofs.Helpers.ToField (2.6s)
+✔ [3448/3635] Built Proofs.Helpers.ToField2625 (2.7s)
+✔ [3449/3635] Built ToMathlib.Control.Functor.Prod (672ms)
+✔ [3450/3636] Built ToMathlib.Algebra.BigOperators.Finset (1.4s)
+✔ [3451/3636] Built Curve25519.Edwards.Order (1.7s)
+✔ [3452/3636] Built ToMathlib.Algebra.BigOperators.List (922ms)
+✔ [3453/3640] Built ToMathlib.Data.Fin.Basic (924ms)
+✔ [3454/3640] Built ToMathlib.Data.List.Count (1.3s)
+✔ [3455/3640] Built ToMathlib.Logic.Basic (867ms)
+✔ [3456/3642] Built Curve25519.Ristretto.Even (2.3s)
+✔ [3457/3643] Built Proofs.Helpers.Coords (3.7s)
+✔ [3459/3645] Built ToMathlib.Data.Vector.Induction (901ms)
+✔ [3460/3647] Built ToMathlib.Data.Vector.Count (2.5s)
+✔ [3461/3647] Built ToMathlib.Data.BitVec (1.1s)
+✔ [3462/3647] Built Curve25519.Ristretto.Encoding (2.4s)
+✔ [3463/3647] Built ToMathlib.Control.Monad.Fold (978ms)
+✔ [3464/3647] Built ToMathlib.Topology.Algebra.InfiniteSum.Option (1.4s)
+✔ [3465/3647] Built ToMathlib.Lint.UsesPMF (459ms)
+✔ [3466/3647] Built ToMathlib.Data.Vector.ListVector (2.4s)
+✔ [3467/3650] Built VCVio.Prelude.Core (1.8s)
+✔ [3469/3650] Built Proofs.Helpers.RistrettoCompress (3.7s)
+✔ [3472/3664] Built Cslib.Foundations.Lint.Basic (1.5s)
+✔ [3473/3664] Built Cslib.Tactic.GrindAttrs (1.4s)
+✔ [3477/3667] Built Cslib.Init (1.0s)
+✔ [3480/3668] Built PolyFun.PFunctor.Obj (2.1s)
+✔ [3481/3668] Built Cslib.Foundations.Data.PFunctor.Basic (2.1s)
+✔ [3482/3668] Built Cslib.Foundations.Control.Monad.IsMonadHom (1.0s)
+✔ [3483/3670] Built PolyFun.Control.Monad.Hom (2.3s)
+✔ [3484/3670] Built Cslib.Foundations.Data.PFunctor.Free (2.7s)
+✔ [3485/3674] Built Cslib.Foundations.Data.PFunctor.Free.W (1.5s)
+✔ [3486/3674] Built PolyFun.PFunctor.Basic (2.6s)
+✔ [3487/3675] Built Cslib.Foundations.Data.PFunctor.Free.Fold (1.3s)
+✔ [3488/3675] Built VCVio.OracleComp.OracleSpec (1.7s)
+✔ [3489/3675] Built PolyFun.PFunctor.Equiv.Basic (2.0s)
+✔ [3490/3675] Built ToMathlib.Data.Set.Functor (1.7s)
+✔ [3491/3679] Built ToCslib.Data.PFunctor.Free.Basic (2.5s)
+✔ [3492/3679] Built VCVio.OracleComp.OracleQuery (1.8s)
+✔ [3493/3679] Built PolyFun.PFunctor.Lens.Basic (5.4s)
+✔ [3494/3679] Built PolyFun.Control.Monad.Support (4.7s)
+✔ [3495/3683] Built VCVio.OracleComp.HasQuery.Basic (3.2s)
+✔ [3496/3684] Built PolyFun.PFunctor.Free.Basic (2.6s)
+✔ [3497/3684] Built PolyFun.Control.Monad.Support.Instances (2.0s)
+✔ [3498/3684] Built PolyFun.PFunctor.Free.Displayed (2.4s)
+✔ [3499/3684] Built VCVio.EvalDist.Defs.Support (1.0s)
+✔ [3500/3688] Built VCVio.OracleComp.OracleComp (2.8s)
+✔ [3501/3688] Built VCVio.EvalDist.Defs.Support.Failure (4.5s)
+✔ [3502/3688] Built PolyFun.PFunctor.Free.Path (8.2s)
+✔ [3504/3688] Built PolyFun.PFunctor.Free.Support (5.0s)
+✔ [3506/3688] Built VCVio.EvalDist.Monad.Support (13s)
+✔ [3507/3708] Built ToMathlib.Control.OptionT (4.4s)
+✔ [3597/3780] Built ToMathlib.MeasureTheory.Measure.Prop (5.7s)
+✔ [3598/3781] Built VCVio.OracleComp.Support (6.7s)
+✔ [3600/3786] Built Curve25519Dalek.Funs (110s)
+✔ [3602/3786] Built ToMathlib.MeasureTheory.Measure.Subprobability (6.5s)
+✔ [3603/3786] Built VCVio.OracleComp.ProbComp.Basic (7.5s)
+✔ [3604/3786] Built Proofs.Ristretto.ToBytes (2.5s)
+✔ [3605/3786] Built Proofs.Ristretto.AsBytes (1.7s)
+⚠ [3606/3786] Built Concrete.Algebra (74s)
+warning: Concrete/Algebra.lean: imports `Mathlib.Algebra.Module.Torsion.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/Algebra.lean:46:0: 'DhConcrete.agree_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Algebra.lean:47:0: 'DhConcrete.shared_secret_comm' depends on axioms: [propext, Classical.choice, Quot.sound]
+✔ [3607/3786] Built Proofs.Backend.GetSelectedBackend (1.7s)
+✔ [3608/3786] Built Proofs.Helpers.TableCertificate (5.8s)
+✔ [3609/3786] Built Proofs.Edwards.AsProjective (2.3s)
+✔ [3610/3786] Built Proofs.Backend.Serial.U64.Field.SixteenP (1.9s)
+✔ [3611/3786] Built Zeroize.Instances (2.0s)
+✔ [3612/3786] Built Proofs.Backend.Serial.U64.Field.SquareLimbs (5.8s)
+✔ [3613/3786] Built Proofs.Helpers.Window (7.2s)
+✔ [3614/3786] Built Proofs.Backend.Serial.U32.Field.AddAssign (3.6s)
+✔ [3615/3786] Built Proofs.Backend.Serial.U64.Field.Mul (9.6s)
+✔ [3616/3786] Built Proofs.Backend.Serial.U32.Field.FromLimbs (2.3s)
+✔ [3617/3786] Built Proofs.Backend.Serial.U32.Scalar.Zero (1.9s)
+✔ [3618/3786] Built Proofs.Backend.Serial.U32.Scalar.M (3.1s)
+✔ [3619/3786] Built Proofs.Backend.Serial.U32.Scalar.Index (1.8s)
+✔ [3620/3786] Built Proofs.Backend.Serial.U32.Scalar.IndexMut (2.0s)
+✔ [3621/3786] Built Proofs.Backend.Serial.U32.Field.SquareInner (14s)
+✔ [3622/3786] Built Proofs.Backend.Serial.U32.Field.Reduce (12s)
+✔ [3623/3786] Built Proofs.Helpers.Scalar29 (3.0s)
+✔ [3624/3786] Built Proofs.Backend.Serial.U64.Scalar.Zero (1.7s)
+✔ [3625/3786] Built Proofs.Backend.Serial.U64.Constants.Lfactor (1.7s)
+✔ [3626/3786] Built Subtle.Instances (1.7s)
+✔ [3627/3786] Built Proofs.Backend.Serial.U64.Constants.L (1.6s)
+✔ [3629/3786] Built Proofs.Backend.Serial.U64.Constants.RR (1.7s)
+✔ [3630/3786] Built Proofs.Backend.Serial.U64.Constants.R (1.7s)
+✔ [3631/3786] Built Concrete.Wire (3.1s)
+✔ [3632/3786] Built Proofs.Helpers.TableCertificate2625 (3.4s)
+✔ [3633/3786] Built Zeroize (1.6s)
+✔ [3634/3786] Built Proofs.Backend.Serial.U64.Field.Square (1.9s)
+✔ [3635/3786] Built Proofs.Backend.Serial.U64.Constants.Ed25519BasepointTable (5.6s)
+✔ [3636/3786] Built Proofs.Backend.Serial.U64.Scalar.ToBytes (13s)
+✔ [3637/3786] Built Proofs.Backend.Serial.U32.Field.Add (1.0s)
+✔ [3638/3786] Built Proofs.Backend.Serial.U64.Field.Pow2k (2.5s)
+✔ [3639/3786] Built Proofs.Backend.Serial.U64.Field.Square2 (3.2s)
+✔ [3640/3786] Built Proofs.Backend.Serial.U32.Field.Zero (1.7s)
+✔ [3641/3786] Built Proofs.Backend.Serial.U32.Field.One (1.8s)
+✔ [3642/3786] Built Proofs.Backend.Serial.U32.Constants.EdwardsD (1.8s)
+✔ [3643/3786] Built Proofs.Backend.Serial.U32.Constants.Aplus2OverFour (1.8s)
+✔ [3644/3786] Built Proofs.Backend.Serial.U32.Constants.MinusOne (1.8s)
+✔ [3645/3786] Built Proofs.Backend.Serial.U32.Constants.OneMinusEdwardsDSquared (1.8s)
+✔ [3646/3786] Built Proofs.Backend.Serial.U32.Constants.InvsqrtAMinusD (2.0s)
+✔ [3647/3786] Built Proofs.Backend.Serial.U32.Constants.EdwardsDMinusOneSquared (2.1s)
+✔ [3648/3786] Built Proofs.Backend.Serial.U32.Constants.SqrtM1 (1.9s)
+✔ [3649/3786] Built Proofs.Backend.Serial.U32.Constants.EdwardsD2 (1.0s)
+✔ [3650/3786] Built Proofs.Backend.Serial.U32.Constants.SqrtAdMinusOne (2.1s)
+✔ [3651/3786] Built Proofs.Backend.Serial.U32.Constants.Ed25519BasepointPoint (2.2s)
+✔ [3652/3786] Built Proofs.Backend.Serial.U32.Field.Square (1.0s)
+✔ [3653/3786] Built Proofs.Backend.Serial.U32.Field.Negate (6.8s)
+✔ [3654/3786] Built Proofs.Backend.Serial.U32.Field.SubAssign (13s)
+✔ [3655/3786] Built Proofs.Backend.Serial.U32.Field.Mul (23s)
+✔ [3656/3786] Built Proofs.Backend.Serial.U32.Field.ToBytes (22s)
+✔ [3657/3786] Built Proofs.Backend.Serial.U32.Constants.R (1.6s)
+✔ [3658/3786] Built Proofs.Backend.Serial.U32.Field.FromBytes (18s)
+✔ [3659/3786] Built Proofs.Backend.Serial.U32.Constants.RR (1.6s)
+✔ [3660/3786] Built Proofs.Backend.Serial.U32.Constants.L (1.7s)
+✔ [3661/3786] Built Proofs.Backend.Serial.U32.Constants.Lfactor (1.5s)
+✔ [3663/3786] Built Subtle (1.6s)
+✔ [3664/3786] Built Proofs.Backend.Serial.U32.Scalar.MulInternal (15s)
+✔ [3665/3786] Built Proofs.Scalar.Scalar52Pack (1.5s)
+✔ [3666/3786] Built Proofs.Backend.Serial.U32.Field.Pow2k (1.9s)
+✔ [3667/3786] Built Proofs.Backend.Serial.U32.Field.Neg (1.8s)
+✔ [3668/3786] Built Proofs.Backend.Serial.U32.Field.Sub (1.6s)
+✔ [3669/3786] Built ToMathlib.Data.ENNReal.AbsDiff (1.4s)
+✔ [3670/3786] Built Proofs.Backend.Serial.U32.Constants.Ed25519BasepointTable (7.5s)
+✔ [3671/3786] Built Proofs.Backend.Serial.U64.Scalar.Index (1.8s)
+✔ [3672/3786] Built Proofs.Backend.Serial.U32.Scalar.ToBytes (9.1s)
+✔ [3673/3786] Built Proofs.Backend.Serial.U64.Scalar.IndexMut (1.8s)
+✔ [3674/3786] Built Proofs.Backend.Serial.U64.Scalar.M (1.8s)
+✔ [3675/3786] Built Proofs.Backend.Serial.U64.Field.FromLimbs (1.7s)
+✔ [3676/3786] Built Proofs.Backend.Serial.U32.Field.Square2 (2.4s)
+✔ [3677/3786] Built Proofs.Backend.Serial.U32.Scalar.ConditionalAddL (6.5s)
+✔ [3678/3786] Built Proofs.Backend.Serial.U32.Field.ConditionalAssign (2.0s)
+✔ [3679/3786] Built Proofs.Backend.Serial.U64.Field.AddAssign (3.3s)
+✔ [3680/3786] Built Proofs.Scalar.Index (1.7s)
+✔ [3681/3788] Built Proofs.Backend.Serial.U64.Field.ConditionalAssign (2.4s)
+✔ [3682/3788] Built ToMathlib.MeasureTheory.Measure.Bool (2.1s)
+✔ [3683/3788] Built Proofs.Scalar.ReadLeU64Into (3.9s)
+✔ [3684/3788] Built Proofs.Scalar.Scalar29Pack (1.7s)
+✔ [3685/3788] Built Proofs.Backend.Serial.U64.Field.Reduce (6.8s)
+✔ [3686/3788] Built Proofs.Backend.Serial.U64.Field.FromBytes (4.8s)
+✔ [3687/3788] Built Proofs.Backend.Serial.U64.Field.One (1.9s)
+✔ [3688/3788] Built Proofs.Backend.Serial.U64.Field.Zero (1.9s)
+✔ [3689/3788] Built Proofs.Backend.Serial.U64.Constants.EdwardsD (1.9s)
+✔ [3690/3788] Built Proofs.Backend.Serial.U64.Constants.Aplus2OverFour (1.8s)
+✔ [3691/3788] Built Proofs.Backend.Serial.U64.Scalar.ConditionalAddL (6.4s)
+✔ [3692/3788] Built Proofs.Backend.Serial.U64.Constants.InvsqrtAMinusD (2.0s)
+✔ [3693/3788] Built Proofs.Backend.Serial.U64.Scalar.MulInternal (6.0s)
+✔ [3694/3788] Built Proofs.Backend.Serial.U64.Constants.EdwardsDMinusOneSquared (2.0s)
+✔ [3695/3788] Built Proofs.Backend.Serial.U64.Constants.MinusOne (1.9s)
+✔ [3696/3788] Built Proofs.Backend.Serial.U64.Constants.OneMinusEdwardsDSquared (1.9s)
+✔ [3697/3788] Built Proofs.Backend.Serial.U64.Constants.SqrtAdMinusOne (1.0s)
+✔ [3698/3788] Built Proofs.Backend.Serial.U64.Constants.SqrtM1 (1.8s)
+✔ [3699/3788] Built Proofs.Backend.Serial.U64.Constants.EdwardsD2 (1.9s)
+✔ [3700/3788] Built Proofs.Backend.Serial.U32.Field.ConditionalNegate (1.7s)
+✔ [3701/3788] Built Proofs.Backend.Serial.U64.Constants.Ed25519BasepointPoint (2.3s)
+✔ [3702/3788] Built Proofs.Backend.Serial.U64.Field.Add (1.8s)
+✔ [3703/3788] Built Proofs.Backend.Serial.CurveModels.AffineNielsConditionalAssign (2.2s)
+✔ [3705/3788] Built Proofs.Backend.Serial.U32.Scalar.Sub (4.6s)
+✔ [3706/3788] Built Proofs.Backend.Serial.CurveModels.ProjectiveNielsConditionalAssign (2.1s)
+✔ [3707/3788] Built Proofs.Scalar.AsRadix16 (3.7s)
+✔ [3708/3788] Built VCVio.EvalDist.Defs.Measure.Core (1.0s)
+✔ [3709/3788] Built Proofs.Backend.Serial.U64.Field.Negate (2.1s)
+✔ [3710/3788] Built Proofs.Backend.Serial.U64.Field.Sub (2.5s)
+✔ [3711/3788] Built Proofs.Backend.Serial.CurveModels.ProjectiveIdentity (2.6s)
+✔ [3712/3788] Built Proofs.Backend.Serial.CurveModels.ProjectiveNielsIdentity (2.7s)
+✔ [3713/3788] Built Proofs.Edwards.Identity (2.8s)
+✔ [3714/3788] Built Proofs.Backend.Serial.CurveModels.AffineNielsIdentity (2.9s)
+✔ [3715/3789] Built Proofs.Helpers.Backend.U32 (2.8s)
+✔ [3717/3789] Built Proofs.Constants.RistrettoBasepoint (2.6s)
+✔ [3718/3789] Built Proofs.Backend.Serial.U64.Scalar.Sub (5.3s)
+✔ [3719/3789] Built Proofs.Backend.Serial.U32.Scalar.Add (6.4s)
+✔ [3720/3789] Built Proofs.Scalar.AsRadix2w (6.5s)
+✔ [3721/3789] Built Proofs.Backend.Serial.U64.Field.Neg (1.8s)
+✔ [3722/3789] Built Proofs.Backend.Serial.ScalarMul.VariableBase.MulGeneric (5.1s)
+✔ [3723/3792] Built Proofs.Edwards.AsProjectiveNiels (3.2s)
+✔ [3725/3793] Built Proofs.Backend.Serial.U64.Field.ToBytes (20s)
+✔ [3726/3793] Built Proofs.Backend.Serial.U32.Scalar.MontgomeryReduce (13s)
+✔ [3727/3793] Built Proofs.Backend.Serial.CurveModels.AffineNielsDefault (2.6s)
+✔ [3728/3793] Built Proofs.Backend.Serial.U64.Field.ConditionalNegate (2.2s)
+✔ [3729/3794] Built Proofs.Backend.Serial.CurveModels.AffineNielsNeg (3.1s)
+✔ [3731/3794] Built Proofs.Backend.Serial.CurveModels.ProjectiveNielsNeg (3.1s)
+✔ [3732/3794] Built Proofs.Backend.Serial.U64.Scalar.Add (6.1s)
+✔ [3733/3794] Built Proofs.Field.CtEq (2.0s)
+✔ [3735/3794] Built Proofs.Field.IsZero (2.1s)
+✔ [3736/3794] Built Proofs.Backend.Serial.U64.Scalar.MontgomeryReduce (8.3s)
+✔ [3739/3795] Built Proofs.Field.IsNegative (2.1s)
+✔ [3740/3795] Built Proofs.Backend.Serial.U32.Scalar.MontgomeryMul (1.9s)
+✔ [3741/3795] Built Proofs.Helpers.Backend.U64 (2.6s)
+✔ [3742/3795] Built Proofs.Window.LookupTableRadix256Select (2.3s)
+✔ [3743/3795] Built Proofs.Window.LookupTableRadix128Select (2.1s)
+✔ [3744/3795] Built Proofs.Window.LookupTableRadix64Select (2.3s)
+✔ [3745/3795] Built Proofs.Field.Eq (1.9s)
+✔ [3748/3795] Built Proofs.Window.LookupTableRadix32Select (2.1s)
+✔ [3749/3795] Built Proofs.Window.LookupTableSelect (2.4s)
+✔ [3750/3795] Built Proofs.Backend.Serial.U64.Scalar.MontgomeryMul (1.8s)
+✔ [3751/3795] Built Proofs.Backend.Serial.CurveModels.ProjectiveAsExtended (2.5s)
+✔ [3752/3795] Built Proofs.Backend.Serial.CurveModels.SubProjectiveNiels (2.0s)
+✔ [3753/3795] Built Proofs.Backend.Serial.CurveModels.SubAffineNiels (2.9s)
+✔ [3754/3795] Built Proofs.Field.Pow22501 (3.3s)
+✔ [3755/3795] Built Proofs.Backend.Serial.CurveModels.AddProjectiveNiels (2.0s)
+✔ [3756/3795] Built Proofs.Backend.Serial.CurveModels.ProjectiveDouble (3.0s)
+✔ [3757/3796] Built Proofs.Backend.Serial.CurveModels.CompletedAsExtended (2.4s)
+✔ [3758/3796] Built Proofs.Backend.Serial.CurveModels.CompletedAsProjective (2.8s)
+✔ [3759/3798] Built Proofs.Backend.Serial.CurveModels.AddAffineNiels (2.9s)
+✔ [3760/3798] Built Proofs.Backend.Serial.U32.Scalar.FromBytesWide (10s)
+✔ [3761/3798] Built Proofs.Helpers.Backend.U32.Bytes (1.8s)
+✔ [3762/3798] Built Proofs.Helpers.Backend.U64.Bytes (1.0s)
+✔ [3764/3799] Built Proofs.Field.PowP58 (2.5s)
+✔ [3765/3799] Built Proofs.Field.Invert (3.4s)
+✔ [3766/3799] Built Proofs.Edwards.MulByPow2 (3.0s)
+✔ [3767/3799] Built Proofs.Edwards.Add (3.1s)
+✔ [3769/3801] Built Proofs.Edwards.Double (2.4s)
+✔ [3771/3801] Built Proofs.Edwards.BasepointTableBasepoint (2.9s)
+✔ [3772/3801] Built Proofs.Edwards.AsAffineNiels (2.8s)
+✔ [3773/3802] Built Proofs.Backend.Serial.U64.Scalar.FromBytesWide (11s)
+✔ [3775/3803] Built Proofs.Field.SqrtRatioI (5.7s)
+✔ [3777/3803] Built Proofs.Edwards.AddAssign (2.9s)
+✔ [3778/3803] Built Proofs.Helpers.BasepointTable (5.3s)
+✔ [3779/3803] Built Proofs.Window.NafLookupTable5From (2.7s)
+✔ [3780/3803] Built Proofs.Window.LookupTableRadix256From (2.4s)
+✔ [3781/3803] Built Proofs.Window.LookupTableRadix128From (2.5s)
+✔ [3782/3803] Built Proofs.Window.LookupTableRadix64From (2.3s)
+✔ [3784/3807] Built Proofs.Scalar.FromBytesModOrderWide (1.8s)
+✔ [3787/3807] Built Proofs.Window.LookupTableRadix32From (2.7s)
+✔ [3816/3852] Built Proofs.Window.LookupTableFrom (2.7s)
+✔ [3833/3852] Built Proofs.Field.Invsqrt (2.7s)
+✔ [3835/3852] Built Proofs.Helpers.EdwardsOps.Instances (2.9s)
+✔ [3836/3852] Built Proofs.Edwards.BasepointTableCreate (3.2s)
+✔ [3838/3853] Built Proofs.Backend.Serial.ScalarMul.VariableBase.Mul (2.7s)
+✔ [3840/3853] Built Proofs.Edwards.BasepointTableMulBase (6.5s)
+✔ [3843/3882] Built Proofs.Ristretto.Decompress (5.7s)
+✔ [3898/3964] Built Proofs.Ristretto.Compress (3.9s)
+✔ [3952/3970] Built VCVio.EvalDist.ProbabilityNotation.Attr (667ms)
+✔ [3953/3970] Built Proofs.Backend.VariableBaseMul (2.4s)
+✔ [3954/3971] Built Proofs.Edwards.BasepointTableMul (2.0s)
+✔ [3957/3971] Built ToMathlib.Probability.UniformOn (1.9s)
+✔ [3958/3971] Built ToMathlib.MeasureTheory.Integral.Bounds (1.6s)
+✔ [3959/3971] Built VCVio.EvalDist.ProbabilityNotation (3.5s)
+✔ [3960/3971] Built Proofs.Ristretto.BasepointTable (2.4s)
+✔ [3961/3972] Built Proofs.Edwards.Mul (3.2s)
+✔ [3962/3975] Built VCVio.EvalDist.PFunctorMeasure.Core (2.7s)
+✔ [3963/3975] Built VCVio.EvalDist.Defs.Measure.Failure (1.5s)
+✔ [3964/3975] Built ToMathlib.MeasureTheory.Measure.Bounds (1.8s)
+✔ [3965/3979] Built ToMathlib.MeasureTheory.MeasurableSpace.Option (1.1s)
+✔ [3966/3981] Built ToMathlib.MeasureTheory.Measure.GiryMonad (1.3s)
+✔ [3967/3981] Built VCVio.OracleComp.EvalDist.AnswerMeasure (2.2s)
+✔ [3968/3981] Built ToMathlib.MeasureTheory.MeasurableSpace.Except (1.2s)
+✔ [3969/3983] Built Proofs.Ristretto.Mul (2.0s)
+✔ [3970/3984] Built ToMathlib.MeasureTheory.Measure.TotalVariation (1.7s)
+✔ [3971/3984] Built ToMathlib.MeasureTheory.Measure.Option (2.2s)
+✔ [3972/3984] Built VCVio.OracleComp.Constructions.UniformFinMeasure (1.8s)
+✔ [3973/3984] Built ToMathlib.MeasureTheory.Measure.Except (1.8s)
+✔ [3974/3984] Built VCVio.EvalDist.MeasureTVDist.Basic (1.3s)
+✔ [3975/3984] Built ToMathlib.MeasureTheory.Measure.IndependentDraws (1.6s)
+✔ [3976/3984] Built VCVio.EvalDist.Monad.Bool (1.4s)
+✔ [3977/3984] Built Proofs.Ristretto.MulBase (2.1s)
+✔ [3978/3984] Built VCVio.EvalDist.Defs.Measure.OptionT (1.7s)
+✔ [3979/3986] Built VCVio.CryptoFoundations.HardnessAssumptions.HardRelation (1.8s)
+✔ [3980/3988] Built VCVio.EvalDist.Defs.Measure.ExceptT (1.8s)
+✔ [3981/3988] Built VCVio.EvalDist.Monad.Measure (1.7s)
+✔ [3982/3988] Built PolyFun.Control.Monad.Hom.IsMonadHom (1.1s)
+✔ [3983/3992] Built Cslib.Foundations.Control.Monad.IsMonadHom.List (1.7s)
+✔ [3984/3995] Built VCVio.EvalDist.Defs.Semantics.Core (1.7s)
+✔ [3985/3995] Built ToCslib.Control.Monad.HomTransport (1.2s)
+✔ [3986/3995] Built PolyFun.PFunctor.Handler (1.1s)
+✔ [3987/3999] Built PolyFun.Control.Monad.Hom.Loops (1.0s)
+✔ [3988/3999] Built ToMathlib.Data.FinEnum (1.4s)
+✔ [3989/4002] Built VCVio.EvalDist.Monad.Seq.Measure (1.9s)
+ℹ [3990/4002] Built Concrete.Primitives (4.8s)
+info: Concrete/Primitives.lean:77:0: 'DhConcrete.publicCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Primitives.lean:78:0: 'DhConcrete.agreeCompose_spec' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+✔ [3991/4003] Built PolyFun.PFunctor.Handler.Instrumentation (1.1s)
+✔ [3992/4003] Built VCVio.EvalDist.Monad.Failure (1.5s)
+✔ [3993/4004] Built ToMathlib.MeasureTheory.Integral.Quadratic (1.7s)
+✔ [3994/4005] Built VCVio.EvalDist.Monad.Seq.Uniform (1.5s)
+✔ [3995/4009] Built VCVio.EvalDist.EvalDistEq (1.7s)
+✔ [3996/4009] Built VCVio.OracleComp.Constructions.Replicate.Basic (1.1s)
+✔ [3998/4009] Built VCVio.OracleComp.SimSemantics.QueryImpl.Basic (1.4s)
+✔ [3999/4013] Built ToMathlib.MeasureTheory.DiscreteInstances (861ms)
+✔ [4000/4013] Built PolyFun.PFunctor.Bound (1.7s)
+✔ [4001/4013] Built VCVio.EvalDist.ProbabilityBounds (2.5s)
+✔ [4002/4019] Built VCVio.OracleComp.SimSemantics.SimulateQ (2.0s)
+✔ [4003/4019] Built PolyFun.Control.Trace (1.2s)
+✔ [4004/4019] Built ToMathlib.Control.WriterT (1.5s)
+✔ [4005/4020] Built VCVio.EvalDist.Monad.Option (1.8s)
+✔ [4006/4020] Built VCVio.OracleComp.SimSemantics.QueryImpl.Compose (1.6s)
+✔ [4007/4020] Built PolyFun.PFunctor.Chart.Basic (3.5s)
+✔ [4008/4020] Built VCVio.OracleComp.SimSemantics.WriterT.Core (1.5s)
+✔ [4009/4025] Built VCVio.OracleComp.SimSemantics.Measure (1.8s)
+✔ [4010/4025] Built VCVio.OracleComp.EvalDist.Measure (2.6s)
+✔ [4011/4025] Built PolyFun.PFunctor.Lens.Cartesian (1.2s)
+✔ [4012/4030] Built PolyFun.PFunctor.Trace (1.6s)
+✔ [4013/4043] Built PolyFun.Control.Monad.Algebra (834ms)
+✔ [4014/4043] Built VCVio.OracleComp.SimSemantics.QueryImpl.Constructions.Core (1.0s)
+✔ [4015/4043] Built Cslib.Foundations.Control.Monad.Free (1.2s)
+✔ [4016/4043] Built PolyFun.PFunctor.Free.WP (1.5s)
+✔ [4017/4043] Built VCVio.OracleComp.Constructions.SampleableType.Basic (2.7s)
+✔ [4018/4043] Built PolyFun.Control.Monad.Free (1.0s)
+✔ [4019/4044] Built VCVio.OracleComp.QueryTracking.Structures (3.3s)
+✔ [4020/4044] Built Concrete.GeneratedAdapter (2.5s)
+✔ [4021/4044] Built ToMathlib.Control.StateT (1.1s)
+✔ [4022/4044] Built VCVio.OracleComp.Coercions.SubSpec.Basic (2.7s)
+✔ [4023/4044] Built VCVio.OracleComp.Constructions.SampleableType.Measure (2.6s)
+✔ [4024/4044] Built VCVio.OracleComp.QueryTracking.Tracing.Core (1.8s)
+✔ [4025/4044] Built ToMathlib.MeasureTheory.Integral.AbsDiff (1.6s)
+✔ [4026/4054] Built VCVio.OracleComp.SimSemantics.StateT.Basic (2.0s)
+✔ [4065/4097] Built VCVio.CryptoFoundations.SecExp.Measure (1.8s)
+✔ [4072/4097] Built VCVio.OracleComp.QueryTracking.CountingOracle.Core (2.8s)
+✔ [4073/4097] Built ToMathlib.MeasureTheory.Measure.TotalVariation.Bind (2.1s)
+✔ [4074/4097] Built ToMathlib.Probability.Kernel.Subprobability (1.8s)
+✔ [4075/4097] Built ToMathlib.Probability.Kernel.TotalVariation (1.6s)
+✔ [4076/4097] Built VCVio.EvalDist.MeasureTVDist.Bind (1.6s)
+✔ [4077/4097] Built VCVio.OracleComp.Coercions.Add.Basic (9.9s)
+✔ [4078/4097] Built VCVio.OracleComp.SimSemantics.Append.Core (2.5s)
+✔ [4079/4097] Built VCVio.OracleComp.QueryTracking.QueryBound.Basic (2.1s)
+✔ [4080/4097] Built VCVio.OracleComp.QueryTracking.QueryBound.Simulation (2.2s)
+✔ [4081/4097] Built VCVio.OracleComp.QueryTracking.QueryBound (1.2s)
+✔ [4082/4097] Built VCVio.CryptoFoundations.HardnessAssumptions.DiffieHellman (2.3s)
+✔ [4083/4097] Built DhPoc.Refinement (3.0s)
+✔ [4084/4097] Built DhPoc.RawSampler (2.6s)
+⚠ [4085/4097] Built DhPoc.RawSecurity (2.7s)
+warning: ../lean/DhPoc/RawSecurity.lean:51:0: automatically included section variable(s) unused in theorem `DhPoc.sampledReal_eq_sampledDDHReal`:
+  [SampleableType F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SampleableType F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+✔ [4086/4097] Built Concrete.SamplingHybrids (2.7s)
+ℹ [4087/4097] Built Concrete.Model (3.2s)
+info: Concrete/Model.lean:52:0: 'DhConcrete.model' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:53:0: 'DhConcrete.public_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Model.lean:54:0: 'DhConcrete.agree_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+ℹ [4088/4097] Built Concrete.Security (2.0s)
+info: Concrete/Security.lean:15:0: 'DhConcrete.advantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+✔ [4089/4097] Built Concrete.Sampler (3.8s)
+✔ [4090/4097] Built Concrete.Native (3.4s)
+⚠ [4091/4097] Built Concrete.SamplingError (3.3s)
+warning: Concrete/SamplingError.lean: imports `Mathlib.Basic.ENNReal.Real` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Concrete/SamplingError.lean: imports `Mathlib.Tactic.NormNum` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [4092/4097] Built Concrete.ModuloSampling (3.0s)
+warning: Concrete/ModuloSampling.lean: imports `Mathlib.Data.Nat.Periodic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+info: Concrete/ModuloSampling.lean:131:0: 'DhConcrete.uniform_modulo_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/ModuloSampling.lean:132:0: 'DhConcrete.uniformWide_scalar_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+✔ [4093/4097] Built Concrete.Wide (2.9s)
+✔ [4094/4097] Built Concrete.Standard (3.4s)
+ℹ [4095/4097] Built Concrete.Audit (2.9s)
+info: Concrete/Audit.lean:4:0: 'DhConcrete.extracted_public_link' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:5:0: 'DhConcrete.extracted_agree_link' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:6:0: 'DhConcrete.native_public_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:7:0: 'DhConcrete.native_agree_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:8:0: 'DhConcrete.native_session_refines' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RustAx.core,
+ RustAx.subtle]
+info: Concrete/Audit.lean:9:0: 'DhConcrete.nativeReal_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:10:0: 'DhConcrete.nativeIdeal_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:11:0: 'DhConcrete.nativeAdvantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:12:0: 'DhConcrete.nativeAdvantage_le' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:13:0: 'DhConcrete.bytesOfNat_asNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:14:0: 'DhConcrete.bytes_asNat_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:15:0: theorem DhConcrete.nativeAdvantage_eq : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (μ ν : ProbComp DhConcrete.Secret)
+    (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool),
+    DhConcrete.nativeAdvantage μ ν adversary =
+      DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator μ ν
+        (DhPoc.rawReduction DhConcrete.model adversary) :=
+fun hTarget μ ν adversary =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          _a =
+            DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator μ ν
+              (DhPoc.rawReduction DhConcrete.model adversary))
+        (DhConcrete.nativeAdvantage.eq_1 μ ν adversary)))
+    (Eq.mpr
+      (id
+        (congrArg
+          (fun _a =>
+            𝒟[_a].boolDist 𝒟[DhConcrete.nativeIdeal μ ν adversary] =
+              DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator μ ν
+                (DhPoc.rawReduction DhConcrete.model adversary))
+          (DhConcrete.nativeReal_eq hTarget μ ν adversary)))
+      (Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              𝒟[DhPoc.sampledReal DhConcrete.model μ ν adversary].boolDist 𝒟[_a] =
+                DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator μ ν
+                  (DhPoc.rawReduction DhConcrete.model adversary))
+            (DhConcrete.nativeIdeal_eq hTarget μ ν adversary)))
+        (DhConcrete.advantage_eq μ ν adversary)))
+info: Concrete/Audit.lean:16:0: theorem DhConcrete.nativeAdvantage_le : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (μ ν : ProbComp DhConcrete.Secret)
+    (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool) (ε : ENNReal),
+    DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator μ ν
+          (DhPoc.rawReduction DhConcrete.model adversary) ≤
+        ε →
+      DhConcrete.nativeAdvantage μ ν adversary ≤ ε :=
+fun hTarget μ ν adversary ε hDDH =>
+  Eq.mpr (id (congrArg (fun _a => _a ≤ ε) (DhConcrete.nativeAdvantage_eq hTarget μ ν adversary))) hDDH
+info: Concrete/Audit.lean:18:0: 'DhConcrete.rawOfNat_asNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:19:0: 'DhConcrete.decode_rawOfNat' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:20:0: 'DhConcrete.uniformWide_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:21:0: 'DhConcrete.wideAdvantage_eq' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:22:0: 'DhConcrete.wideAdvantage_le' depends on axioms: [propext, Classical.choice, Quot.sound, RustAx.core, RustAx.subtle]
+info: Concrete/Audit.lean:23:0: theorem DhConcrete.wideAdvantage_eq : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool),
+    DhConcrete.nativeAdvantage DhConcrete.uniformWide DhConcrete.uniformWide adversary =
+      DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator DhConcrete.uniformWide
+        DhConcrete.uniformWide (DhPoc.rawReduction DhConcrete.model adversary) :=
+fun hTarget adversary => DhConcrete.nativeAdvantage_eq hTarget DhConcrete.uniformWide DhConcrete.uniformWide adversary
+info: Concrete/Audit.lean:24:0: theorem DhConcrete.wideAdvantage_le : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool) (ε : ENNReal),
+    DhPoc.sampledDDHAdvantage DhConcrete.decodeScalar DhConcrete.generator DhConcrete.uniformWide DhConcrete.uniformWide
+          (DhPoc.rawReduction DhConcrete.model adversary) ≤
+        ε →
+      DhConcrete.nativeAdvantage DhConcrete.uniformWide DhConcrete.uniformWide adversary ≤ ε :=
+fun hTarget adversary ε hDDH =>
+  DhConcrete.nativeAdvantage_le hTarget DhConcrete.uniformWide DhConcrete.uniformWide adversary ε hDDH
+info: Concrete/Audit.lean:26:0: 'DhConcrete.uniform_modulo_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:27:0: 'DhConcrete.uniformWide_scalar_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:28:0: 'DhPoc.sampledDDHAdvantage_le_standard' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:29:0: 'DhConcrete.four_wideSamplingError_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Concrete/Audit.lean:30:0: 'DhConcrete.wideAdvantage_le_standard' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RustAx.core,
+ RustAx.subtle]
+info: Concrete/Audit.lean:31:0: 'DhConcrete.wideAdvantage_le_of_standardDDH' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ RustAx.core,
+ RustAx.subtle]
+info: Concrete/Audit.lean:32:0: theorem DhConcrete.wideAdvantage_le_standard : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool),
+    DhConcrete.nativeAdvantage DhConcrete.uniformWide DhConcrete.uniformWide adversary ≤
+      DiffieHellman.ddhAdvantage DhConcrete.generator (DhPoc.rawReduction DhConcrete.model adversary) +
+        4 * DhConcrete.wideSamplingError :=
+fun hTarget adversary =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          _a ≤
+            DiffieHellman.ddhAdvantage DhConcrete.generator (DhPoc.rawReduction DhConcrete.model adversary) +
+              4 * DhConcrete.wideSamplingError)
+        (DhConcrete.wideAdvantage_eq hTarget adversary)))
+    (LE.le.trans
+      (DhPoc.sampledDDHAdvantage_le_standard DhConcrete.decodeScalar DhConcrete.generator DhConcrete.uniformWide
+        DhConcrete.uniformWide (DhPoc.rawReduction DhConcrete.model adversary))
+      (have h :=
+        Eq.mpr
+          (id
+            (congrArg
+              (LE.le (measureETVDist (DhConcrete.decodeScalar <$> DhConcrete.uniformWide) ($ᵗ DhConcrete.Scalar)))
+              (congrArg (HDiv.hDiv ↑(256 ^ 64 % curve25519.L)) (Nat.cast_pow 256 64))))
+          (Eq.mp
+            (congrArg
+              (LE.le (measureETVDist (DhConcrete.decodeScalar <$> DhConcrete.uniformWide) ($ᵗ DhConcrete.Scalar)))
+              (congrArg (HDiv.hDiv ↑(256 ^ 64 % curve25519.L)) (Nat.cast_pow 256 64)))
+            DhConcrete.uniformWide_scalar_measureETVDist_le);
+      have hsum :=
+        mul_le_mul
+          (have this := le_rfl;
+          this)
+          (add_le_add h h) bot_le bot_le;
+      have heq :=
+        Mathlib.Tactic.Ring.of_eq
+          (Mathlib.Tactic.Ring.Common.mul_congr
+            (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ENNReal (Eq.refl 2)))
+            (Mathlib.Tactic.Ring.Common.add_congr
+              (Mathlib.Tactic.Ring.Common.atom_pf DhConcrete.wideSamplingError rfl
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                          DhConcrete.wideSamplingError ^ Nat.rawCast 1 * _a)
+                      (Eq.symm rfl)))
+                  (Eq.refl (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1))))
+              (Mathlib.Tactic.Ring.Common.atom_pf DhConcrete.wideSamplingError rfl
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                          DhConcrete.wideSamplingError ^ Nat.rawCast 1 * _a)
+                      (Eq.symm rfl)))
+                  (Eq.refl (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1))))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_overlap
+                (Mathlib.Tactic.Ring.Common.add_overlap_pf DhConcrete.wideSamplingError (Nat.rawCast 1)
+                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                    (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1)
+                      (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1) (Eq.refl 2))))
+                (Mathlib.Tactic.Ring.Common.add_pf_zero_add 0)))
+            (Mathlib.Tactic.Ring.Common.add_mul
+              (Mathlib.Tactic.Ring.Common.mul_add
+                (Mathlib.Tactic.Ring.Common.mul_pf_right DhConcrete.wideSamplingError (Nat.rawCast 1)
+                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                    (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 2)
+                      (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 2) (Eq.refl 4))))
+                (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 2))
+                (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                  (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 4 + 0)))
+              (Mathlib.Tactic.Ring.Common.zero_mul (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 2 + 0))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 4 + 0))))
+          (Mathlib.Tactic.Ring.Common.mul_congr
+            (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ENNReal (Eq.refl 4)))
+            (Mathlib.Tactic.Ring.Common.atom_pf DhConcrete.wideSamplingError rfl
+              (Eq.mpr
+                (id
+                  (congrArg
+                    (fun _a =>
+                      DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                        DhConcrete.wideSamplingError ^ Nat.rawCast 1 * _a)
+                    (Eq.symm rfl)))
+                (Eq.refl (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1))))
+            (Mathlib.Tactic.Ring.Common.add_mul
+              (Mathlib.Tactic.Ring.Common.mul_add
+                (Mathlib.Tactic.Ring.Common.mul_pf_right DhConcrete.wideSamplingError (Nat.rawCast 1)
+                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                    (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 4)
+                      (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1) (Eq.refl 4))))
+                (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 4))
+                (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                  (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 4 + 0)))
+              (Mathlib.Tactic.Ring.Common.zero_mul (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                (DhConcrete.wideSamplingError ^ Nat.rawCast 1 * Nat.rawCast 4 + 0))));
+      add_le_add le_rfl
+        (Eq.mp
+          (congrArg
+            (fun _a =>
+              2 *
+                  (measureETVDist (DhConcrete.decodeScalar <$> DhConcrete.uniformWide) ($ᵗ DhConcrete.Scalar) +
+                    measureETVDist (DhConcrete.decodeScalar <$> DhConcrete.uniformWide) ($ᵗ DhConcrete.Scalar)) ≤
+                _a)
+            heq)
+          hsum)))
+info: Concrete/Audit.lean:33:0: theorem DhConcrete.wideAdvantage_le_of_standardDDH : Aeneas.Std.target = "x86_64-no-tables" →
+  ∀ (adversary : DhConcrete.Public → DhConcrete.Public → DhConcrete.Key → ProbComp Bool) (ε : ENNReal),
+    DiffieHellman.ddhAdvantage DhConcrete.generator (DhPoc.rawReduction DhConcrete.model adversary) ≤ ε →
+      DhConcrete.nativeAdvantage DhConcrete.uniformWide DhConcrete.uniformWide adversary ≤ ε + (2 ^ 260)⁻¹ :=
+fun hTarget adversary ε hDDH =>
+  LE.le.trans (DhConcrete.wideAdvantage_le_standard hTarget adversary)
+    (add_le_add hDDH (LT.lt.le DhConcrete.four_wideSamplingError_lt))
+✔ [4096/4097] Built Concrete (2.7s)
+Build completed successfully (4097 jobs).

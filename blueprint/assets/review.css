@@ -1,0 +1,47 @@
+/* Academic reading layout. Formal status and imported source remain native. */
+:root {
+  --bp-color-accent-info: #28536b;
+  --bp-color-text-strong: #16232c;
+  --bp-color-border: #d7dde0;
+}
+html { scroll-padding-top: 4rem; }
+.header-title h1 { font-size: 1.05rem; line-height: 1.25; }
+.content-wrapper { max-width: 90rem; }
+.content-wrapper > main > p, .content-wrapper > section > p { max-width: 78ch; }
+.content-wrapper p, .content-wrapper li { line-height: 1.6; }
+.bp_build_metadata { display: none; }
+.page-top-anchor { display: block; position: relative; top: -4rem; height: 0; }
+.page-top-anchor:target { background: transparent !important; }
+.bp_math_code .bp_pair_prose,
+.bp_math_code .bp_pair_prose p,
+.bp_math_code .bp_pair_prose li { font-style: normal; line-height: 1.65; }
+.bp_declaration_card { border-radius: .25rem; box-shadow: none; }
+.bp_declaration_card_body { max-height: 32rem; overflow: auto; padding: .85rem; }
+.bp_declaration_card_body > code.hl.lean.block { font-size: .82rem; line-height: 1.55; }
+.bp_declaration_card > summary { padding: .55rem .75rem; }
+.bp_declaration_card_pill { border: 0; padding: 0; border-radius: 0; letter-spacing: .02em; font-size: .73rem; }
+.bp_declaration_card_hint { display: none; }
+.bp_source_link { display: block; padding: .4rem .8rem; border-top: 1px solid #e3e7e9; font: .8rem system-ui,sans-serif; }
+.bp_wrapper:has(.bp_math_code) + .bp_code_panel,
+.bp_wrapper:has(.bp_math_code) + .bp_code_panel_wrapper { display: none; }
+.bp_math_code p > code { overflow-wrap: anywhere; white-space: normal; }
+.source-page { max-width: 90rem; margin: 2rem auto; padding: 0 1.25rem; color: #18232b; }
+.source-page h1 { overflow-wrap: anywhere; font: 1.25rem system-ui,sans-serif; }
+.source-page pre { font: .85rem/1.55 ui-monospace,monospace; overflow-x: auto; padding: 1rem; border: 1px solid #d7dde0; }
+.source-line { display: block; min-height: 1.55em; }
+.source-line:target { background: #f8ebc6; }
+.line-number { color: #687781; display: inline-block; width: 3.5rem; text-decoration: none; user-select: none; }
+@media (max-width: 1050px) {
+  .bp_math_code { grid-template-columns: minmax(0, 1fr); gap: .7rem; }
+  .bp_pair_prose { order: -1; }
+}
+@media (max-width: 640px) {
+  .header-title h1 { font-size: .9rem; }
+  .content-wrapper { overflow-wrap: anywhere; }
+  .bp_declaration_card_body { max-height: 28rem; padding: .6rem; }
+  .bp_declaration_card_body > code.hl.lean.block { font-size: .76rem; }
+}
+@media print {
+  .bp_declaration_card_body { max-height: none; overflow: visible; }
+  .bp_math_code { grid-template-columns: 1fr; }
+}

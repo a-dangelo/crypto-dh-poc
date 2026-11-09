@@ -1,0 +1,232 @@
+{
+  "scope": "Project Lean sources, including generated adapters, examples, audit, and import roots. Dependency libraries and the Blueprint are separate and excluded.",
+  "total_lines": 1367,
+  "audited_module_counts": {
+    "generic_modules": 446,
+    "concrete_modules": 915,
+    "all_local_lean_modules": 1361,
+    "generated_lean": 250,
+    "handwritten_lean": 1111,
+    "wide_endpoint_import_path": 867,
+    "standard_endpoint_import_path": 1145,
+    "largest_file": 195
+  },
+  "largest_file_lines": 195,
+  "generic": {
+    "total_lines": 451,
+    "largest_file_lines": 99,
+    "files": [
+      {
+        "path": "lean/DhPoc.lean",
+        "lines": 5
+      },
+      {
+        "path": "lean/DhPoc/Audit.lean",
+        "lines": 24
+      },
+      {
+        "path": "lean/DhPoc/Examples.lean",
+        "lines": 60
+      },
+      {
+        "path": "lean/DhPoc/Games.lean",
+        "lines": 99
+      },
+      {
+        "path": "lean/DhPoc/Generated/DhCore.lean",
+        "lines": 55
+      },
+      {
+        "path": "lean/DhPoc/RawSampler.lean",
+        "lines": 68
+      },
+      {
+        "path": "lean/DhPoc/RawSecurity.lean",
+        "lines": 91
+      },
+      {
+        "path": "lean/DhPoc/Refinement.lean",
+        "lines": 49
+      }
+    ]
+  },
+  "concrete_addition": {
+    "total_lines": 916,
+    "largest_file_lines": 195,
+    "files": [
+      {
+        "path": "concrete/Concrete.lean",
+        "lines": 1
+      },
+      {
+        "path": "concrete/Concrete/Algebra.lean",
+        "lines": 48
+      },
+      {
+        "path": "concrete/Concrete/Audit.lean",
+        "lines": 33
+      },
+      {
+        "path": "concrete/Concrete/Bytes.lean",
+        "lines": 40
+      },
+      {
+        "path": "concrete/Concrete/GeneratedAdapter.lean",
+        "lines": 195
+      },
+      {
+        "path": "concrete/Concrete/Model.lean",
+        "lines": 55
+      },
+      {
+        "path": "concrete/Concrete/ModuloSampling.lean",
+        "lines": 134
+      },
+      {
+        "path": "concrete/Concrete/Native.lean",
+        "lines": 90
+      },
+      {
+        "path": "concrete/Concrete/Primitives.lean",
+        "lines": 79
+      },
+      {
+        "path": "concrete/Concrete/Sampler.lean",
+        "lines": 39
+      },
+      {
+        "path": "concrete/Concrete/SamplingError.lean",
+        "lines": 22
+      },
+      {
+        "path": "concrete/Concrete/SamplingHybrids.lean",
+        "lines": 83
+      },
+      {
+        "path": "concrete/Concrete/Security.lean",
+        "lines": 16
+      },
+      {
+        "path": "concrete/Concrete/Standard.lean",
+        "lines": 39
+      },
+      {
+        "path": "concrete/Concrete/Wide.lean",
+        "lines": 24
+      },
+      {
+        "path": "concrete/Concrete/Wire.lean",
+        "lines": 18
+      }
+    ]
+  },
+  "generated_adapters": {
+    "total_lines": 250,
+    "largest_file_lines": 195,
+    "files": [
+      {
+        "path": "lean/DhPoc/Generated/DhCore.lean",
+        "lines": 55
+      },
+      {
+        "path": "concrete/Concrete/GeneratedAdapter.lean",
+        "lines": 195
+      }
+    ]
+  },
+  "handwritten_excluding_generated": {
+    "total_lines": 1117,
+    "largest_file_lines": 134,
+    "files": [
+      {
+        "path": "lean/DhPoc.lean",
+        "lines": 5
+      },
+      {
+        "path": "lean/DhPoc/Audit.lean",
+        "lines": 24
+      },
+      {
+        "path": "lean/DhPoc/Examples.lean",
+        "lines": 60
+      },
+      {
+        "path": "lean/DhPoc/Games.lean",
+        "lines": 99
+      },
+      {
+        "path": "lean/DhPoc/RawSampler.lean",
+        "lines": 68
+      },
+      {
+        "path": "lean/DhPoc/RawSecurity.lean",
+        "lines": 91
+      },
+      {
+        "path": "lean/DhPoc/Refinement.lean",
+        "lines": 49
+      },
+      {
+        "path": "concrete/Concrete.lean",
+        "lines": 1
+      },
+      {
+        "path": "concrete/Concrete/Algebra.lean",
+        "lines": 48
+      },
+      {
+        "path": "concrete/Concrete/Audit.lean",
+        "lines": 33
+      },
+      {
+        "path": "concrete/Concrete/Bytes.lean",
+        "lines": 40
+      },
+      {
+        "path": "concrete/Concrete/Model.lean",
+        "lines": 55
+      },
+      {
+        "path": "concrete/Concrete/ModuloSampling.lean",
+        "lines": 134
+      },
+      {
+        "path": "concrete/Concrete/Native.lean",
+        "lines": 90
+      },
+      {
+        "path": "concrete/Concrete/Primitives.lean",
+        "lines": 79
+      },
+      {
+        "path": "concrete/Concrete/Sampler.lean",
+        "lines": 39
+      },
+      {
+        "path": "concrete/Concrete/SamplingError.lean",
+        "lines": 22
+      },
+      {
+        "path": "concrete/Concrete/SamplingHybrids.lean",
+        "lines": 83
+      },
+      {
+        "path": "concrete/Concrete/Security.lean",
+        "lines": 16
+      },
+      {
+        "path": "concrete/Concrete/Standard.lean",
+        "lines": 39
+      },
+      {
+        "path": "concrete/Concrete/Wide.lean",
+        "lines": 24
+      },
+      {
+        "path": "concrete/Concrete/Wire.lean",
+        "lines": 18
+      }
+    ]
+  },
+  "dependency_note": "The concrete proof reuses the pinned BAIF dalek proof, Mathlib, Aeneas, EllipticCurve, and VCVio. Their much larger implementation and proof sources are not included in the small project line count."
+}
