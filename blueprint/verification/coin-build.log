@@ -1,0 +1,19 @@
+⚠ [3149/3411] Replayed DhPoc.RawSecurity
+warning: DhPoc/RawSecurity.lean:56:0: automatically included section variable(s) unused in theorem `DhPoc.sampledReal_eq_sampledDDHReal`:
+  [SampleableType F]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [SampleableType F] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3538/3691] Replayed DhPoc.ModuloSampling
+warning: DhPoc/ModuloSampling.lean: imports `Mathlib.Algebra.Field.ZMod` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: DhPoc/ModuloSampling.lean: imports `Mathlib.Data.Nat.Periodic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [4107/4147] Replayed DhPoc.SamplingSchedule
+warning: DhPoc/SamplingSchedule.lean: imports `Mathlib.Analysis.SpecificLimits.Normed` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: DhPoc/SamplingSchedule.lean: imports `Mathlib.Tactic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [4143/4147] Built DhPoc.CoinSampling (3.2s)
+warning: DhPoc/CoinSampling.lean: imports `Mathlib.Logic.Equiv.Fin.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+✔ [4144/4147] Built DhPoc.CoinSecurity (3.3s)
+✔ [4145/4147] Built DhPoc.CoinResources (2.9s)
+✔ [4146/4147] Built DhPoc (2.4s)
+Build completed successfully (4147 jobs).

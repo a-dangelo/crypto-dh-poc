@@ -1,7 +1,7 @@
 {
-  "kind": "current-source-with-parameterized-security",
+  "kind": "current-source-with-coin-explicit-security",
   "base_source_commit": "a27d45ad02331a96279032a11872d6ec7af47860",
-  "description": "Current generic parameterized security and backend-relative strict-PPT proofs, concrete compatibility wrappers, and retained historical evidence. Historical recovery sources and logs are unchanged.",
+  "description": "Current generic parameterized security, backend-relative strict-PPT reduction, explicit fair-coin experiments and polynomial coin-query bounds; concrete compatibility wrappers and all historical recovery sources and logs are retained unchanged.",
   "historical_manifest": "source-manifest.json",
   "historical_path_overrides": {
     "README.md": "docs/recovered/README.md",
@@ -144,7 +144,7 @@
     "lean/DhPoc/Examples.lean": "scripts/check-generic-axioms.lean",
     "concrete/Concrete/Audit.lean": "scripts/check-concrete-axioms.lean"
   },
-  "verification_report": "verification/parameterized-replay.json",
+  "verification_report": "verification/coin-replay.json",
   "files": [
     {
       "path": "README.md",
@@ -382,9 +382,27 @@
     },
     {
       "path": "lean/DhPoc.lean",
-      "sha256": "0a0dba38681e4c3275b20b8718d78837aff48dcc011a6ba16624335cd08edeb3",
-      "lines": 7,
-      "bytes": 137
+      "sha256": "af93f9429b315286c19b99f4336cc1afe8d46d05859c6deea4270266a5e082d0",
+      "lines": 8,
+      "bytes": 164
+    },
+    {
+      "path": "lean/DhPoc/CoinResources.lean",
+      "sha256": "018a152c4e3236f05872d4565bf83921dff6088deb60238d2938fb6e24357563",
+      "lines": 94,
+      "bytes": 5018
+    },
+    {
+      "path": "lean/DhPoc/CoinSampling.lean",
+      "sha256": "00e0b5c83731eec40b76e1b878cd233dbcb55620485ab37dd8907b7b5054b856",
+      "lines": 72,
+      "bytes": 3217
+    },
+    {
+      "path": "lean/DhPoc/CoinSecurity.lean",
+      "sha256": "c26ff54aadcb6dd42f204d595504a1cee2972665804945032f8f5ad08e517e5e",
+      "lines": 221,
+      "bytes": 10677
     },
     {
       "path": "lean/DhPoc/Games.lean",
@@ -544,15 +562,15 @@
     },
     {
       "path": "scripts/check-parameterized-axioms.lean",
-      "sha256": "503f9aec9d23d976911472f7b750ebab93ce2d94d5f8f135ead685f0e5c8419d",
-      "lines": 50,
-      "bytes": 1785
+      "sha256": "5614bf2ca87a35e3f5c0f1ff7b337f0ba457020f3153190ea475aa3a68605d68",
+      "lines": 82,
+      "bytes": 3326
     },
     {
       "path": "scripts/check-parameterized-axioms.py",
-      "sha256": "c041744a3af0cf900b0d31dc97b82f140e7753a95730044dbf231a2667289eef",
-      "lines": 38,
-      "bytes": 1725
+      "sha256": "41197c7a202c36346644e7dd03a2c9b0aef7dc213e4846254535673d6b0e313c",
+      "lines": 57,
+      "bytes": 2614
     },
     {
       "path": "scripts/check.sh",
@@ -591,7 +609,10 @@
       "lean/DhPoc/SamplingHybrids.lean",
       "lean/DhPoc/SamplingSchedule.lean",
       "lean/DhPoc/Parameterized.lean",
-      "lean/DhPoc/PPT.lean"
+      "lean/DhPoc/PPT.lean",
+      "lean/DhPoc/CoinSampling.lean",
+      "lean/DhPoc/CoinSecurity.lean",
+      "lean/DhPoc/CoinResources.lean"
     ],
     "concrete_compatibility_wrappers": [
       "concrete/Concrete/ModuloSampling.lean",
@@ -602,5 +623,6 @@
       "scripts/check-parameterized-axioms.py"
     ]
   },
-  "historical_prose_replay_report": "verification/current-source-replay.json"
+  "historical_prose_replay_report": "verification/current-source-replay.json",
+  "previous_parameterized_replay_report": "verification/parameterized-replay.json"
 }

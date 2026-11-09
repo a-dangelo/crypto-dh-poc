@@ -1,4 +1,5 @@
 import DhPoc.PPT
+import DhPoc.CoinResources
 
 /-! Separate audit for the new generic theorem family; historical audits stay unchanged. -/
 
@@ -48,3 +49,34 @@ end DhPoc.ParameterizedTests
 #print axioms DhPoc.PPT.session_secure_isPPTBy
 
 #print DhPoc.PPT.session_secure_isPPTBy
+
+/-! Width-zero and growing-width regression checks, independent of DDH hardness. -/
+example : DhPoc.CoinSampling.sample 0 = pure 0 := rfl
+
+example (n : ℕ) : (DhPoc.CoinSampling.sample (n + 5)).IsTotalRollBound (n + 5) :=
+  DhPoc.CoinSampling.sample_polynomial_rollBound (fun n => n + 5)
+    (.add .input (.const 5)) (fun _ => le_rfl) n
+
+#print axioms DhPoc.CoinSampling.sample_rollBound
+#print axioms DhPoc.CoinSampling.sample_evalDist
+#print axioms DhPoc.CoinSampling.sample_evalDistEq
+#print axioms DhPoc.CoinSampling.interpret_sample_evalDistEq
+#print axioms DhPoc.CoinSampling.sample_polynomial_rollBound
+#print axioms DhPoc.CoinSecurity.real_evalDistEq
+#print axioms DhPoc.CoinSecurity.ideal_evalDistEq
+#print axioms DhPoc.CoinSecurity.bind_distance_le
+#print axioms DhPoc.CoinSecurity.ideal_distance_le
+#print axioms DhPoc.CoinSecurity.advantage_le_standard
+#print axioms DhPoc.CoinSecurity.real_rollBound
+#print axioms DhPoc.CoinSecurity.ideal_rollBound
+#print axioms DhPoc.CoinSecurity.five_samplingError_negligible
+#print axioms DhPoc.CoinSecurity.advantage_negligible
+#print axioms DhPoc.CoinSecurity.session_secure_isPPTBy
+#print axioms DhPoc.CoinResources.queryPolynomial_eval
+#print axioms DhPoc.CoinResources.isPPTBy_coinBound
+#print axioms DhPoc.CoinResources.isPPTBy_parameterBound
+#print axioms DhPoc.CoinResources.games_polynomial_coinBound
+
+#print DhPoc.CoinSecurity.advantage_le_standard
+#print DhPoc.CoinSecurity.session_secure_isPPTBy
+#print DhPoc.CoinResources.games_polynomial_coinBound

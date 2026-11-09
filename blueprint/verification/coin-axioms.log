@@ -1,0 +1,411 @@
+../scripts/check-parameterized-axioms.lean:24:28: warning: `simp` already closes the goal
+
+Hint: Use `simp` instead of `simpa`:
+  [apply] simp [smul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'DhPoc.uniform_modulo_measureETVDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.pair_bind_distance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.sampledDDHAdvantage_le_standard' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.four_samplingError_le_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.four_samplingError_negligible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.moduloSessionAdvantage_le_standard' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.parameterizedSessionAdvantage_negligible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.parameterizedSession_secure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.ParameterizedTests.arithmeticFamily' depends on axioms: [propext, Classical.choice, Quot.sound]
+theorem DhPoc.moduloSessionAdvantage_le_standard : ∀ {D P K G : Type} {q w : ℕ} [inst : Fact (Nat.Prime q)]
+  [inst_1 : AddCommGroup G] [inst_2 : Module (ZMod q) G] (M : DhPoc.PrimeOrderModel D P K G q w)
+  (A : P → P → K → ProbComp Bool),
+  DhPoc.sampledSessionAdvantage M.toRawPrimitiveModel ($ᵗ Fin (2 ^ w)) ($ᵗ Fin (2 ^ w)) A ≤
+    DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel A) + 4 * DhPoc.samplingError q w :=
+fun {D P K G} {q w} [Fact (Nat.Prime q)] [AddCommGroup G] [Module (ZMod q) G] M A =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          _a ≤
+            DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel A) +
+              4 * DhPoc.samplingError q w)
+        (DhPoc.sampledSessionAdvantage_eq M.toRawPrimitiveModel ($ᵗ Fin (2 ^ w)) ($ᵗ Fin (2 ^ w)) A)))
+    (LE.le.trans
+      (DhPoc.sampledDDHAdvantage_le_standard M.scalar M.generator ($ᵗ Fin (2 ^ w)) ($ᵗ Fin (2 ^ w))
+        (DhPoc.rawReduction M.toRawPrimitiveModel A))
+      (have h :=
+        have hs := funext M.scalar_eq;
+        Eq.mpr
+          (id (congrArg (fun _a => measureETVDist (_a <$> ($ᵗ Fin (2 ^ w))) ($ᵗ ZMod q) ≤ DhPoc.samplingError q w) hs))
+          (id
+            (Eq.mp
+              (congrArg (LE.le (measureETVDist ((fun x => ↑↑x) <$> ($ᵗ Fin (2 ^ w))) ($ᵗ ZMod q)))
+                (congrArg (HDiv.hDiv ↑(2 ^ w % q)) (Nat.cast_pow 2 w)))
+              (DhPoc.uniform_modulo_measureETVDist_le (2 ^ w) q)));
+      have hsum :=
+        mul_le_mul
+          (have this := le_rfl;
+          this)
+          (add_le_add h h) bot_le bot_le;
+      have heq :=
+        Mathlib.Tactic.Ring.of_eq
+          (Mathlib.Tactic.Ring.Common.mul_congr
+            (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ENNReal (Eq.refl 2)))
+            (Mathlib.Tactic.Ring.Common.add_congr
+              (Mathlib.Tactic.Ring.Common.atom_pf (DhPoc.samplingError q w) rfl
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                          DhPoc.samplingError q w ^ Nat.rawCast 1 * _a)
+                      (Eq.symm rfl)))
+                  (Eq.refl (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1))))
+              (Mathlib.Tactic.Ring.Common.atom_pf (DhPoc.samplingError q w) rfl
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                          DhPoc.samplingError q w ^ Nat.rawCast 1 * _a)
+                      (Eq.symm rfl)))
+                  (Eq.refl (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1))))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_overlap
+                (Mathlib.Tactic.Ring.Common.add_overlap_pf (DhPoc.samplingError q w) (Nat.rawCast 1)
+                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                    (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1)
+                      (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1) (Eq.refl 2))))
+                (Mathlib.Tactic.Ring.Common.add_pf_zero_add 0)))
+            (Mathlib.Tactic.Ring.Common.add_mul
+              (Mathlib.Tactic.Ring.Common.mul_add
+                (Mathlib.Tactic.Ring.Common.mul_pf_right (DhPoc.samplingError q w) (Nat.rawCast 1)
+                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                    (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 2)
+                      (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 2) (Eq.refl 4))))
+                (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 2))
+                (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                  (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 4 + 0)))
+              (Mathlib.Tactic.Ring.Common.zero_mul (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 2 + 0))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 4 + 0))))
+          (Mathlib.Tactic.Ring.Common.mul_congr
+            (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ENNReal (Eq.refl 4)))
+            (Mathlib.Tactic.Ring.Common.atom_pf (DhPoc.samplingError q w) rfl
+              (Eq.mpr
+                (id
+                  (congrArg
+                    (fun _a =>
+                      DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                        DhPoc.samplingError q w ^ Nat.rawCast 1 * _a)
+                    (Eq.symm rfl)))
+                (Eq.refl (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1))))
+            (Mathlib.Tactic.Ring.Common.add_mul
+              (Mathlib.Tactic.Ring.Common.mul_add
+                (Mathlib.Tactic.Ring.Common.mul_pf_right (DhPoc.samplingError q w) (Nat.rawCast 1)
+                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                    (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 4)
+                      (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1) (Eq.refl 4))))
+                (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 4))
+                (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                  (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 4 + 0)))
+              (Mathlib.Tactic.Ring.Common.zero_mul (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 4 + 0))));
+      add_le_add le_rfl
+        (Eq.mp
+          (congrArg
+            (fun _a =>
+              2 *
+                  (measureETVDist (M.scalar <$> ($ᵗ Fin (2 ^ w))) ($ᵗ ZMod q) +
+                    measureETVDist (M.scalar <$> ($ᵗ Fin (2 ^ w))) ($ᵗ ZMod q)) ≤
+                _a)
+            heq)
+          hsum)))
+theorem DhPoc.parameterizedSessionAdvantage_negligible : ∀ {D P K G : ℕ → Type} {q w : ℕ → ℕ}
+  [inst : ∀ (n : ℕ), Fact (Nat.Prime (q n))] [inst_1 : (n : ℕ) → AddCommGroup (G n)]
+  [inst_2 : (n : ℕ) → Module (ZMod (q n)) (G n)]
+  (M : (n : ℕ) → DhPoc.PrimeOrderModel (D n) (P n) (K n) (G n) (q n) (w n)) (A : DhPoc.FamilyAdversary P K) (b : ℕ → ℕ),
+  (∀ (n : ℕ), q n ≤ 2 ^ b n) →
+    (∀ (n : ℕ), b n + n + 2 ≤ w n) →
+      (negligible fun n => DiffieHellman.ddhAdvantage (M n).generator (DhPoc.familyReduction M A n)) →
+        negligible (DhPoc.parameterizedSessionAdvantage M A) :=
+fun {D P K G} {q w} [∀ (n : ℕ), Fact (Nat.Prime (q n))] [(n : ℕ) → AddCommGroup (G n)]
+    [(n : ℕ) → Module (ZMod (q n)) (G n)] M A b hq hw hDDH =>
+  negligible_of_le (fun n => DhPoc.moduloSessionAdvantage_le_standard (M n) (A n))
+    (negligible_add hDDH (DhPoc.four_samplingError_negligible q w b hq hw))
+theorem DhPoc.parameterizedSession_secure : ∀ {D P K G : ℕ → Type} {q w : ℕ → ℕ}
+  [inst : ∀ (n : ℕ), Fact (Nat.Prime (q n))] [inst_1 : (n : ℕ) → AddCommGroup (G n)]
+  [inst_2 : (n : ℕ) → Module (ZMod (q n)) (G n)]
+  (M : (n : ℕ) → DhPoc.PrimeOrderModel (D n) (P n) (K n) (G n) (q n) (w n)) (b : ℕ → ℕ),
+  (∀ (n : ℕ), q n ≤ 2 ^ b n) →
+    (∀ (n : ℕ), b n + n + 2 ≤ w n) →
+      ∀ (sessionEfficient : DhPoc.FamilyAdversary P K → Prop)
+        (ddhEfficient : ((n : ℕ) → DiffieHellman.DDHAdversary (ZMod (q n)) (G n)) → Prop),
+        (∀ (A : DhPoc.FamilyAdversary P K), sessionEfficient A → ddhEfficient (DhPoc.familyReduction M A)) →
+          (DhPoc.parameterizedDDHGame M).secureAgainst ddhEfficient →
+            (DhPoc.parameterizedSessionGame M).secureAgainst sessionEfficient :=
+fun {D P K G} {q w} [∀ (n : ℕ), Fact (Nat.Prime (q n))] [(n : ℕ) → AddCommGroup (G n)]
+    [(n : ℕ) → Module (ZMod (q n)) (G n)] M b hq hw sessionEfficient ddhEfficient hreduce hDDH A hA =>
+  DhPoc.parameterizedSessionAdvantage_negligible M A b hq hw (hDDH (DhPoc.familyReduction M A) (hreduce A hA))
+'DhPoc.PPT.precompWitness' depends on axioms: [propext, Quot.sound]
+'DhPoc.PPT.isPPTBy_precomp' depends on axioms: [propext, Quot.sound]
+'DhPoc.PPT.interpretCoins_evalDistEq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.PPT.ddhFamily_reduce' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.PPT.session_secure_isPPTBy' depends on axioms: [propext, Classical.choice, Quot.sound]
+theorem DhPoc.PPT.session_secure_isPPTBy.{u_1, u_2} : ∀ {D P K G : ℕ → Type} {q w : ℕ → ℕ}
+  [inst : ∀ (n : ℕ), Fact (Nat.Prime (q n))] [inst_1 : (n : ℕ) → AddCommGroup (G n)]
+  [inst_2 : (n : ℕ) → Module (ZMod (q n)) (G n)]
+  (M : (n : ℕ) → DhPoc.PrimeOrderModel (D n) (P n) (K n) (G n) (q n) (w n)) (b : ℕ → ℕ),
+  (∀ (n : ℕ), q n ≤ 2 ^ b n) →
+    (∀ (n : ℕ), b n + n + 2 ≤ w n) →
+      ∀ {C : PFunctor.StepClass} [inst_3 : C.HasProd] [inst_4 : C.HasSum] [inst_5 : C.HasOption]
+        (Q : PFunctor.QuantitativeStepClass C) [inst_6 : Q.HasComposition]
+        (bd : PFunctor.DynSystem.DynComputation.Boundary C coinSpec.toPFunctor (DhPoc.PPT.SessionInput P K) Bool)
+        (ddhInputRep : C.Str (DhPoc.PPT.DDHInput G)) (composition : Q.PolynomialComposition)
+        (encoding : Q.PolyRealizer ddhInputRep bd.input (DhPoc.PPT.encodeInput M)),
+        (DhPoc.PPT.ddhGame M).secureAgainst (OracleComp.Complexity.IsPPTBy Q (bd.withInput ddhInputRep)) →
+          (DhPoc.PPT.sessionGame M).secureAgainst (OracleComp.Complexity.IsPPTBy Q bd) :=
+fun {D P K G} {q w} [∀ (n : ℕ), Fact (Nat.Prime (q n))] [(n : ℕ) → AddCommGroup (G n)]
+    [(n : ℕ) → Module (ZMod (q n)) (G n)] M b hq hw {C} [C.HasProd] [C.HasSum] [C.HasOption] Q [Q.HasComposition] bd
+    ddhInputRep composition encoding hDDH A hA =>
+  DhPoc.parameterizedSessionAdvantage_negligible M (DhPoc.PPT.sessionFamily A) b hq hw
+    (have hreduce := DhPoc.PPT.isPPTBy_precomp composition encoding hA;
+    hDDH (DhPoc.PPT.reduce M A) hreduce)
+'DhPoc.CoinSampling.sample_rollBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSampling.sample_evalDist' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSampling.sample_evalDistEq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSampling.interpret_sample_evalDistEq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSampling.sample_polynomial_rollBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSecurity.real_evalDistEq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSecurity.ideal_evalDistEq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSecurity.bind_distance_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSecurity.ideal_distance_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSecurity.advantage_le_standard' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSecurity.real_rollBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSecurity.ideal_rollBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSecurity.five_samplingError_negligible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSecurity.advantage_negligible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinSecurity.session_secure_isPPTBy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinResources.queryPolynomial_eval' depends on axioms: [propext]
+'DhPoc.CoinResources.isPPTBy_coinBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinResources.isPPTBy_parameterBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'DhPoc.CoinResources.games_polynomial_coinBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+theorem DhPoc.CoinSecurity.advantage_le_standard : ∀ {D P K G : Type} {q w : ℕ} [inst : Fact (Nat.Prime q)]
+  [inst_1 : AddCommGroup G] [inst_2 : Module (ZMod q) G] (M : DhPoc.PrimeOrderModel D P K G q w)
+  (A : P → P → K → OracleComp coinSpec Bool),
+  DhPoc.CoinSecurity.advantage M A ≤
+    DiffieHellman.ddhAdvantage M.generator
+        (DhPoc.rawReduction M.toRawPrimitiveModel fun pa pb k => DhPoc.PPT.interpretCoins (A pa pb k)) +
+      5 * DhPoc.samplingError q w :=
+fun {D P K G} {q w} [Fact (Nat.Prime q)] [AddCommGroup G] [Module (ZMod q) G] M A =>
+  let B := fun pa pb k => DhPoc.PPT.interpretCoins (A pa pb k);
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          _a ≤
+            DiffieHellman.ddhAdvantage M.generator
+                (DhPoc.rawReduction M.toRawPrimitiveModel fun pa pb k => DhPoc.PPT.interpretCoins (A pa pb k)) +
+              5 * DhPoc.samplingError q w)
+        (DhPoc.CoinSecurity.advantage.eq_1 M A)))
+    (Eq.mpr
+      (id
+        (congrArg
+          (fun _a =>
+            _a.boolDist 𝒟[DhPoc.CoinSecurity.ideal M A] ≤
+              DiffieHellman.ddhAdvantage M.generator
+                  (DhPoc.rawReduction M.toRawPrimitiveModel fun pa pb k => DhPoc.PPT.interpretCoins (A pa pb k)) +
+                5 * DhPoc.samplingError q w)
+          (EvalDistEq.evalDist_eq (DhPoc.CoinSecurity.real_evalDistEq M A))))
+      (Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              𝒟[DhPoc.sampledReal M.toRawPrimitiveModel ($ᵗ Fin (2 ^ w)) ($ᵗ Fin (2 ^ w)) fun pa pb k =>
+                        DhPoc.PPT.interpretCoins (A pa pb k)].boolDist
+                  _a ≤
+                DiffieHellman.ddhAdvantage M.generator
+                    (DhPoc.rawReduction M.toRawPrimitiveModel fun pa pb k => DhPoc.PPT.interpretCoins (A pa pb k)) +
+                  5 * DhPoc.samplingError q w)
+            (EvalDistEq.evalDist_eq (DhPoc.CoinSecurity.ideal_evalDistEq M A))))
+        (Trans.trans
+          (Trans.trans
+            (MeasureTheory.Measure.boolDist_triangle
+              𝒟[DhPoc.sampledReal M.toRawPrimitiveModel ($ᵗ Fin (2 ^ w)) ($ᵗ Fin (2 ^ w)) B]
+              𝒟[DhPoc.sampledIdeal M.toRawPrimitiveModel ($ᵗ Fin (2 ^ w)) ($ᵗ Fin (2 ^ w)) B]
+              𝒟[DhPoc.CoinSecurity.wideIdeal M B])
+            (add_le_add (DhPoc.moduloSessionAdvantage_le_standard M B)
+              (LE.le.trans
+                (DhPoc.bool_distance_le_tv
+                  (DhPoc.sampledIdeal M.toRawPrimitiveModel ($ᵗ Fin (2 ^ w)) ($ᵗ Fin (2 ^ w)) B)
+                  (DhPoc.CoinSecurity.wideIdeal M B))
+                (DhPoc.CoinSecurity.ideal_distance_le M B))))
+          (Mathlib.Tactic.Ring.of_eq
+            (Mathlib.Tactic.Ring.Common.add_congr
+              (Mathlib.Tactic.Ring.Common.add_congr
+                (Mathlib.Tactic.Ring.Common.atom_pf
+                  (DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel B)) rfl
+                  (Eq.mpr
+                    (id
+                      (congrArg
+                        (fun _a =>
+                          DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel B) ^
+                                Nat.rawCast 1 *
+                              Nat.rawCast 1 =
+                            DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel B) ^
+                                Nat.rawCast 1 *
+                              _a)
+                        (Eq.symm rfl)))
+                    (Eq.refl
+                      (DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel B) ^
+                          Nat.rawCast 1 *
+                        Nat.rawCast 1))))
+                (Mathlib.Tactic.Ring.Common.mul_congr
+                  (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ENNReal (Eq.refl 4)))
+                  (Mathlib.Tactic.Ring.Common.atom_pf (DhPoc.samplingError q w) rfl
+                    (Eq.mpr
+                      (id
+                        (congrArg
+                          (fun _a =>
+                            DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                              DhPoc.samplingError q w ^ Nat.rawCast 1 * _a)
+                          (Eq.symm rfl)))
+                      (Eq.refl (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1))))
+                  (Mathlib.Tactic.Ring.Common.add_mul
+                    (Mathlib.Tactic.Ring.Common.mul_add
+                      (Mathlib.Tactic.Ring.Common.mul_pf_right (DhPoc.samplingError q w) (Nat.rawCast 1)
+                        (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                          (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul)
+                            (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 4) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1)
+                            (Eq.refl 4))))
+                      (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 4))
+                      (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                        (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 4 + 0)))
+                    (Mathlib.Tactic.Ring.Common.zero_mul (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                    (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                      (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 4 + 0))))
+                (Mathlib.Tactic.Ring.Common.add_pf_add_lt
+                  (DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel B) ^ Nat.rawCast 1 *
+                    Nat.rawCast 1)
+                  (Mathlib.Tactic.Ring.Common.add_pf_zero_add
+                    (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 4 + 0))))
+              (Mathlib.Tactic.Ring.Common.atom_pf (DhPoc.samplingError q w) rfl
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                          DhPoc.samplingError q w ^ Nat.rawCast 1 * _a)
+                      (Eq.symm rfl)))
+                  (Eq.refl (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1))))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_lt
+                (DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel B) ^ Nat.rawCast 1 *
+                  Nat.rawCast 1)
+                (Mathlib.Tactic.Ring.Common.add_pf_add_overlap
+                  (Mathlib.Tactic.Ring.Common.add_overlap_pf (DhPoc.samplingError q w) (Nat.rawCast 1)
+                    (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                      (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 4)
+                        (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1) (Eq.refl 5))))
+                  (Mathlib.Tactic.Ring.Common.add_pf_zero_add 0))))
+            (Mathlib.Tactic.Ring.Common.add_congr
+              (Mathlib.Tactic.Ring.Common.atom_pf
+                (DiffieHellman.ddhAdvantage M.generator
+                  (DhPoc.rawReduction M.toRawPrimitiveModel fun pa pb k => DhPoc.PPT.interpretCoins (A pa pb k)))
+                rfl
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel B) ^
+                              Nat.rawCast 1 *
+                            Nat.rawCast 1 =
+                          DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel B) ^
+                              Nat.rawCast 1 *
+                            _a)
+                      (Eq.symm rfl)))
+                  (Eq.refl
+                    (DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel B) ^
+                        Nat.rawCast 1 *
+                      Nat.rawCast 1))))
+              (Mathlib.Tactic.Ring.Common.mul_congr
+                (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ENNReal (Eq.refl 5)))
+                (Mathlib.Tactic.Ring.Common.atom_pf (DhPoc.samplingError q w) rfl
+                  (Eq.mpr
+                    (id
+                      (congrArg
+                        (fun _a =>
+                          DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                            DhPoc.samplingError q w ^ Nat.rawCast 1 * _a)
+                        (Eq.symm rfl)))
+                    (Eq.refl (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1))))
+                (Mathlib.Tactic.Ring.Common.add_mul
+                  (Mathlib.Tactic.Ring.Common.mul_add
+                    (Mathlib.Tactic.Ring.Common.mul_pf_right (DhPoc.samplingError q w) (Nat.rawCast 1)
+                      (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                        (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul)
+                          (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 5) (Mathlib.Meta.NormNum.IsNat.of_raw ENNReal 1)
+                          (Eq.refl 5))))
+                    (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 5))
+                    (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                      (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 5 + 0)))
+                  (Mathlib.Tactic.Ring.Common.zero_mul (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                  (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                    (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 5 + 0))))
+              (Mathlib.Tactic.Ring.Common.add_pf_add_lt
+                (DiffieHellman.ddhAdvantage M.generator (DhPoc.rawReduction M.toRawPrimitiveModel B) ^ Nat.rawCast 1 *
+                  Nat.rawCast 1)
+                (Mathlib.Tactic.Ring.Common.add_pf_zero_add
+                  (DhPoc.samplingError q w ^ Nat.rawCast 1 * Nat.rawCast 5 + 0))))))))
+theorem DhPoc.CoinSecurity.session_secure_isPPTBy.{u_1, u_2} : ∀ {D P K G : ℕ → Type} {q w : ℕ → ℕ}
+  [inst : ∀ (n : ℕ), Fact (Nat.Prime (q n))] [inst_1 : (n : ℕ) → AddCommGroup (G n)]
+  [inst_2 : (n : ℕ) → Module (ZMod (q n)) (G n)]
+  (M : (n : ℕ) → DhPoc.PrimeOrderModel (D n) (P n) (K n) (G n) (q n) (w n)) (b : ℕ → ℕ),
+  (∀ (n : ℕ), q n ≤ 2 ^ b n) →
+    (∀ (n : ℕ), b n + n + 2 ≤ w n) →
+      ∀ {C : PFunctor.StepClass} [inst_3 : C.HasProd] [inst_4 : C.HasSum] [inst_5 : C.HasOption]
+        (Q : PFunctor.QuantitativeStepClass C) [inst_6 : Q.HasComposition]
+        (bd : PFunctor.DynSystem.DynComputation.Boundary C coinSpec.toPFunctor (DhPoc.PPT.SessionInput P K) Bool)
+        (ddhInputRep : C.Str (DhPoc.PPT.DDHInput G)) (composition : Q.PolynomialComposition)
+        (encoding : Q.PolyRealizer ddhInputRep bd.input (DhPoc.PPT.encodeInput M)),
+        (DhPoc.PPT.ddhGame M).secureAgainst (OracleComp.Complexity.IsPPTBy Q (bd.withInput ddhInputRep)) →
+          (DhPoc.CoinSecurity.sessionGame M).secureAgainst (OracleComp.Complexity.IsPPTBy Q bd) :=
+fun {D P K G} {q w} [∀ (n : ℕ), Fact (Nat.Prime (q n))] [(n : ℕ) → AddCommGroup (G n)]
+    [(n : ℕ) → Module (ZMod (q n)) (G n)] M b hq hw {C} [C.HasProd] [C.HasSum] [C.HasOption] Q [Q.HasComposition] bd
+    ddhInputRep composition encoding hDDH A hA =>
+  DhPoc.CoinSecurity.advantage_negligible M A b hq hw
+    (hDDH (DhPoc.PPT.reduce M A) (DhPoc.PPT.isPPTBy_precomp composition encoding hA))
+theorem DhPoc.CoinResources.games_polynomial_coinBound.{u_1, u_2} : ∀ {C : PFunctor.StepClass} [inst : C.HasProd]
+  [inst_1 : C.HasSum] [inst_2 : C.HasOption] {Q : PFunctor.QuantitativeStepClass C} {D P K G : ℕ → Type} {q w : ℕ → ℕ}
+  [inst_3 : ∀ (n : ℕ), Fact (Nat.Prime (q n))] [inst_4 : (n : ℕ) → AddCommGroup (G n)]
+  [inst_5 : (n : ℕ) → Module (ZMod (q n)) (G n)]
+  (M : (n : ℕ) → DhPoc.PrimeOrderModel (D n) (P n) (K n) (G n) (q n) (w n))
+  {bd : PFunctor.DynSystem.DynComputation.Boundary C coinSpec.toPFunctor (DhPoc.PPT.SessionInput P K) Bool}
+  (A : DhPoc.PPT.SessionAdversary P K),
+  OracleComp.Complexity.IsPPTBy Q bd A →
+    ∀ (inputBound widthBound : Complexity.FirstOrderPolynomial),
+      (∀ (n : ℕ) (pa pb : P n) (k : K n), Q.size bd.input ⟨n, (pa, pb, k)⟩ ≤ inputBound.eval n) →
+        (∀ (n : ℕ), w n ≤ widthBound.eval n) →
+          ∃ p,
+            ∀ (n : ℕ),
+              PFunctor.FreeM.IsTotalRollBound (DhPoc.CoinSecurity.real (M n) fun pa pb k => A ⟨n, (pa, pb, k)⟩)
+                  (p.eval n) ∧
+                PFunctor.FreeM.IsTotalRollBound (DhPoc.CoinSecurity.ideal (M n) fun pa pb k => A ⟨n, (pa, pb, k)⟩)
+                  (p.eval n) :=
+fun {C} [C.HasProd] [C.HasSum] [C.HasOption] {Q} {D P K G} {q w} [∀ (n : ℕ), Fact (Nat.Prime (q n))]
+    [(n : ℕ) → AddCommGroup (G n)] [(n : ℕ) → Module (ZMod (q n)) (G n)] M {bd} A hppt inputBound widthBound hinput
+    hwidth =>
+  let ⟨r, hr⟩ :=
+    DhPoc.CoinResources.isPPTBy_parameterBound hppt inputBound fun n x =>
+      match x with
+      | (pa, pb, k) => hinput n pa pb k
+  Exists.intro (((Complexity.FirstOrderPolynomial.const 3).mul widthBound).add r) fun n =>
+    have hreal :=
+      DhPoc.CoinSecurity.real_rollBound (M n) (fun pa pb k => A ⟨n, (pa, pb, k)⟩) (r.eval n) fun pa pb k =>
+        hr n (pa, pb, k);
+    have hideal :=
+      DhPoc.CoinSecurity.ideal_rollBound (M n) (fun pa pb k => A ⟨n, (pa, pb, k)⟩) (r.eval n) fun pa pb k =>
+        hr n (pa, pb, k);
+    id
+      ⟨PFunctor.FreeM.IsTotalRollBound.mono hreal
+          (have this := hwidth n;
+          Decidable.byContradiction fun a =>
+            DhPoc.CoinResources.games_polynomial_coinBound._proof_1_3 widthBound r n this a),
+        PFunctor.FreeM.IsTotalRollBound.mono hideal
+          (Nat.add_le_add_right (Nat.mul_le_mul_left 3 (hwidth n)) (r.eval n))⟩

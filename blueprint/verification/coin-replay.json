@@ -1,0 +1,95 @@
+{
+  "kind": "coin-explicit-security-cloud-replay",
+  "source_base_revision": "9a81dbe70c14654a1f270e7a52f66d01684baf99",
+  "scope": "Coin-explicit games for the generic extracted DH session, backend-relative strict-PPT adversaries, and polynomial all-branch coin-query bounds.",
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "vcvio_revision": "88efe9715a9fa9e7d89635c38cf70259836766c2",
+  "polyfun_revision": "ef4c157b3c6775fb55864303d96f9b400428d5f0",
+  "checks": {
+    "generic_target_build": "passed (4147 jobs)",
+    "independent_source_reelaboration": "passed for all three new modules",
+    "parameterized_axiom_audit": "passed (33 required declarations), independently repeated",
+    "historical_generic_axiom_audit": "passed (16 declarations)",
+    "audit_negative_tests": "missing endpoint, unexpected endpoint and sorryAx logs correctly rejected",
+    "source_admissions_scan": "passed",
+    "blueprint_render": "not run locally; required by existing Actions build",
+    "native_compatibility_replay": "not run locally; required by existing Actions build",
+    "rust_extraction": "not rerun",
+    "native_tests": "not rerun",
+    "blueprint_static_checks": "passed: four new paired panels, six current source anchors, closing blocks, Python syntax; expected total panels updated from 29 to 33"
+  },
+  "allowed_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "log_sha256": {
+    "coin-axioms.log": "f8d206e31dd2bbcb3415f3e01920ebaf714de57b61e2b44f28e6953e445bf635",
+    "coin-build.log": "f11a0c9345ecb529cb8a5c37beb6f20494dfa0a76a7420f2a23eac2fb9b12cb5",
+    "coin-generic-axioms.log": "32779e88dac6c2f53804846595c5bf2ebe45c40109899a63ed0f691fa84bb9ff"
+  },
+  "source_files": [
+    {
+      "path": "lean/DhPoc/CoinSampling.lean",
+      "sha256": "00e0b5c83731eec40b76e1b878cd233dbcb55620485ab37dd8907b7b5054b856",
+      "lines": 72,
+      "bytes": 3217
+    },
+    {
+      "path": "lean/DhPoc/CoinSecurity.lean",
+      "sha256": "c26ff54aadcb6dd42f204d595504a1cee2972665804945032f8f5ad08e517e5e",
+      "lines": 221,
+      "bytes": 10677
+    },
+    {
+      "path": "lean/DhPoc/CoinResources.lean",
+      "sha256": "018a152c4e3236f05872d4565bf83921dff6088deb60238d2938fb6e24357563",
+      "lines": 94,
+      "bytes": 5018
+    },
+    {
+      "path": "lean/DhPoc.lean",
+      "sha256": "af93f9429b315286c19b99f4336cc1afe8d46d05859c6deea4270266a5e082d0",
+      "lines": 8,
+      "bytes": 164
+    },
+    {
+      "path": "scripts/check-parameterized-axioms.lean",
+      "sha256": "5614bf2ca87a35e3f5c0f1ff7b337f0ba457020f3153190ea475aa3a68605d68",
+      "lines": 82,
+      "bytes": 3326
+    },
+    {
+      "path": "scripts/check-parameterized-axioms.py",
+      "sha256": "41197c7a202c36346644e7dd03a2c9b0aef7dc213e4846254535673d6b0e313c",
+      "lines": 57,
+      "bytes": 2614
+    },
+    {
+      "path": "blueprint/DhBlueprint/Final.lean",
+      "sha256": "16dde0b7c74d870c68029f0d4685ad6e0ce39d1b1264cd527d77e9b919bddd02",
+      "lines": 271,
+      "bytes": 13577
+    },
+    {
+      "path": "blueprint/DhBlueprint/Trust.lean",
+      "sha256": "3dbf9a19c5c9282ca3dbff3fd26ea800f12eabba171a74e4c9367e59c5e3c859",
+      "lines": 118,
+      "bytes": 6778
+    },
+    {
+      "path": "blueprint/scripts/site_checks.py",
+      "sha256": "c37f9f9957e1e796075c2607f81b526dfdd75febf00b20044e5ea672f89ad43f",
+      "lines": 53,
+      "bytes": 2878
+    }
+  ],
+  "limits": [
+    "The new ideal experiment independently samples a width-bit raw value and reduces it modulo the group order. Its bound is DDH advantage plus five sampling errors; the old exact-uniform ideal challenge keeps its four-error result.",
+    "The original width lower bound proves the five-error term negligible; this replay does not prove the same finite bound 2^-n for that term.",
+    "Sampler and complete-game resource results count at most the stated number of fair-coin queries, not deterministic work or honest group-operation runtime.",
+    "The security theorem retains explicit primitive contracts, DDH hardness, backend composition and concrete encoding certificates. No conventional machine adequacy or native implementation family is instantiated.",
+    "The parameter-polynomial randomness theorem additionally assumes polynomial input-size and sampling-width upper bounds. It does not certify canonical unary parameter encoding.",
+    "Historical extraction, native tests, concrete endpoints and prior replay records remain unchanged."
+  ]
+}

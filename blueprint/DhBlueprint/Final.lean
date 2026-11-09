@@ -5,6 +5,7 @@ import DhBlueprint.Code
 import Concrete.Standard
 import DhPoc.Parameterized
 import DhPoc.PPT
+import DhPoc.CoinResources
 
 open Verso.Genre Verso.Genre.Manual Informal
 
@@ -146,12 +147,79 @@ sampled session is secure against `IsPPTBy` at the session input boundary.
 :::
 ::::
 
+# Experiments with explicit fair coins
+
+The preceding ideal game samples its challenge uniformly from the scalar field.
+Here both experiments use only fair-coin queries, including the challenge sampler.
+Fix a prime-order model $`M` with generator $`g` and retain the sampling error $`\delta(q,w)`.
+
+::::theorem "coin_sampler" (lean := "DhPoc.CoinSampling.sample_evalDistEq")
+:::AnchorlessBlueprint.pair DhPoc.CoinSampling.sample_evalDistEq -docstrings
+The recursive sampler `CoinSampling.sample w` has exactly the uniform law on
+$`\mathrm{Fin}(2^w)`. Its
+[`sample_rollBound`](source/lean/DhPoc/CoinSampling.lean.html#L28) theorem
+bounds every branch by $`w` coin queries. No rejection loop is needed.
+:::
+::::
+
+The [real experiment](source/lean/DhPoc/CoinSecurity.lean.html#L24) samples two
+raw values, then calls the extracted `dh_core.session M.operations`.
+The [ideal experiment](source/lean/DhPoc/CoinSecurity.lean.html#L33) also samples
+an independent raw value $`c` and uses $`M.\mathrm{key}(M.\mathrm{scalar}(c)g)`
+as its challenge. Both experiments then call the same coin-program adversary $`A`.
+Write $`\operatorname{Adv}_{\rm coin}(M,A)` for their acceptance-probability difference,
+and let $`R_A` be the encoding reduction after fair-coin interpretation.
+
+::::theorem "coin_bound" (lean := "DhPoc.CoinSecurity.advantage_le_standard") (uses := "coin_sampler, parameterized_bound")
+:::AnchorlessBlueprint.pair DhPoc.CoinSecurity.advantage_le_standard -docstrings
+For every coin-program adversary $`A`,
+
+$$`\operatorname{Adv}_{\rm coin}(M,A)
+\le\operatorname{Adv}_{\rm DDH}(g,R_A)+5\delta(q,w).`
+
+The extra $`\delta(q,w)` accounts for the reduced raw challenge in the ideal game.
+The earlier game with a uniform scalar challenge retains its $`4\delta(q,w)` bound.
+:::
+::::
+
+::::theorem "coin_ppt_security" (lean := "DhPoc.CoinSecurity.session_secure_isPPTBy") (uses := "coin_bound, ppt_security")
+:::AnchorlessBlueprint.pair DhPoc.CoinSecurity.session_secure_isPPTBy -docstrings
+Under the same order and width schedule, $`5\delta(q(\lambda),w(\lambda))`
+is negligible. If the encoding has a `PolyRealizer` certificate, the backend
+has a `PolynomialComposition` certificate, and DDH is secure against `IsPPTBy`
+at its input boundary, then the coin experiments are secure against `IsPPTBy`
+at the session input boundary.
+:::
+::::
+
+::::theorem "coin_resources" (lean := "DhPoc.CoinResources.games_polynomial_coinBound") (uses := "coin_sampler")
+:::AnchorlessBlueprint.pair DhPoc.CoinResources.games_polynomial_coinBound -docstrings
+Suppose $`A` satisfies `IsPPTBy`. Assume polynomial upper bounds in $`\lambda`
+on the represented session-input size and on $`w(\lambda)`.
+Then one polynomial bounds the number of coin queries on every branch of
+both complete experiments. The proof derives the adversary's query bound
+from its strict-PPT witness and adds at most $`3w(\lambda)` honest queries.
+:::
+::::
+
+This last theorem counts randomness, not the running time of honest arithmetic.
+Its input-size and width upper bounds are explicit premises. The width lower
+bound used for negligible bias does not supply them.
+
 # From the security statements to Rust
 
 The two conclusions use different extracted entry points. The following paths
 read backwards from each security statement to its program.
 
 ## Parameterized session
+
+The {bpref "coin_ppt_security"}[coin-experiment theorem] first uses
+[`advantage_negligible`](source/lean/DhPoc/CoinSecurity.lean.html#L190)
+and {bpref "coin_bound"}[the five-error bound]. The
+[`real_evalDistEq`](source/lean/DhPoc/CoinSecurity.lean.html#L53) and
+[`ideal_evalDistEq`](source/lean/DhPoc/CoinSecurity.lean.html#L67) lemmas
+connect its coin syntax to the sampled experiments, with one additional
+ideal-challenge comparison. It then uses the same generic refinement path below.
 
 1. {bpref "ppt_security"}[Strict-PPT security] uses
    [`parameterizedSessionAdvantage_negligible`](source/lean/DhPoc/Parameterized.lean.html#L81).

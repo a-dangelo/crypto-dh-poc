@@ -35,7 +35,7 @@ class Page(HTMLParser):
 
 
 VCVIO_SOURCE_URL = 'https://github.com/Verified-zkEVM/VCVio/blob/88efe9715a9fa9e7d89635c38cf70259836766c2/'
-EXPECTED_PAIRS = 29
+EXPECTED_PAIRS = 33
 
 def declaration_source(link, repository_root, *, source_directory=None, private_blob=None):
     """Resolve only the pinned dependency or an explicitly rendered local declaration."""

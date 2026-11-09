@@ -5,3 +5,4 @@ import DhPoc.RawSecurity
 
 import DhPoc.Parameterized
 import DhPoc.PPT
+import DhPoc.CoinResources

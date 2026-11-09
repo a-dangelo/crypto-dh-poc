@@ -60,6 +60,16 @@ representation and polynomial growth of other represented inputs. These are the
 [asymptotic conditions](https://github.com/a-dangelo/signal-security-blueprint/blob/83d448ba42558abd6f196a54b5c7e4d5e2615f16/content/report.md#L104-L170)
 identified in the Signal blueprint.
 
+The {bpref "coin_ppt_security"}[coin-experiment theorem] uses explicit fair coins
+for both raw secrets and the independent ideal challenge. Its statistical loss
+is $`5\delta`, rather than the earlier game's $`4\delta`.
+The {bpref "coin_resources"}[randomness bound] derives one polynomial in the
+security parameter from the adversary's actual `IsPPTBy` witness and explicit
+polynomial bounds on input size and sampling width. It bounds every coin branch
+of both games. It does not certify honest arithmetic costs, a unary parameter
+encoding, or backend adequacy. Both results concern the generic extracted
+session under primitive contracts, not a native implementation family.
+
 CryptHOL's [hashed ElGamal tutorial](https://isa-afp.org/browser_info/current/AFP/Game_Based_Crypto/CryptHOL_Tutorial.html)
 proves a concrete bound and a separate asymptotic corollary that assumes
 negligible advantage for the reduced adversary.
@@ -83,8 +93,9 @@ the native instantiation. A [cloud replay](source/blueprint/verification/current
 checks both Lean libraries, matches all 22 concrete and 16 generic axiom closures,
 and preserves four regressions. It does not repeat Rust extraction or native execution.
 The [parameterized audit](source/scripts/check-parameterized-axioms.lean)
-separately checks fourteen new endpoints against the standard-axiom allowlist.
+separately checks thirty-three endpoints against the standard-axiom allowlist.
 
+[Coin-explicit proof replay](source/blueprint/verification/coin-replay.json) ·
 [Current source manifest](source/manifest.json) ·
 [Current axiom audit](source/blueprint/verification/current-concrete-axioms.log) ·
 [Historical proof report](source/concrete/evidence/concrete-proof-report.json) ·
