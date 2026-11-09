@@ -102,6 +102,12 @@ jobs:
           (cd concrete && lake build Concrete DhPoc)
           (cd blueprint && lake build DhBlueprint vbp)
 
+      - name: Audit parameterized proof axioms
+        run: |
+          set -o pipefail
+          (cd concrete && lake env lean ../scripts/check-parameterized-axioms.lean) | tee "$RUNNER_TEMP/parameterized-axioms.log"
+          python3 scripts/check-parameterized-axioms.py "$RUNNER_TEMP/parameterized-axioms.log"
+
       - name: Save compiled targets before rendering
         if: steps.lean-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4

@@ -42,6 +42,35 @@ The counting and hybrid lemmas use only Lean's standard logical axioms. No sampl
 
 The ideal challenge is an independent uniform scalar multiple of the generator, canonically encoded and wrapped in `some`. No claim about a uniform 32-byte string or a KDF follows.
 
+## Parameterized sampled-model family
+
+`DhPoc.Parameterized` treats a prime group order `q` and a raw sampling width `w`
+as parameters. `PrimeOrderModel` supplies the generic primitive contracts,
+decoding of `Fin (2^w)` modulo `q`, and a generator bijection. The bijection
+identifies the whole group with its scalar multiples.
+
+For two independent uniform raw inputs, the session advantage is at most
+standard-DDH advantage plus `4δ`, where `δ = (2^w mod q)/2^w`.
+If `q(λ) ≤ 2^b(λ)` and `w(λ) ≥ b(λ) + λ + 2`, the sampling loss is at most
+`2^-λ` and is negligible. Negligible DDH advantage for the reduced adversary
+then gives negligible session advantage.
+
+The security-class theorem takes two adversary-class predicates, a proof that
+the encoding reduction preserves membership, and DDH security against the
+chosen DDH class. It does not instantiate a running-time model for the encodings.
+For a polynomial-time interpretation, applications need efficient parameter
+generation, polynomially bounded sampling width, and efficient group operations
+and encodings.
+The native dalek theorem remains one fixed implementation result. Applying the
+family theorem to native programs requires a refinement proof at every parameter.
+
+`DhPoc.PPT.session_secure_isPPTBy` uses VCVio's actual backend-relative `IsPPTBy`
+predicate on one parameter-tagged fair-coin program. Its executable polynomial
+encoding and backend composition-cost certificates derive reduction closure.
+A conventional machine interpretation still needs backend adequacy, a unary
+parameter representation and polynomial growth of other represented inputs.
+Native parameter generation, sampling and curve-operation costs remain separate.
+
 ## Explicit premises and full axiom closure
 
 The equality selects the compilation target with `Aeneas.Std.target = "x86_64-no-tables"`. The original wide bound assumes its displayed sampled-DDH inequality. The standard corollary instead assumes the displayed standard uniform-scalar DDH inequality. Concrete primitive correctness is not a remaining theorem parameter.
@@ -66,4 +95,4 @@ The work does not verify an operating-system RNG, timing/cache leakage, secret e
 
 ## Earlier prototype
 
-The `lean/` package contains the initial generic proof. The arithmetic witness over `ZMod 7` and the failure regressions are checked separately in `scripts/check-generic-axioms.lean`. The witness exposes the secret in the public value. The generic axiom check confirms that the contracts enter the theorem as explicit hypotheses. It is not the final native implementation theorem. The `rust/native/` baseline uses crates.io `ristretto255-dh` 0.3.0 and dalek 2.1.3, not the final patched dalek 5.0.0 target.
+Alongside the parameterized results, the `lean/` package preserves the initial generic proof. The arithmetic witness over `ZMod 7` and the failure regressions are checked separately in `scripts/check-generic-axioms.lean`. The witness exposes the secret in the public value. The generic axiom check confirms that the contracts enter the theorem as explicit hypotheses. It is not the final native implementation theorem. The `rust/native/` baseline uses crates.io `ristretto255-dh` 0.3.0 and dalek 2.1.3, not the final patched dalek 5.0.0 target.

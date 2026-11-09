@@ -21,6 +21,8 @@ We verify a coin-explicit Rust implementation of one passive Ristretto
 Diffie–Hellman session. Charon and Aeneas translate the wrapper and patched
 BAIF dalek backend. The Lean development proves functional refinement and
 a reduction to VCVio's standard DDH game.
+The generic sampled model also has a
+{bpref "ppt_security"}[backend-relative strict-PPT security theorem].
 
 Throughout, $`L` is the scalar order, $`G=E[L]` the Edwards torsion subgroup,
 and $`g` the selected basepoint. Write $`p:G\to B` for canonical Ristretto
@@ -47,8 +49,8 @@ four sampling replacements.
 :::
 ::::
 
-The development concludes with {bpref "final_bound"}[this security bound],
-after the implementation and sampling lemmas.
+The {ref "final"}[security results] conclude the argument before the optional
+trust and provenance section.
 
 `x86_64-no-tables` selects the serial x86-64 backend without precomputed
 tables. {bpref "session_refinement"}[Session refinement] states its full
@@ -80,8 +82,8 @@ Original proof revision: `a27d45ad02331a96279032a11872d6ec7af47860`.
 {include 0 DhBlueprint.Refinement}
 {include 0 DhBlueprint.Games}
 {include 0 DhBlueprint.Sampling}
-{include 0 DhBlueprint.Trust}
 {include 0 DhBlueprint.Final}
+{include 0 DhBlueprint.Trust}
 
 {blueprint_graph (direction := LR)}
 {blueprint_summary}

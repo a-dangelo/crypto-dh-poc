@@ -1,7 +1,7 @@
 {
-  "kind": "current-source-after-prose-and-check-layout-revision",
+  "kind": "current-source-with-parameterized-security",
   "base_source_commit": "a27d45ad02331a96279032a11872d6ec7af47860",
-  "description": "Current proof sources and retained historical evidence. A separate fresh replay report records the checks of the revised sources.",
+  "description": "Current generic parameterized security and backend-relative strict-PPT proofs, concrete compatibility wrappers, and retained historical evidence. Historical recovery sources and logs are unchanged.",
   "historical_manifest": "source-manifest.json",
   "historical_path_overrides": {
     "README.md": "docs/recovered/README.md",
@@ -62,13 +62,6 @@
       "non_comment_sha256": "f688a4820620d1e71d72e18d372c0da9f21d4cc7f4ac9a7d9c09f4e2ff30adef"
     },
     {
-      "path": "concrete/Concrete/ModuloSampling.lean",
-      "kind": "comments_only",
-      "original_sha256": "b64eba36f96d95a5ad2563c315ca3644688248328233b3aba7ca8ae5d8f6dec6",
-      "current_sha256": "a83e7d6c40e77ce284823d825d84b85f8e4965c50e4191913e7d634e4e7652be",
-      "non_comment_sha256": "0ccdcff53f315b8cc2a2861435967ca68c99db616fbaf565ba14caf189b67b87"
-    },
-    {
       "path": "concrete/Concrete/Native.lean",
       "kind": "comments_only",
       "original_sha256": "1ba8ea0e199245baa4197da72688f8caabe6a553ef38274f398a472fdcda0131",
@@ -95,13 +88,6 @@
       "original_sha256": "39197a2681b75e916234b26acfcd11e2c056aa0f61cdff01248a0798e8c8c307",
       "current_sha256": "e44dde8f79aa0ac52011247fc69566b59fdeddaf392a86648edb083898d88288",
       "non_comment_sha256": "6c4454af908d99b7e61cb9aea3e533b38bb01673bebc7e16d10e77c27b263c8f"
-    },
-    {
-      "path": "concrete/Concrete/SamplingHybrids.lean",
-      "kind": "comments_only",
-      "original_sha256": "70c90d2779b502f149b04582fa4d10e1258f7b1841e4439d6db78dbd661d64d9",
-      "current_sha256": "a62514d6f22e33b3e2b84a77ed66c2ea9c876d94affcec04e0cb074fdea68859",
-      "non_comment_sha256": "e68008a6ebd2ba098b28b459b4668014f5f3373c14c8bde29460d6edf742fd0d"
     },
     {
       "path": "concrete/Concrete/Security.lean",
@@ -158,13 +144,13 @@
     "lean/DhPoc/Examples.lean": "scripts/check-generic-axioms.lean",
     "concrete/Concrete/Audit.lean": "scripts/check-concrete-axioms.lean"
   },
-  "verification_report": "verification/current-source-replay.json",
+  "verification_report": "verification/parameterized-replay.json",
   "files": [
     {
       "path": "README.md",
-      "sha256": "6c20b99061bc931bd238d64dd05f55e544b08df42750a63cc1f643fcd6860c3a",
-      "lines": 130,
-      "bytes": 7228
+      "sha256": "e8a4ee6fbc5a23862a8bd074434fc9bfee2cdc29ff3a752abd4110f41c1c7ace",
+      "lines": 172,
+      "bytes": 9594
     },
     {
       "path": "concrete/Concrete.lean",
@@ -198,9 +184,9 @@
     },
     {
       "path": "concrete/Concrete/ModuloSampling.lean",
-      "sha256": "a83e7d6c40e77ce284823d825d84b85f8e4965c50e4191913e7d634e4e7652be",
-      "lines": 134,
-      "bytes": 6177
+      "sha256": "e83973c19069d1db99ef1fd7617e806e22963dd73b00720d92dc5b19a414dbe0",
+      "lines": 28,
+      "bytes": 1122
     },
     {
       "path": "concrete/Concrete/Native.lean",
@@ -228,9 +214,9 @@
     },
     {
       "path": "concrete/Concrete/SamplingHybrids.lean",
-      "sha256": "a62514d6f22e33b3e2b84a77ed66c2ea9c876d94affcec04e0cb074fdea68859",
-      "lines": 86,
-      "bytes": 4174
+      "sha256": "63f11f19f25296556976b78997790b9cce6fad98beda5774f9d43878a3e8fd06",
+      "lines": 3,
+      "bytes": 115
     },
     {
       "path": "concrete/Concrete/Security.lean",
@@ -258,9 +244,9 @@
     },
     {
       "path": "concrete/README.md",
-      "sha256": "2ed661c6010bad8401bb897a27996d0aa76e86b1530b3d9c53d7e85c5d38503b",
-      "lines": 94,
-      "bytes": 5280
+      "sha256": "f94588508ed78894943f984f39c25046fb855c9ef57e865c70caa67965e63473",
+      "lines": 99,
+      "bytes": 5574
     },
     {
       "path": "concrete/evidence/axioms.log",
@@ -348,9 +334,9 @@
     },
     {
       "path": "docs/TRUST-BOUNDARY.md",
-      "sha256": "82c9c60dfb5514f40033096ca1eab189b7ec0e2d430c38f1c83b1459d73e36f4",
-      "lines": 69,
-      "bytes": 7737
+      "sha256": "261064027104b92c7f76ff4bb71885d347e62ada0a69ea42fec7d96aacceaaa4",
+      "lines": 98,
+      "bytes": 9484
     },
     {
       "path": "evidence/axioms.log",
@@ -396,9 +382,9 @@
     },
     {
       "path": "lean/DhPoc.lean",
-      "sha256": "4598da7455f35600dfe556ff3c5de055b02ea3620145307504bef059141e250e",
-      "lines": 4,
-      "bytes": 92
+      "sha256": "0a0dba38681e4c3275b20b8718d78837aff48dcc011a6ba16624335cd08edeb3",
+      "lines": 7,
+      "bytes": 137
     },
     {
       "path": "lean/DhPoc/Games.lean",
@@ -411,6 +397,24 @@
       "sha256": "9e339f22ba27bab91171c85600aba6ffeea74f100cd90f577f55b61ada8d09b1",
       "lines": 55,
       "bytes": 1825
+    },
+    {
+      "path": "lean/DhPoc/ModuloSampling.lean",
+      "sha256": "5fe78fe50a3aa540a7d8ada7f6675844334d20d0e661609d1a55290c7df4e2ae",
+      "lines": 122,
+      "bytes": 5646
+    },
+    {
+      "path": "lean/DhPoc/PPT.lean",
+      "sha256": "66a3d534c68a07ce1c4ccec4db5f8186a5567130da58164e3f38bb312026e26e",
+      "lines": 199,
+      "bytes": 9344
+    },
+    {
+      "path": "lean/DhPoc/Parameterized.lean",
+      "sha256": "463e941d84a013d511ff5be2de03fdaefacd6148d724d9231fb108b9df3ec061",
+      "lines": 119,
+      "bytes": 6044
     },
     {
       "path": "lean/DhPoc/RawSampler.lean",
@@ -429,6 +433,18 @@
       "sha256": "8a019ebb2909c357619898b6f9418906c133469541d841d78f683ef4d0af8fe0",
       "lines": 56,
       "bytes": 2280
+    },
+    {
+      "path": "lean/DhPoc/SamplingHybrids.lean",
+      "sha256": "a62514d6f22e33b3e2b84a77ed66c2ea9c876d94affcec04e0cb074fdea68859",
+      "lines": 86,
+      "bytes": 4174
+    },
+    {
+      "path": "lean/DhPoc/SamplingSchedule.lean",
+      "sha256": "161db1e23efe9b7e06ba91a97d6db907542f7932ca845afa2e2e6786df6a4c81",
+      "lines": 63,
+      "bytes": 2868
     },
     {
       "path": "lean/lake-manifest.json",
@@ -527,6 +543,18 @@
       "bytes": 743
     },
     {
+      "path": "scripts/check-parameterized-axioms.lean",
+      "sha256": "503f9aec9d23d976911472f7b750ebab93ce2d94d5f8f135ead685f0e5c8419d",
+      "lines": 50,
+      "bytes": 1785
+    },
+    {
+      "path": "scripts/check-parameterized-axioms.py",
+      "sha256": "c041744a3af0cf900b0d31dc97b82f140e7753a95730044dbf231a2667289eef",
+      "lines": 38,
+      "bytes": 1725
+    },
+    {
       "path": "scripts/check.sh",
       "sha256": "827b9a5e128d1611f51cd8ad10ab62526c1124a94b32e0e097d497a9a5ff3baf",
       "lines": 5,
@@ -556,5 +584,23 @@
       "lines": 65,
       "bytes": 2887
     }
-  ]
+  ],
+  "substantive_changes": {
+    "generic_modules_added": [
+      "lean/DhPoc/ModuloSampling.lean",
+      "lean/DhPoc/SamplingHybrids.lean",
+      "lean/DhPoc/SamplingSchedule.lean",
+      "lean/DhPoc/Parameterized.lean",
+      "lean/DhPoc/PPT.lean"
+    ],
+    "concrete_compatibility_wrappers": [
+      "concrete/Concrete/ModuloSampling.lean",
+      "concrete/Concrete/SamplingHybrids.lean"
+    ],
+    "parameterized_audit": [
+      "scripts/check-parameterized-axioms.lean",
+      "scripts/check-parameterized-axioms.py"
+    ]
+  },
+  "historical_prose_replay_report": "verification/current-source-replay.json"
 }

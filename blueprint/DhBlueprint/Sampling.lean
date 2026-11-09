@@ -75,5 +75,6 @@ and the hybrid bound proves {bpref "final_bound"}[the final security theorem].
 ::::
 
 The term $`2^{-260}` is a fixed statistical loss. It is not an asymptotic
-negligibility statement. {ref "trust"}[The security scope] records the
-separate requirements for such a statement.
+negligibility statement. The
+{bpref "parameterized_negligibility"}[parameterized corollary] varies the
+group order and sampling width.

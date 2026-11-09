@@ -5,7 +5,7 @@ and `DhConcrete.wideAdvantage_le_of_standardDDH` in `Concrete/Standard.lean`.
 The earlier exact wide-sampler bound remains in `Concrete/Wide.lean`.
 The real and ideal games both call the extracted Rust `poc_dh.session`.
 The proof discharges the native primitive contracts using the pinned BAIF dalek
-proofs. It is separate from the small generic proof package in `../lean`.
+proofs. The generic session, sampling and family proofs are in `../lean`.
 
 ## What the theorem says
 
@@ -27,8 +27,11 @@ is `r/2^512`. Two independent scalar replacements in each game branch cost
 at most `4r/2^512 < 2^-260`. Thus a standard DDH bound `ε` implies native
 advantage at most `ε + 2^-260`. This is an upper bound, not the sharp TV formula.
 
-The result does not establish authentication, active-attack security, side-channel security,
+This native result does not establish authentication, active-attack security, side-channel security,
 a KDF, an asymptotic security bound, or uniform 32-byte keys.
+A separate [parameterized model theorem](../lean/DhPoc/Parameterized.lean)
+gives a conditional asymptotic result. A corresponding family of native
+implementations still requires refinement and resource arguments.
 
 ## Proof layers
 
@@ -45,8 +48,10 @@ a KDF, an asymptotic security bound, or uniform 32-byte keys.
   dispatch, actual extracted-session correctness, and native security games.
 - `Concrete/Sampler.lean`: explicit uniform 512-bit tape and exact scalar reduction.
 - `Concrete/Wide.lean`: the native security endpoint instantiated with that sampler.
-- `Concrete/ModuloSampling.lean`: total variation bound from quotient and remainder counts for arbitrary events.
-- `Concrete/SamplingHybrids.lean`: four replacements in VCVio's absolute acceptance-probability distance.
+- `Concrete/ModuloSampling.lean`: instantiation of the generic modular-reduction
+  bound for the native wide sampler, with a compatibility theorem name.
+- `Concrete/SamplingHybrids.lean`: compatibility import of the generic
+  four-replacement theorem in `../lean/DhPoc/SamplingHybrids.lean`.
 - `Concrete/SamplingError.lean`: exact arithmetic proves the loss is below `2^-260`.
 - `Concrete/Standard.lean`: standard uniform-scalar DDH corollary for the native game.
 - `../scripts/check-concrete-axioms.lean`: transitive axiom dependencies and endpoint statements.

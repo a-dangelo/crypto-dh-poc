@@ -8,7 +8,7 @@ arithmetic and encoding contracts are proved from the pinned BAIF development.
 
 Blueprint deployment target: [a-dangelo.com/crypto-dh-poc/](https://a-dangelo.com/crypto-dh-poc/).
 
-## Main result
+## Native result
 
 Assume the configuration `Aeneas.Std.target = "x86_64-no-tables"`. Each party
 independently samples an ideal 512-bit integer and reduces it modulo the scalar
@@ -37,6 +37,36 @@ scalar multiple of the generator. The result makes no claim about a uniform
 32-byte key or a KDF. Advantage is VCVio's absolute difference of acceptance
 probabilities.
 
+## Parameterized sampled-model result
+
+[`DhPoc.Parameterized`](lean/DhPoc/Parameterized.lean) treats prime-order groups
+and sampling widths as parameters. `PrimeOrderModel` supplies the primitive
+contracts, reduction modulo the prime order `q`, and a bijection from scalars to
+the group through the generator. Raw inputs are uniform in `Fin (2^w)`.
+
+`moduloSessionAdvantage_le_standard` bounds session advantage by standard-DDH
+advantage plus `4δ`, where `δ = (2^w mod q)/2^w`.
+For families indexed by `λ`, if `q(λ) ≤ 2^b(λ)` and
+`w(λ) ≥ b(λ) + λ + 2`, then `4δ(λ) ≤ 2^-λ`.
+`parameterizedSessionAdvantage_negligible` transfers negligible advantage for
+the reduced DDH adversary to negligible session advantage.
+
+`parameterizedSession_secure` states security against chosen adversary classes.
+Its hypotheses supply DDH security for the chosen DDH class and require the
+encoding reduction to preserve class membership. Applications must justify
+efficient parameter generation and a polynomial bound on `w(λ)`. Group
+operations, encodings and the reduction must preserve the chosen resource bounds.
+The family theorem concerns the generic sampled model. A growing family of
+native programs would also need a refinement proof at every parameter.
+
+[`DhPoc.PPT.session_secure_isPPTBy`](lean/DhPoc/PPT.lean) specializes this to
+VCVio's backend-relative `IsPPTBy` class for one parameter-tagged fair-coin
+program. Executable polynomial encoding code and a backend composition-cost
+certificate derive reduction closure. A conventional machine interpretation
+still needs backend adequacy, a unary parameter representation and polynomial
+growth of other represented inputs. Native-family refinement and native
+parameter-generation, sampling and curve-operation costs remain separate obligations.
+
 ## Program and proof structure
 
 The selected program is [`concrete/rust/poc_dh.rs`](concrete/rust/poc_dh.rs) with
@@ -60,15 +90,16 @@ The proof proceeds through four stages:
    `Curve25519Dalek.poc_dh.session`. Exact game transport, the sampling-distance
    bound, and four replacements yield the standard-DDH corollary.
 
-The final development is in [`concrete/`](concrete/README.md). The earlier generic
-prototype remains in `rust/` and `lean/`. The
+The native implementation proof is in [`concrete/`](concrete/README.md).
+The generic games, sampling lemmas and parameterized results are in `lean/`.
+The earlier Rust prototype remains in `rust/`. The
 [linkage report](concrete/evidence/linkage-comparison.json) records the declaration
 comparison, and the [axiom audit](concrete/evidence/axioms.log) records the complete
 theorem dependency closures.
 
 ## Assumptions and scope
 
-The endpoint depends on `propext`, `Classical.choice`, and `Quot.sound`, together
+The native endpoint depends on `propext`, `Classical.choice`, and `Quot.sound`, together
 with `RustAx.core` and `RustAx.subtle`. The latter two supply functional contracts
 for selected Rust core and subtle operations. Concrete primitive correctness is
 proved. The runtime contract bundles remain assumptions.
@@ -82,7 +113,7 @@ check.
 
 The wide sampler models ideal caller entropy. The development does not verify
 an operating-system RNG, the Rust compiler, machine code, timing or cache
-behavior, or secret erasure. The security claim covers one honest passive session
+behavior, or secret erasure. The native security claim covers one honest passive session
 and excludes authentication, active attacks, multiple sessions, and a formal
 running-time model. The supplied DDH hardness bound remains a premise. See the
 [trust boundary](docs/TRUST-BOUNDARY.md) for the precise contracts and exclusions.
@@ -103,6 +134,14 @@ For a proof iteration after extraction, use
 `scripts/check-concrete.sh --proof-only`. This mode does not regenerate extraction.
 The separate [Blueprint build instructions](blueprint/README.md) describe how to
 build the editable documentation with the committed dependency manifests.
+
+The parameterized audit is separate from the historical generic audit:
+
+```sh
+(cd lean && lake build DhPoc)
+(cd lean && lake env lean ../scripts/check-parameterized-axioms.lean) > /tmp/parameterized-axioms.log
+python3 scripts/check-parameterized-axioms.py /tmp/parameterized-axioms.log
+```
 
 ## Evidence and provenance
 
@@ -125,6 +164,9 @@ empty machine.
 A [separate cloud replay](blueprint/verification/cloud-replay.json) rebuilt the
 concrete proofs and matched all 22 audited dependency closures during the
 Blueprint reconstruction. It did not repeat Rust extraction or native tests.
+The parameterized results have a separate
+[fourteen-endpoint audit](scripts/check-parameterized-axioms.lean) and
+[strict validator](scripts/check-parameterized-axioms.py).
 [Documentation QA](blueprint/verification/QA.md) records the build, source-panel,
-link, and browser checks. The [line-count report](line-counts.json) excludes the
+link, and browser checks. The [historical line-count report](line-counts.json) excludes the
 external arithmetic libraries and the Blueprint.

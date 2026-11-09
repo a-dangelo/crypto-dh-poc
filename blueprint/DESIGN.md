@@ -2,8 +2,8 @@
 
 Audience: an expert in formal methods and cryptography.
 The opening theorem states the result and hypotheses. Subsequent chapters supply
-the refinement, games, sampling comparison, and trust boundary. The final
-chapter concludes with the main security theorem. A single short
+the refinement, games, and sampling comparison. The main security theorem
+concludes the argument before the optional trust and provenance section. A single short
 page recalls the DH exchange. Brief framework notes explain VCVio terms at
 their first use without interrupting the proof with a tutorial.
 

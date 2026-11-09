@@ -11,10 +11,13 @@ open Verso.Genre Verso.Genre.Manual Informal
 tag := "trust"
 %%%
 
-The main theorem assumes `x86_64-no-tables` and a standard-DDH bound for the
+This optional section records the trust boundary, scope, and provenance of
+the preceding results.
+
+The native theorem assumes `x86_64-no-tables` and a standard-DDH bound for the
 explicit encoding reduction. Its axiom closure is `propext`, `Classical.choice`,
 `Quot.sound`, `RustAx.core`, and `RustAx.subtle`. The sampling and hybrid lemmas
-use only the first three. Concrete primitive correctness is proved from the
+and parameterized results use only the first three. Concrete primitive correctness is proved from the
 pinned BAIF development. Selected Rust runtime contracts remain axioms.
 
 The trusted pipeline includes Charon, Aeneas and its models, Lean's kernel,
@@ -31,26 +34,40 @@ for every pair of raw inputs. The two native game equalities preserve the
 adversary and the input laws without conditioning. The sampling comparison
 then accounts for the wide-reduction bias explicitly.
 
-For a fixed adversary $`A`, the theorem assumes a DDH bound for $`R_A`.
+For a fixed adversary $`A`, the native theorem assumes a DDH bound for $`R_A`.
 It contains no PPT predicate, charged cost semantics, or theorem that the
 encoding reduction preserves an efficient adversary class. The reduction
 performs three canonical encodings and one call to $`A`; those costs remain
-to be justified in a resource-bounded corollary. This is the
+to be justified for a concrete resource model. This is the
 [resource condition](https://github.com/a-dangelo/signal-security-blueprint/blob/83d448ba42558abd6f196a54b5c7e4d5e2615f16/content/report.md#L89-L102)
 identified in the Signal blueprint.
 
-The curve and 512-bit tapes are fixed. There is no parameterized family of
-implementations or negligibility theorem. The term $`2^{-260}` is a concrete
-statistical loss. It supplies neither an asymptotic theorem nor a numerical
-DDH-hardness estimate. A concrete security estimate therefore needs a
-justified DDH bound $`\varepsilon` for the relevant adversary resources.
-The Signal blueprint's
-[asymptotic implication](https://github.com/a-dangelo/signal-security-blueprint/blob/83d448ba42558abd6f196a54b5c7e4d5e2615f16/content/report.md#L104-L170)
-requires separate parameterization, efficiency and negligibility arguments.
+The native curve and 512-bit tapes are fixed. Its $`2^{-260}` term is a
+concrete statistical loss. A concrete security estimate still needs a DDH
+bound $`\varepsilon` for the relevant adversary resources.
+The {bpref "parameterized_security"}[family theorem] separately makes the
+group order, sampling width, DDH hypothesis and reduction closure explicit.
+A corresponding native family requires refinement at every parameter.
+
+For a polynomial-time interpretation, applications must justify efficient
+parameter generation, polynomially bounded sampling width, and efficient
+group operations and encodings. In the general class theorem, efficiency
+predicates and reduction closure are explicit hypotheses. The
+{bpref "ppt_security"}[strict-PPT theorem] derives closure from certified
+polynomial encoding code and backend composition costs. A conventional
+machine interpretation still requires backend adequacy, a unary parameter
+representation and polynomial growth of other represented inputs. These are the
+[asymptotic conditions](https://github.com/a-dangelo/signal-security-blueprint/blob/83d448ba42558abd6f196a54b5c7e4d5e2615f16/content/report.md#L104-L170)
+identified in the Signal blueprint.
 
 CryptHOL's [hashed ElGamal tutorial](https://isa-afp.org/browser_info/current/AFP/Game_Based_Crypto/CryptHOL_Tutorial.html)
 proves a concrete bound and a separate asymptotic corollary that assumes
 negligible advantage for the reduced adversary.
+
+[Bao, Pan and Zeng, §1](https://eprint.iacr.org/2026/1980) discuss asymptotic
+reduction loss and concrete tightness.
+[Roy, Datta and Mitchell, §2](https://theory.stanford.edu/~jcm/papers/rdm-tgc-07.pdf)
+formulate polynomial-time executions and negligible failure as the parameter grows.
 
 Caller entropy is ideal. The proof does not cover an operating-system RNG,
 compiler or machine code, timing leakage, or erasure. Authentication, adaptive
@@ -61,14 +78,12 @@ The proof establishes no KDF or uniform-byte-key claim.
 # Evidence and reproduction
 
 The original extraction and linkage evidence is retained with its recorded
-hashes. The current sources have revised comments and separate audit/regression
-scripts. A [fresh cloud replay](source/blueprint/verification/current-source-replay.json)
+hashes. The current sources separate the generic probability arguments from
+the native instantiation. A [cloud replay](source/blueprint/verification/current-source-replay.json)
 checks both Lean libraries, matches all 22 concrete and 16 generic axiom closures,
 and preserves four regressions. It does not repeat Rust extraction or native execution.
-
-The current standard-DDH theorem's local import path has 1,178 Lean lines,
-including 250 generated lines. The largest retained module has 195 lines.
-These counts exclude external libraries and this documentation.
+The [parameterized audit](source/scripts/check-parameterized-axioms.lean)
+separately checks fourteen new endpoints against the standard-axiom allowlist.
 
 [Current source manifest](source/manifest.json) ·
 [Current axiom audit](source/blueprint/verification/current-concrete-axioms.log) ·
