@@ -13,6 +13,10 @@ tag := "sampling"
 
 We compare the decoded wide-input law with uniform scalar sampling.
 Write $`N=2^{512}` and $`r=N\bmod L`.
+Total variation distance, written $`\operatorname{TV}(\mu,\nu)`, is the
+largest absolute difference between the probabilities that two laws assign to the
+same event. For finite probability laws,
+$`\operatorname{TV}(\mu,\nu)=\frac12\sum_x|\mu(x)-\nu(x)|`.
 
 ::::definition "wide_sampler" (lean := "DhConcrete.uniformWide")
 :::AnchorlessBlueprint.pair DhConcrete.uniformWide -docstrings
@@ -61,3 +65,7 @@ Combining this inequality with {bpref "game_transport"}[exact transport]
 and the hybrid bound proves {bpref "main_bound"}[the standard-DDH corollary].
 :::
 ::::
+
+The term $`2^{-260}` is a fixed statistical loss. It is not an asymptotic
+negligibility statement. {ref "trust"}[The security scope] records the
+separate requirements for such a statement.

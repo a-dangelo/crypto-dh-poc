@@ -42,7 +42,9 @@ identified in the Signal blueprint.
 The curve and 512-bit tapes are fixed. There is no parameterized family of
 implementations or negligibility theorem. The term $`2^{-260}` is a concrete
 statistical loss. It supplies neither an asymptotic theorem nor a numerical
-DDH-hardness estimate. The Signal blueprint's
+DDH-hardness estimate. A concrete security estimate therefore needs a
+justified DDH bound $`\varepsilon` for the relevant adversary resources.
+The Signal blueprint's
 [asymptotic implication](https://github.com/a-dangelo/signal-security-blueprint/blob/83d448ba42558abd6f196a54b5c7e4d5e2615f16/content/report.md#L104-L170)
 requires separate parameterization, efficiency and negligibility arguments.
 

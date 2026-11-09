@@ -11,6 +11,11 @@ at 4b097e96e75f996d1228621bfc4b353aa803ed96. Mathematical prose appears on the
 left and actual imported Lean source on the right. SubVerso supplies defining
 commands, token hovers and tactic states. At narrow widths, prose precedes code.
 
+The opening theorem links its experiments and refinement assumptions.
+One short page recalls the DH exchange. Two framework notes explain the
+adversary type and oracle interface. The games chapter displays the primitive
+model and distinguishes it from the stateful CKA scheme interface.
+
 ## Reproduce on Linux x86_64
 
 Install Git, Python 3 and official elan with Lean 4.35.0, then run from the

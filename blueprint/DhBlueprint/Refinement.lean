@@ -17,6 +17,9 @@ canonical 32-byte public values. Charon and Aeneas extract this wrapper together
 with patched BAIF dalek 5.0.0 at
 `95b5831c63ff1c5f6287bd3a77569412a9afdbfb`.
 
+A raw secret is the caller's 64-byte input, before
+$`d(s)=\operatorname{LE}(s)\bmod L` converts it to a scalar.
+
 `Concrete.GeneratedAdapter` imports the retained `Curve25519Dalek.Funs`
 backend and contains the extracted `Curve25519Dalek.poc_dh.session` below.
 The [linkage report](source/concrete/evidence/linkage-comparison.json)

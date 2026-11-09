@@ -9,6 +9,31 @@ open Verso.Output.Html
 
 namespace AnchorlessBlueprint
 
+structure NoteConfig where
+  title : String
+
+instance {m : Type → Type} [Monad m] [MonadError m] :
+    Verso.ArgParse.FromArgs NoteConfig m where
+  fromArgs := NoteConfig.mk <$> .positional `title .string
+
+block_extension Block.frameworkNote (title : String) where
+  data := toJson title
+  traverse _ _ _ := pure none
+  toTeX := none
+  toHtml := some <| fun _ goB _ data blocks => do
+    let title := (fromJson? (α := String) data).toOption.getD ""
+    let body ← blocks.mapM goB
+    pure <| tag "aside" #[("class", "bp_framework_note"), ("aria-label", title)]
+      (.seq #[tag "p" #[("class", "bp_framework_note_title")] (.text true title),
+              .seq body])
+
+/-- A short framework note, separate from the mathematical statement. -/
+@[directive]
+def note : DirectiveExpanderOf NoteConfig
+  | cfg, contents => do
+    let blocks ← contents.mapM elabBlock
+    ``(Verso.Doc.Block.other (Block.frameworkNote $(quote cfg.title)) #[ $[$blocks],* ])
+
 structure DeclarationConfig where
   name : Name
   part : String := "full"

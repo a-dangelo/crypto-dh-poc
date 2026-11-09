@@ -3,13 +3,33 @@
   --bp-color-accent-info: #28536b;
   --bp-color-text-strong: #16232c;
   --bp-color-border: #d7dde0;
+  --bp-reading-width: 46rem;
 }
 html { scroll-padding-top: 4rem; }
 .header-title h1 { font-size: 1.05rem; line-height: 1.25; }
 .content-wrapper { max-width: 90rem; }
-.content-wrapper > main > p, .content-wrapper > section > p { max-width: 78ch; }
+/* Ordinary prose shares one centered rail, including nested chapters.
+   Formal prose/source pairs keep the full review canvas. */
+.content-wrapper :is(section, .titlepage) { max-width: none; }
+.content-wrapper :is(section, .titlepage) > :is(h1, h2, h3, p, ul, ol, dl, blockquote, .bp_framework_note) {
+  width: min(100%, var(--bp-reading-width));
+  max-width: none;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
 .content-wrapper p, .content-wrapper li { line-height: 1.6; }
 .bp_build_metadata { display: none; }
+.bp_framework_note {
+  max-width: 78ch;
+  margin: 1.2rem 0;
+  padding: .65rem 1rem;
+  border: 1px solid var(--bp-color-border);
+  border-left: 3px solid var(--bp-color-accent-info);
+  background: #f7f9fa;
+}
+.bp_framework_note > p { margin: .35rem 0; }
+.bp_framework_note > .bp_framework_note_title { font-weight: 600; margin-top: 0; }
+.bp_framework_note > :last-child { margin-bottom: 0; }
 .bp_heading_title_row .bp_label { white-space: nowrap; min-width: max-content; }
 .page-top-anchor { display: block; position: relative; top: -4rem; height: 0; }
 .page-top-anchor:target { background: transparent !important; }

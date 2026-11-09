@@ -13,9 +13,23 @@ tag := "games"
 
 # Model and origin
 
-The local [model](source/concrete/Concrete/Model.lean.html) instantiates
-`DhPoc.RawPrimitiveModel` with the extracted primitive compositions, scalar
-reduction, canonical encoding, and proved public-value and agreement contracts.
+The extracted [`dh_core.Dh`](source/lean/DhPoc/Generated/DhCore.lean.html)
+interface supplies `public` and `agree`. The following structure adds their
+group specifications and representation maps.
+
+::::definition "primitive_model" (lean := "DhPoc.RawPrimitiveModel")
+:::AnchorlessBlueprint.pair DhPoc.RawPrimitiveModel -docstrings
+The model bundles the operations, a decoder $`S\to F` for secret inputs,
+public and key encodings, a basepoint, and two primitive correctness equations.
+“Raw” means that the secret type $`S` is the caller's input representation,
+before scalar decoding. Here $`S=\mathrm{Bytes}_{64}` and
+$`d(s)=\operatorname{LE}(s)\bmod L`.
+:::
+::::
+
+The local [`DhConcrete.model`](source/concrete/Concrete/Model.lean.html)
+instantiates this interface with the extracted primitive compositions,
+scalar reduction, canonical encoding, and proved contracts.
 Its [algebra](source/concrete/Concrete/Algebra.lean.html) is
 $`F=\mathbb Z/L\mathbb Z` and $`G=E[L]`, with the Edwards basepoint $`g`.
 The curve definitions and Ristretto codec come from
@@ -28,6 +42,21 @@ supplies `ProbComp`, distribution semantics, acceptance-probability distance,
 and the standard DDH experiments below. The native protocol experiments and
 the raw-sampler DDH experiments are local definitions. They model one completed
 honest exchange, with a passive adversary that receives two public values and one key.
+
+:::AnchorlessBlueprint.note "VCVio: computations and oracles"
+`OracleComp` describes a computation that may query typed oracles.
+An oracle implementation supplies the replies and any state changes.
+`ProbComp` specializes this interface to probabilistic sampling.
+Here the adversary receives its three inputs once and returns a bit.
+It has no protocol oracle for further sessions, corruption, or key release.
+:::
+
+This model instantiates the generic sampled experiments. The native
+experiments below call the concrete implementation directly. In
+[`CKAScheme`](https://github.com/a-dangelo/secure-messaging/blob/750c725fd91c58158218bff678c6bc1aadd196d7/SecureMessaging/CKA/Defs.lean),
+the interface bundles algorithms for repeated key updates.
+[`ddhCKA`](https://github.com/a-dangelo/secure-messaging/blob/750c725fd91c58158218bff678c6bc1aadd196d7/SecureMessaging/CKA/FromDDH/Construction.lean)
+instantiates that scheme for separate stateful oracle games.
 
 # Extracted implementation experiments
 
