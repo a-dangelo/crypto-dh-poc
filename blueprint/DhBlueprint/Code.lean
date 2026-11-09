@@ -80,6 +80,59 @@ private partial def window (hl : Highlighted) (start stop : Nat) : Highlighted :
 #guard (window (.point .warning (.text "diagnostic, not source")) 0 1).isEmpty
 #guard (window (.seq #[.text "a", .point .warning (.text "diagnostic"), .text "b"]) 0 2).toString == "ab"
 
+/-- Read the original spelling of a highlighted leaf. SubVerso normalizes
+identifier names, so a token may omit the source's guillemets. No other
+character difference is accepted. -/
+private def sourceLeaf (expected : String) (identifier : Bool) :
+    StateT (List Char) (Except String) String := do
+  if expected.isEmpty then return ""
+  let mut out := ""
+  for c in expected.toList do
+    let mut remaining ← get
+    if identifier then
+      while remaining.head? != some c &&
+          (remaining.head? == some '«' || remaining.head? == some '»') do
+        out := out.push remaining.head!
+        remaining := remaining.tail!
+    match remaining with
+    | actual :: rest =>
+      unless actual == c do
+        throw s!"Source token mismatch: expected '{c}', found '{actual}'"
+      out := out.push actual
+      set rest
+    | [] => throw "Source ended before the highlighted declaration"
+  if identifier then
+    while (← get).head? == some '»' do
+      out := out.push '»'
+      modify List.tail!
+  return out
+
+private partial def sourceTokens : Highlighted → StateT (List Char) (Except String) Highlighted
+  | .text s => .text <$> sourceLeaf s false
+  | .unparsed s => .unparsed <$> sourceLeaf s false
+  | .token tok => do
+    let content ← sourceLeaf tok.content true
+    return .token { tok with content }
+  | .point .. => pure .empty
+  | .span info content => .span info <$> sourceTokens content
+  | .tactics info first last content => .tactics info first last <$> sourceTokens content
+  | .seq children => .seq <$> children.mapM sourceTokens
+
+private def sourceSpelling (source : String) (hl : Highlighted) : Except String Highlighted := do
+  let (result, rest) ← (sourceTokens hl).run source.toList
+  unless rest.isEmpty do throw "Source extends beyond the highlighted declaration"
+  unless result.toString == source do throw "Restored declaration source does not match"
+  return result
+
+#guard (sourceSpelling "operations.«public» s"
+  (.seq #[.text "operations.", .token ⟨.unknown, "public"⟩, .text " s"])).toOption.map
+    (·.toString) == some "operations.«public» s"
+#guard (sourceSpelling "foo.«bar».baz" (.token ⟨.unknown, "foo.bar.baz"⟩)).toOption.map
+    (·.toString) == some "foo.«bar».baz"
+#guard match sourceSpelling "wrong" (.token ⟨.unknown, "right"⟩) with
+  | .error _ => true
+  | .ok _ => false
+
 /-- Locate the declaration's first top-level `:=`, `where`, or equation bar.
 Ignore comments, strings, and nested binders so binder defaults do not split a signature. -/
 private def boundaries (source : String) : Nat × Option Nat × Option Nat := Id.run do
@@ -303,13 +356,34 @@ def declaration : CodeBlockExpanderOf DeclarationConfig
     let hits := items.filter (·.defines.contains cfg.name)
     unless hits.size == 1 do
       throwError "Expected one highlighted command for {cfg.name} in {modName}, found {hits.size}"
-    let hl ← match declarationWindow env cfg.name cfg.part cfg.docstrings hits[0]!.code with
+    let sourcePrefix := if modName.toString.startsWith "Concrete." then "concrete/"
+      else if modName.toString.startsWith "DhPoc" then "lean/" else ""
+    let modulePath := modName.toString.replace "." "/" ++ ".lean"
+    let originalPath := if modName.toString.startsWith "VCVio." then
+      "../vendor/VCVio/" ++ modulePath
+      else "../" ++ sourcePrefix ++ modulePath
+    let original ← IO.FS.readFile (System.FilePath.mk originalPath)
+    let normalized := hits[0]!.code.toString
+    let code ← if (original.splitOn normalized.trimAscii.toString).length > 1 then
+      pure hits[0]!.code
+    else do
+      let some (first, last) := hits[0]!.range
+        | throwError "No original source range for {cfg.name}"
+      let positions := FileMap.ofString original
+      let source := (SubVerso.Compat.String.Pos.extract original
+        (positions.ofPosition first) (positions.ofPosition last)).trimAscii.toString
+      let leftTrim := (normalized.takeWhile Char.isWhitespace).toString.length
+      let trimmed := normalized.trimAscii.toString
+      let code := window hits[0]!.code leftTrim (leftTrim + trimmed.length)
+      match sourceSpelling source code with
+      | .ok code => pure code
+      | .error reason => throwError
+          "{cfg.name}: {reason}\nOriginal command: {repr source}\nHighlighted command: {repr code.toString}"
+    let hl ← match declarationWindow env cfg.name cfg.part cfg.docstrings code with
       | .ok hl => pure hl
       | .error reason => throwError "{reason}"
     let source ← ``(ExternalCode.leanBlock (genre := Verso.Genre.Manual)
       $(quote hl) $(quote ({} : CodeConfig)))
-    let sourcePrefix := if modName.toString.startsWith "Concrete." then "concrete/"
-      else if modName.toString.startsWith "DhPoc" then "lean/" else ""
     let sourcePath := if modName.toString.startsWith "VCVio." then
       "https://github.com/Verified-zkEVM/VCVio/blob/88efe9715a9fa9e7d89635c38cf70259836766c2/" ++
         modName.toString.replace "." "/" ++ ".lean"
