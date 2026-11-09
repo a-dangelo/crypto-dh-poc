@@ -145,3 +145,59 @@ If DDH is secure against `IsPPTBy` at the DDH input boundary, then the
 sampled session is secure against `IsPPTBy` at the session input boundary.
 :::
 ::::
+
+# From the security statements to Rust
+
+The two conclusions use different extracted entry points. The following paths
+read backwards from each security statement to its program.
+
+## Parameterized session
+
+1. {bpref "ppt_security"}[Strict-PPT security] uses
+   [`parameterizedSessionAdvantage_negligible`](source/lean/DhPoc/Parameterized.lean.html#L81).
+   [`ddhFamily_reduce`](source/lean/DhPoc/PPT.lean.html#L161) identifies its
+   coin-program reduction with `familyReduction`.
+2. The negligibility proof uses
+   [`moduloSessionAdvantage_le_standard`](source/lean/DhPoc/Parameterized.lean.html#L34).
+   That bound first rewrites the session advantage with
+   [`sampledSessionAdvantage_eq`](source/lean/DhPoc/RawSecurity.lean.html#L83),
+   then applies the sampling comparison.
+3. The real and ideal game equalities use
+   [`raw_session_refines`](source/lean/DhPoc/RawSampler.lean.html#L33).
+   This theorem unfolds the Aeneas entry
+   [`dh_core.session`](source/lean/DhPoc/Generated/DhCore.lean.html#L43)
+   under the `public_spec` and `agree_spec` contracts of `RawPrimitiveModel`.
+4. Aeneas generated that entry from
+   [`session<D: Dh>`](source/rust/src/lib.rs.html#L24).
+   The Rust function supplies the protocol control flow. Its `Dh` trait
+   leaves the primitive implementation abstract.
+
+Thus the family theorem concerns the extracted generic Rust session under
+primitive contracts at every parameter. It does not instantiate a growing
+family of native curve implementations.
+
+## Fixed native session
+
+1. {bpref "final_bound"}[The native bound] uses
+   [`wideAdvantage_le_standard`](source/concrete/Concrete/Standard.lean.html#L11)
+   and the numerical sampling bound.
+2. [`wideAdvantage_eq`](source/concrete/Concrete/Wide.lean.html#L9) specializes
+   [`nativeAdvantage_eq`](source/concrete/Concrete/Native.lean.html#L79).
+   The latter uses `nativeReal_eq`, `nativeIdeal_eq`, and `advantage_eq`
+   to identify the native and sampled-DDH experiments.
+3. Those game equalities use
+   [`native_session_refines`](source/concrete/Concrete/Native.lean.html#L28).
+   Its `native_public_eq` and `native_agree_eq` contracts connect the
+   selected generated primitives to the imported BAIF specifications.
+4. The refinement unfolds
+   [`Curve25519Dalek.poc_dh.session`](source/concrete/Concrete/GeneratedAdapter.lean.html#L184),
+   extracted from [`poc_dh::session`](source/concrete/rust/poc_dh.rs.html#L25).
+   The [extraction manifest](source/concrete/evidence/extraction-inputs.json)
+   and [linkage comparison](source/concrete/evidence/linkage-comparison.json)
+   record its connection to the pinned dalek backend.
+
+This path requires `Aeneas.Std.target = "x86_64-no-tables"` and uses two
+independent uniform 64-byte inputs. The Rust wrapper receives those inputs
+from its caller. The theorem bounds its advantage by the supplied DDH bound
+plus $`2^{-260}`. It does not prove native runtime or an asymptotic
+security claim for this fixed curve.
