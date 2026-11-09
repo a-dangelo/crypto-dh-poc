@@ -4,7 +4,7 @@ import VersoBlueprint
 
 open Verso.Genre Verso.Genre.Manual Informal
 
-#doc (Manual) "Diffie–Hellman in one page" =>
+#doc (Manual) "Diffie–Hellman" =>
 %%%
 tag := "dh"
 %%%
@@ -22,7 +22,9 @@ $$`\alpha Y=(\alpha\beta)g=(\beta\alpha)g=\beta X.`
 For the stated security bound, the caller's 64-byte inputs $`a,b` are sampled
 independently and uniformly. The implementation sets $`\alpha=d(a)`,
 $`\beta=d(b)`, where
-$`d(s)=\operatorname{LE}(s)\bmod L`. It sends canonical Ristretto encodings
+$`d(s)=\operatorname{LE}(s)\bmod L`. Here $`\operatorname{LE}(s)` is the
+little-endian integer encoded by $`s`, with the first byte least significant.
+The implementation sends canonical Ristretto encodings
 $`p(X),p(Y)` and returns the shared encoding $`p((\alpha\beta)g)`.
 “Raw” refers to the byte inputs before this scalar reduction.
 {bpref "session_refinement"}[Session refinement] proves this equation for

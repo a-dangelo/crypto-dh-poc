@@ -11,6 +11,7 @@ import DhBlueprint.DH
 import DhBlueprint.Games
 import DhBlueprint.Sampling
 import DhBlueprint.Trust
+import DhBlueprint.Final
 
 open Verso.Genre Verso.Genre.Manual Informal
 
@@ -26,8 +27,10 @@ and $`g` the selected basepoint. Write $`p:G\to B` for canonical Ristretto
 encoding into $`B=\mathrm{Bytes}_{32}`, and $`k(P)=\mathrm{some}(p(P))`.
 Let $`\Omega` be the uniform law on 64-byte inputs and
 $`d(s)=\operatorname{LE}(s)\bmod L`.
+Here $`\operatorname{LE}(s)` is the little-endian integer encoded by $`s`,
+with the first byte least significant.
 
-::::theorem "main_bound" (lean := "DhConcrete.wideAdvantage_le_of_standardDDH") (uses := "game_transport, bias_bound, hybrid_bound, numeric_loss")
+::::theorem "main_bound" (lean := "DhConcrete.wideAdvantage_le_of_standardDDH") (uses := "final_bound")
 :::AnchorlessBlueprint.pair DhConcrete.wideAdvantage_le_of_standardDDH -docstrings
 Assume `Aeneas.Std.target = "x86_64-no-tables"` and fix a passive adversary
 $`A:B\to B\to\mathrm{Option}(B)\to\mathrm{ProbComp}(\mathrm{Bool})`.
@@ -43,6 +46,9 @@ extracted `poc_dh.session`. The proof combines exact game transport with
 four sampling replacements.
 :::
 ::::
+
+The development concludes with {bpref "final_bound"}[this security bound],
+after the implementation and sampling lemmas.
 
 `x86_64-no-tables` selects the serial x86-64 backend without precomputed
 tables. {bpref "session_refinement"}[Session refinement] states its full
@@ -60,7 +66,7 @@ Here $`\operatorname{Adv}_{\rm native}` is the absolute difference between
 acceptance probabilities in {bpref "real_game"}[the real experiment] and
 {bpref "ideal_game"}[the ideal experiment].
 {bpref "encoding_reduction"}[The encoding reduction] defines $`R_A`.
-{ref "dh"}[Diffie–Hellman in one page] describes the exchange.
+{ref "dh"}[Diffie–Hellman] describes the exchange.
 
 The axiom closure is Lean's standard three axioms together with
 `RustAx.core` and `RustAx.subtle`. The result concerns the patched,
@@ -75,6 +81,7 @@ Original proof revision: `a27d45ad02331a96279032a11872d6ec7af47860`.
 {include 0 DhBlueprint.Games}
 {include 0 DhBlueprint.Sampling}
 {include 0 DhBlueprint.Trust}
+{include 0 DhBlueprint.Final}
 
 {blueprint_graph (direction := LR)}
 {blueprint_summary}

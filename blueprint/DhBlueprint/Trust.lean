@@ -48,6 +48,10 @@ The Signal blueprint's
 [asymptotic implication](https://github.com/a-dangelo/signal-security-blueprint/blob/83d448ba42558abd6f196a54b5c7e4d5e2615f16/content/report.md#L104-L170)
 requires separate parameterization, efficiency and negligibility arguments.
 
+CryptHOL's [hashed ElGamal tutorial](https://isa-afp.org/browser_info/current/AFP/Game_Based_Crypto/CryptHOL_Tutorial.html)
+proves a concrete bound and a separate asymptotic corollary that assumes
+negligible advantage for the reduced adversary.
+
 Caller entropy is ideal. The proof does not cover an operating-system RNG,
 compiler or machine code, timing leakage, or erasure. Authentication, adaptive
 corruption, multiple sessions, candidate-key selection and key-release security
