@@ -3,10 +3,16 @@
 from pathlib import Path
 import hashlib, html, json, re, shutil, subprocess, zipfile
 from site_checks import declaration_source
+from proof_replay import check_replay
+import argparse
 
 DOC = Path(__file__).resolve().parents[1]
 ROOT = DOC.parent
 SITE = DOC / '_out/site/html-multi'
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--replay-directory', required=True, type=Path)
+replay_directory = parser.parse_args().replay_directory.resolve()
 
 # Verify the current sources and the original snapshot independently.
 import importlib.util
@@ -28,13 +34,9 @@ for name, axioms in report['audited_declarations'].items():
     assert set(axioms) <= allowed, name
 for name, entry in report['files'].items():
     assert hashlib.sha256(snapshot_path(name).read_bytes()).hexdigest() == entry['sha256'], name
-replay = json.loads((DOC / 'verification/current-source-replay.json').read_text())
-assert replay['source_manifest_sha256'] == checks.sha(DOC / 'current-source-manifest.json')
-assert replay['concrete_build_exit_code'] == replay['concrete_audit_exit_code'] == replay['generic_audit_exit_code'] == 0
-for name, digest in replay['log_sha256'].items():
-    assert checks.sha(DOC / 'verification' / name) == digest, name
-checks.check_axioms(DOC / 'verification/current-concrete-axioms.log',
-                    DOC / 'verification/current-generic-axioms.log')
+# Bind the current source manifest to this build's successful commands and audits.
+# The stored prose-only replay remains historical evidence, unchanged.
+replay = check_replay(replay_directory)
 
 assert (SITE/'index.html').exists()
 xref = json.loads((SITE/'xref.json').read_text())
@@ -85,6 +87,12 @@ for entry in manifest['files']:
         title=html.escape(str(rel))
         page='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>'+title+'</title><link rel="stylesheet" href="/review.css"></head><body class="source-page"><nav><a href="/">Blueprint</a> · <a href="/source/'+str(rel)+'">Raw source</a></nav><h1>'+title+'</h1><p>SHA-256 '+entry['sha256']+'</p><pre>'+body+'</pre></body></html>'
         Path(str(target)+'.html').write_text(page)
+
+# Retain actual current-run proof evidence only in the private source snapshot.
+current_verification = SITE/'source/current-verification'
+current_verification.mkdir(parents=True, exist_ok=True)
+for name in ['replay.json', *replay['log_sha256']]:
+    shutil.copyfile(replay_directory / name, current_verification / name)
 
 (SITE/'source/manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 # Preserve the recovered snapshot under a separate historical prefix.
