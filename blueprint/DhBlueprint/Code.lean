@@ -56,7 +56,10 @@ private partial def window (hl : Highlighted) (start stop : Nat) : Highlighted :
       let text := SubVerso.Compat.String.take
         (SubVerso.Compat.String.drop tok.content start) (stop - start)
       if text.isEmpty then .empty else .token { tok with content := text }
-  | .point .. => if start == 0 then hl else .empty
+  -- Point annotations contain compiler messages, but no source characters.
+  -- Verso renders their message bodies as text, so they do not belong in a
+  -- declaration-source panel. Token hovers and tactic states remain below.
+  | .point .. => .empty
   | .span info content =>
       let kept := window content start stop
       if kept.isEmpty then .empty else .span info kept
@@ -73,6 +76,9 @@ private partial def window (hl : Highlighted) (start stop : Nat) : Highlighted :
           out := out.push (window child (start - offset) (stop - offset))
         offset := offset + width
       return .seq out
+
+#guard (window (.point .warning (.text "diagnostic, not source")) 0 1).isEmpty
+#guard (window (.seq #[.text "a", .point .warning (.text "diagnostic"), .text "b"]) 0 2).toString == "ab"
 
 /-- Locate the declaration's first top-level `:=`, `where`, or equation bar.
 Ignore comments, strings, and nested binders so binder defaults do not split a signature. -/

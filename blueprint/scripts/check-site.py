@@ -27,7 +27,9 @@ for p,parser in pages.items():
         assert parser.cards==parser.open_cards==len(parser.blocks)==len(parser.card_sources),(p,parser.cards,len(parser.blocks))
         for (source,hovers),link in zip(parser.blocks,parser.card_sources):
             path=declaration_source(link,DOC.parent,source_directory=ROOT/'source')
-            assert source in path.read_text(),f'Rendered source differs from file: {link}'
+            assert source in path.read_text(), (
+                f'Rendered source differs from file: {link}\n'
+                f'Rendered text: {source!r}')
             assert hovers>0,f'Missing source hovers: {link}'
 for name in ['manifest.json','documentation-manifest.json']:
     data=json.loads((ROOT/'source'/name).read_text())
