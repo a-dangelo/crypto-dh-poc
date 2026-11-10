@@ -15,7 +15,7 @@ import DhBlueprint.Final
 
 open Verso.Genre Verso.Genre.Manual Informal
 
-#doc (Manual) "A Rust DH session, verified in Lean" =>
+#doc (Manual) "DH session in Rust" =>
 
 We verify a coin-explicit Rust implementation of one passive Ristretto
 Diffie–Hellman session. Charon and Aeneas translate the wrapper and patched
@@ -31,6 +31,15 @@ Let $`\Omega` be the uniform law on 64-byte inputs and
 $`d(s)=\operatorname{LE}(s)\bmod L`.
 Here $`\operatorname{LE}(s)` is the little-endian integer encoded by $`s`,
 with the first byte least significant.
+
+:::AnchorlessBlueprint.note "What raw means"
+Here, “raw” means the secret before scalar decoding: 64 caller-supplied bytes,
+interpreted as a little-endian integer and reduced modulo the group order $`L`.
+Different byte strings can give the same scalar, so uniform bytes need not give
+exactly uniform scalars. The name also appears on constructions at this model
+layer, even when they do not decode bytes. In particular, `rawReduction` encodes
+a group-element challenge for the adversary.
+:::
 
 ::::theorem "main_bound" (lean := "DhConcrete.wideAdvantage_le_of_standardDDH") (uses := "final_bound")
 :::AnchorlessBlueprint.pair DhConcrete.wideAdvantage_le_of_standardDDH -docstrings
@@ -48,6 +57,9 @@ extracted `poc_dh.session`. The proof combines exact game transport with
 four sampling replacements.
 :::
 ::::
+
+The {ref "refinement"}[program and refinement chapter] identifies the extracted
+declarations and traces their use in the experiments and security theorem.
 
 The {ref "final"}[security results] conclude the argument before the optional
 trust and provenance section.

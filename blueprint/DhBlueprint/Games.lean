@@ -14,11 +14,14 @@ tag := "games"
 # Model and origin
 
 The extracted [`dh_core.Dh`](source/lean/DhPoc/Generated/DhCore.lean.html)
-interface supplies `public` and `agree`. The following structure adds their
-group specifications and representation maps.
+interface supplies `public` and `agree`. Aeneas generates this interface from
+the generic Rust trait. The following hand-written structure adds group
+specifications and representation maps; Aeneas does not generate these contracts.
 
 ::::definition "primitive_model" (lean := "DhPoc.RawPrimitiveModel")
 :::AnchorlessBlueprint.pair DhPoc.RawPrimitiveModel -docstrings
+*Origin: hand-written model over an extracted interface.*
+
 The model bundles the operations, a decoder $`S\to F` for secret inputs,
 public and key encodings, a basepoint, and two primitive correctness equations.
 “Raw” means that the secret type $`S` is the caller's input representation,
@@ -42,8 +45,8 @@ shared encodings in `some`.
 [VCVio at `88efe971`](https://github.com/Verified-zkEVM/VCVio/tree/88efe9715a9fa9e7d89635c38cf70259836766c2)
 supplies `ProbComp`, distribution semantics, acceptance-probability distance,
 and the standard DDH experiments below. The native protocol experiments and
-the raw-sampler DDH experiments are local definitions. They model one completed
-honest exchange, with a passive adversary that receives two public values and one key.
+the DDH experiments with caller-supplied input distributions are hand-written
+definitions. They model one completed honest exchange, with a passive adversary that receives two public values and one key.
 
 :::AnchorlessBlueprint.note "VCVio: computations and oracles"
 `OracleComp` describes a computation that may query typed oracles.
@@ -62,21 +65,25 @@ instantiates that scheme for separate stateful oracle games.
 
 # Extracted implementation experiments
 
-Let $`\mu,\nu` be laws on raw secrets. Both experiments draw independently
+Let $`\mu,\nu` be laws on 64-byte secret inputs. Both experiments draw independently
 from these laws and evaluate the Aeneas declaration
 `Curve25519Dalek.poc_dh.session`. The adversary returns a `ProbComp Bool` computation.
 
 ::::definition "real_game" (lean := "DhConcrete.nativeReal") (uses := "extracted_session")
 :::AnchorlessBlueprint.pair DhConcrete.nativeReal -docstrings
+*Origin: hand-written experiment that calls the extracted session.*
+
 The real experiment supplies Alice's computed key. The code matches on
 `(poc_dh.session a b).match` and maps a non-success result to `false`.
 {bpref "session_refinement"}[Session refinement] excludes that branch under
-`x86_64-no-tables`, for every pair of raw inputs.
+`x86_64-no-tables`, for every pair of input byte strings.
 :::
 ::::
 
 ::::definition "ideal_game" (lean := "DhConcrete.nativeIdeal") (uses := "extracted_session")
 :::AnchorlessBlueprint.pair DhConcrete.nativeIdeal -docstrings
+*Origin: hand-written experiment that calls the extracted session.*
+
 The ideal experiment executes the same extracted session and retains its
 public outputs. It supplies $`k(cg)` for an independent uniform
 $`c\in F`. The challenge is an encoded group element, not a uniform byte string.
@@ -85,11 +92,21 @@ $`c\in F`. The challenge is an encoded group element, not a uniform byte string.
 
 # Exact implementation bridge
 
+The generic extraction is separate from the concrete dalek wrapper.
+[`DhPoc/Generated/DhCore.lean`](source/lean/DhPoc/Generated/DhCore.lean.html)
+is direct Aeneas output from [`rust/src/lib.rs`](source/rust/src/lib.rs.html).
+It contains `dh_core.Dh`, `dh_core.Session`, and `dh_core.session`.
+The generic session calls the supplied `public` and `agree` operations.
+Aeneas extracts this control flow; the models, contracts and security proofs
+are hand-written.
+
 Write $`M` for `DhConcrete.model`. The generic session experiments take
 this primitive model explicitly, rather than call the concrete Rust wrapper.
 
 ::::definition "sampled_real_game" (lean := "DhPoc.sampledReal") (uses := "primitive_model")
 :::AnchorlessBlueprint.pair DhPoc.sampledReal -docstrings
+*Origin: hand-written experiment that calls the generic extracted session.*
+
 `sampledReal` draws independent $`a\leftarrow\mu` and $`b\leftarrow\nu`
 and executes `dh_core.session M.operations a b`. It gives $`A` the two
 public outputs and Alice's computed key, or returns `false` if the session fails.
@@ -98,6 +115,8 @@ public outputs and Alice's computed key, or returns `false` if the session fails
 
 ::::definition "sampled_ideal_game" (lean := "DhPoc.sampledIdeal") (uses := "primitive_model")
 :::AnchorlessBlueprint.pair DhPoc.sampledIdeal -docstrings
+*Origin: hand-written experiment that calls the generic extracted session.*
+
 `sampledIdeal` executes the same session and retains its public outputs.
 It gives $`A` the key $`M.\mathrm{key}(cg)` for independent uniform
 $`c\in F`, or returns `false` if the session fails.
@@ -137,7 +156,7 @@ The independent uniform challenge is unchanged.
 
 Let $`R:G\to G\to G\to G\to\mathrm{ProbComp}(\mathrm{Bool})`
 be a test of the basepoint, two public group elements, and a challenge.
-The sampled-DDH games use the same raw-secret laws $`\mu,\nu` and decoder
+The sampled-DDH games use the same secret-input laws $`\mu,\nu` and decoder
 $`d`. They pass group elements directly to $`R`, without executing a session.
 
 ::::definition "sampled_ddh_real" (lean := "DhPoc.sampledDDHReal")
@@ -188,14 +207,15 @@ For the concrete model, define
 
 $$`R_A(g,X,Y,Z)=A(p(X),p(Y),k(Z)).`
 
-The reduction computes three canonical encodings and invokes $`A` once.
+The hand-written `rawReduction` belongs to the input-decoding model.
+It receives group elements, computes three canonical encodings and invokes $`A` once.
 A computational-cost claim must account for these encodings.
 :::
 ::::
 
 ::::theorem "game_transport" (lean := "DhConcrete.nativeAdvantage_eq") (uses := "real_transport, ideal_transport, encoding_reduction, sampled_ddh_advantage")
 :::AnchorlessBlueprint.pair DhConcrete.nativeAdvantage_eq -docstrings
-For the selected target and arbitrary raw-secret laws,
+For the selected target and arbitrary secret-input laws,
 
 $$`\operatorname{Adv}_{\rm native}(\mu,\nu,A)
 =\operatorname{Adv}_{\rm sampledDDH}(d,g,\mu,\nu,R_A).`
