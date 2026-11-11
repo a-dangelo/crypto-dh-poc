@@ -42,5 +42,8 @@ in `docs/<Name>`, add the library to `docs/lakefile.lean`, and include its bluep
 `source/<Name>/` source-link namespace. Extend source preparation, axiom auditing,
 and source-link checks for the new chapter. Keep the graph and summary at book level.
 
-For optional browser QA, install Playwright and Chromium and run
-`python3 docs/scripts/browser-qa.py`. Screenshots and results remain in `docs/_out/qa`.
+For browser QA, install Playwright and Chromium/Chrome and run
+`python3 docs/scripts/browser-qa.py`. It checks the public export at desktop and
+narrow widths under `/crypto-dh-poc/`. Use `--site PATH` for another build and
+`BLUEPRINT_BROWSER=/path/to/browser` to select the browser. The JSON report and
+named screenshots are written to `docs/_out/qa` for CI artifact upload.

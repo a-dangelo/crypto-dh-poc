@@ -19,6 +19,8 @@ def repository_url(match):
     example, path = path.split('/', 1)
     path = re.sub(r'\.html(?=#|$)', '', path)
     path, sep, fragment = path.partition('#')
+    if path == 'source-snapshot.zip':
+        return blob.replace('/blob/', '/tree/') + f'Examples/{example}'
     mapped = {'manifest.json':f'docs/{example}/current-source-manifest.json' if example == 'DH' else f'Examples/{example}/README.md',
               'line-counts.json':f'docs/{example}/source-line-counts.json',
               'documentation-manifest.json':f'docs/{example}/README.md',

@@ -12,7 +12,5 @@ The chapters share this book, navigation, and dependency graph.
 {include 0 DhBlueprint.Blueprint}
 {include 0 SchnorrBlueprint.Blueprint}
 
-# Dependency graph
-
 {blueprint_graph (direction := LR)}
 {blueprint_summary}

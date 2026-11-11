@@ -134,6 +134,26 @@ jobs:
         working-directory: docs
         run: python3 scripts/export-public.py --repository-revision "$GITHUB_SHA"
 
+      - name: Check public pages in desktop and narrow browsers
+        shell: bash
+        run: |
+          set -euo pipefail
+          venv="$RUNNER_TEMP/blueprint-browser-qa"
+          python3 -m venv "$venv"
+          "$venv/bin/pip" install 'playwright==1.62.0'
+          export BLUEPRINT_BROWSER
+          BLUEPRINT_BROWSER=$(command -v google-chrome || command -v chromium)
+          "$venv/bin/python" docs/scripts/browser-qa.py --site docs/_out/site/pages-public
+
+      - name: Keep browser QA screenshots and report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: blueprint-browser-qa
+          path: docs/_out/qa
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Enforce publication boundary
         shell: python
         run: |

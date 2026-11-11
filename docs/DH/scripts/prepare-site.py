@@ -66,12 +66,12 @@ for page in SITE.rglob('*.html'):
         href = html.unescape(re.search(r'href="([^"]+)"',tag)[1])
         name = html.unescape(re.search(r'data-declaration="([^"]+)"',tag)[1])
         base_href = href.split('#',1)[0]
-        if not (base_href.startswith('source/DH/') or name.startswith('Dh') or name.startswith('poc_dh')):
-            return tag
-        source_file = declaration_source(base_href.replace('source/DH/', 'source/'), ROOT)
+        example_root = ROOT.parent / 'Schnorr' if base_href.startswith('source/Schnorr/') else ROOT
+        local_href = base_href.replace('source/DH/', 'source/').replace('source/Schnorr/', 'source/')
+        source_file = declaration_source(local_href, example_root)
         lines = source_file.read_text().splitlines()
         short = name.split('.')[-1]
-        pattern = re.compile(r'^\s*(?:(?:private|protected|noncomputable|partial|unsafe)\s+)*(?:theorem|def|abbrev|structure|class|inductive)\s+([^\s:(]+)')
+        pattern = re.compile(r'^\s*(?:@\[[^]]*\]\s*)*(?:(?:private|protected|noncomputable|partial|unsafe)\s+)*(?:theorem|def|abbrev|structure|class|inductive)\s+([^\s:(]+)')
         candidates = [i+1 for i,line in enumerate(lines)
                       if (hit := pattern.search(line)) and hit[1].split('.')[-1] == short]
         assert len(candidates) == 1, (source_file,name,candidates)

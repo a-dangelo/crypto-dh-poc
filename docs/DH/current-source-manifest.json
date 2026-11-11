@@ -150,7 +150,7 @@
       "path": "README.md",
       "sha256": "164483db33833b1be626179632e963ede54e93780319f4bfd972c1c8f231ce01",
       "lines": 172,
-      "bytes": 9594
+      "bytes": 9606
     },
     {
       "path": "concrete/Concrete.lean",
