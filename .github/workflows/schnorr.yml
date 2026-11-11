@@ -1,6 +1,7 @@
 name: Check independent Schnorr prototype
 
 on:
+  workflow_call:
   workflow_dispatch:
 
 permissions:
@@ -16,7 +17,7 @@ jobs:
     timeout-minutes: 90
     env:
       LEAN_NUM_THREADS: '2'
-      MATHLIB_CACHE_DIR: ${{ github.workspace }}/schnorr/vendor/mathlib-cache
+      MATHLIB_CACHE_DIR: ${{ github.workspace }}/Examples/Schnorr/vendor/mathlib-cache
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
@@ -59,28 +60,21 @@ jobs:
         continue-on-error: true
         with:
           path: |
-            schnorr/vendor
-            schnorr/lean/.lake
-            schnorr/blueprint/.lake
-          key: schnorr-${{ runner.os }}-${{ hashFiles('schnorr/lean/lake-manifest.json', 'schnorr/blueprint/lake-manifest.json', 'schnorr/scripts/bootstrap.sh') }}-${{ hashFiles('schnorr/**/*.lean') }}
+            Examples/Schnorr/vendor
+            Examples/Schnorr/lean/.lake
+          key: schnorr-${{ runner.os }}-${{ hashFiles('Examples/Schnorr/lean/lake-manifest.json', 'Examples/Schnorr/scripts/bootstrap.sh') }}-${{ hashFiles('Examples/Schnorr/**/*.lean') }}
           restore-keys: |
-            schnorr-${{ runner.os }}-${{ hashFiles('schnorr/lean/lake-manifest.json', 'schnorr/blueprint/lake-manifest.json', 'schnorr/scripts/bootstrap.sh') }}-
+            schnorr-${{ runner.os }}-${{ hashFiles('Examples/Schnorr/lean/lake-manifest.json', 'Examples/Schnorr/scripts/bootstrap.sh') }}-
       - name: Prepare independent dependencies
-        run: bash schnorr/scripts/bootstrap.sh
+        run: bash Examples/Schnorr/scripts/bootstrap.sh
       - name: Check Rust, extraction, Lean and axioms
-        run: bash schnorr/scripts/check.sh
-      - name: Build the separate editable Blueprint
-        working-directory: schnorr/blueprint
-        run: |
-          lake exe cache get
-          bash scripts/build.sh
+        run: bash Examples/Schnorr/scripts/check.sh
       - name: Save checked build cache
         if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         continue-on-error: true
         with:
           path: |
-            schnorr/vendor
-            schnorr/lean/.lake
-            schnorr/blueprint/.lake
+            Examples/Schnorr/vendor
+            Examples/Schnorr/lean/.lake
           key: ${{ steps.cache.outputs.cache-primary-key }}

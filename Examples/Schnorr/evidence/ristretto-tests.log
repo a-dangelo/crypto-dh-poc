@@ -1,0 +1,18 @@
+   Compiling schnorr-core v0.1.0 (/workspace/scratch/689300220974/schnorr-work/Examples/Schnorr/rust)
+   Compiling schnorr-ristretto-example v0.1.0 (/workspace/scratch/689300220974/schnorr-work/Examples/Schnorr/rust/native)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.32s
+     Running unittests src/lib.rs (target/debug/build/schnorr-ristretto-example/0e10350628c0769d/out/schnorr_ristretto_example-0e10350628c0769d)
+
+running 3 tests
+test tests::stateful_entry_point_consumes_one_scalar ... ok
+test tests::two_distinct_challenges_extract_the_witness ... ok
+test tests::honest_transcripts_and_mutations ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.54s
+
+   Doc-tests schnorr_ristretto_example
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
