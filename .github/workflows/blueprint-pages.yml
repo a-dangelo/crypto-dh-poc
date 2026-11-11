@@ -148,7 +148,7 @@ jobs:
 
       - name: Compile proof and documentation targets
         run: |
-          (cd docs && lake build ExamplesBlueprint vbp)
+          (cd docs && lake build ExamplesBlueprint Schnorr vbp)
 
       - name: Save compiled targets before rendering
         if: steps.lean-cache.outputs.cache-hit != 'true'

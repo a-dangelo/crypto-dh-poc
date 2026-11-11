@@ -10,8 +10,13 @@ else
 fi
 mkdir -p ../Examples/Schnorr/evidence
 # Audit Schnorr against the same dependency environment used to render the book.
-lake build ExamplesBlueprint
-lake env lean ../Examples/Schnorr/scripts/axioms.lean > ../Examples/Schnorr/evidence/blueprint-axioms.log 2>&1
+# The audit imports the aggregate Schnorr module, not only chapter dependencies.
+lake build ExamplesBlueprint Schnorr
+AXIOM_LOG=../Examples/Schnorr/evidence/blueprint-axioms.log
+if ! lake env lean ../Examples/Schnorr/scripts/axioms.lean > "$AXIOM_LOG" 2>&1; then
+  cat "$AXIOM_LOG" >&2
+  exit 1
+fi
 python3 ../Examples/Schnorr/scripts/check-axioms.py ../Examples/Schnorr/evidence/blueprint-axioms.log
 python3 -c 'import shutil; shutil.rmtree("_out/site", ignore_errors=True)'
 lake exe vbp build
