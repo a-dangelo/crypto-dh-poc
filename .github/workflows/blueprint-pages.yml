@@ -91,6 +91,49 @@ jobs:
           restore-keys: |
             examples-blueprint-${{ runner.os }}-${{ hashFiles('docs/lean-toolchain', 'Examples/DH/concrete/lake-manifest.json', 'docs/lake-manifest.json', 'docs/scripts/bootstrap.sh', 'docs/DH/scripts/bootstrap-docs.sh') }}-
 
+      # Cache versions include paths. Restore the pre-Examples layout separately.
+      - name: Restore pre-reorganization DH cache when needed
+        if: steps.lean-cache.outputs.cache-matched-key == ''
+        id: legacy-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        continue-on-error: true
+        with:
+          path: |
+            vendor
+            lean/.lake
+            concrete/vendor
+            concrete/.lake
+            blueprint/.lake
+          key: blueprint-Linux-6b683178d035d89571d7347dbf48a32183324ef07267d3d30f067fc930fa560c-0fbab44317e7396a368ea1062e06dc51f42761f7fe4c9728a9aae0cfdca5d04d
+          restore-keys: |
+            blueprint-Linux-832a57cbdc27de4b35fcbbaada090b0c7109387088bdf321e9711099f3107aa8-39174fee3e164a528c4d2fb176c887ed6cf3c49c8e62ed483caefb422d29d75a
+
+      - name: Relocate legacy build artifacts without replacing sources
+        if: steps.legacy-cache.outputs.cache-matched-key != ''
+        shell: python
+        run: |
+          from pathlib import Path
+          import shutil
+          moves = [
+              ('vendor', 'Examples/DH/vendor'),
+              ('lean/.lake', 'Examples/DH/lean/.lake'),
+              ('concrete/vendor', 'Examples/DH/concrete/vendor'),
+              ('concrete/.lake', 'Examples/DH/concrete/.lake'),
+              ('blueprint/.lake/packages', 'docs/.lake/packages'),
+              ('blueprint/.lake/build', 'docs/DH/.lake/build'),
+          ]
+          for source, destination in moves:
+              source, destination = Path(source), Path(destination)
+              if not source.is_dir():
+                  continue
+              if destination.exists() or destination.is_symlink():
+                  print(f'Keeping existing {destination}; not overwriting from {source}')
+                  continue
+              destination.parent.mkdir(parents=True, exist_ok=True)
+              shutil.move(str(source), str(destination))
+              print(f'Restored {source} to {destination}')
+          # Bootstrap below verifies dependency origins, revisions and source hashes.
+
       - name: Bootstrap pinned documentation dependencies
         run: bash docs/scripts/bootstrap.sh
 
@@ -99,8 +142,9 @@ jobs:
           CACHE_HIT: ${{ steps.lean-cache.outputs.cache-hit }}
           CACHE_MATCH: ${{ steps.lean-cache.outputs.cache-matched-key }}
           CACHE_KEY: ${{ steps.lean-cache.outputs.cache-primary-key }}
+          LEGACY_CACHE_MATCH: ${{ steps.legacy-cache.outputs.cache-matched-key }}
         run: |
-          printf 'Exact cache hit: %s\nRestored key: %s\nRequested key: %s\n' "$CACHE_HIT" "$CACHE_MATCH" "$CACHE_KEY"
+          printf 'Exact cache hit: %s\nRestored key: %s\nRequested key: %s\nLegacy key: %s\n' "$CACHE_HIT" "$CACHE_MATCH" "$CACHE_KEY" "$LEGACY_CACHE_MATCH"
 
       - name: Compile proof and documentation targets
         run: |
