@@ -1,0 +1,15 @@
+✔ [3599/3600] Built Schnorr (5.8s)
+Build completed successfully (3600 jobs).
+Audited 18 Schnorr endpoints; only standard Lean axioms occur.
+⚠ [482/682] Replayed VersoBlueprint.Data
+warning: src/VersoBlueprint/Data.lean:512:0: `instFromJsonExcept_versoBlueprint.fromJson`: universes `u_1`, `u_2` only occur together. This usually means there is a `max` expression in the type where none of these universes appear on their own.
+
+Note: This linter can be disabled with `set_option linter.checkUnivs false`
+warning: src/VersoBlueprint/Data.lean:512:0: `instFromJsonExcept_versoBlueprint`: universes `u_1`, `u_2` only occur together. This usually means there is a `max` expression in the type where none of these universes appear on their own.
+
+Note: This linter can be disabled with `set_option linter.checkUnivs false`
+⚠ [789/827] Replayed VersoBlueprint.Slides.Node
+warning: src/VersoBlueprint/Slides/Node.lean: imports `VersoSlides` from package `verso-slides`, which is designed for use with the module system; consider adding `module` to the start of this file
+⚠ [798/827] Replayed VersoBlueprint.Graft
+warning: src/VersoBlueprint/Graft.lean: imports `VersoSlides` from package `verso-slides`, which is designed for use with the module system; consider adding `module` to the start of this file
+✔ [1957/2006] Built SchnorrBlueprint.Code (3.5s)

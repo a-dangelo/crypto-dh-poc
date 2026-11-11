@@ -1,0 +1,71 @@
+   Compiling schnorr-core v0.1.0 (/workspace/scratch/689300220974/schnorr-work/schnorr/rust)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.46s
+     Running unittests src/lib.rs (target/debug/build/schnorr-core/9517751b2ab26ab9/out/schnorr_core-9517751b2ab26ab9)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/exhaustive.rs (target/debug/build/schnorr-core/72adec5f49a87003/out/exhaustive-72adec5f49a87003)
+
+running 1 test
+test every_honest_transcript_accepts ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests schnorr_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running unittests src/lib.rs (target/debug/build/schnorr-ristretto-example/7b2e87671c002287/out/schnorr_ristretto_example-7b2e87671c002287)
+
+running 3 tests
+test tests::stateful_entry_point_consumes_one_scalar ... ok
+test tests::two_distinct_challenges_extract_the_witness ... ok
+test tests::honest_transcripts_and_mutations ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.59s
+
+   Doc-tests schnorr_ristretto_example
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling schnorr-core v0.1.0 (/workspace/scratch/689300220974/schnorr-work/schnorr/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s
+[[92mInfo[39m ] Imported: /workspace/scratch/689300220974/schnorr-work/schnorr/evidence/schnorr_core.llbc
+[?25lApplied prepasses:  [--------------------------------------------------]  0/25 ⠋
+
+Applied prepasses:  [##------------------------------------------------]  1/25 ⠋
+
+Applied prepasses:  [########################################----------] 20/25 ⠙
+Applied prepasses:  [##################################################] 25/25 ✔️
+[?25h[?25lTranslated globals:  [---------------------------------------------------] 0/0 ⠋
+Translated globals:  [---------------------------------------------------] 0/0 ✔️
+[?25h[?25lTranslated opaque functions:  [------------------------------------------] 0/0 ⠋
+Translated opaque functions:  [------------------------------------------] 0/0 ✔️
+[?25h[?25lTranslated transparent functions:  [-------------------------------------] 0/6 ⠋
+
+Translated transparent functions:  [######-------------------------------] 1/6 ⠙
+Translated transparent functions:  [#####################################] 6/6 ✔️
+[?25h[?25lTranslated trait declarations:  [----------------------------------------] 0/6 ⠋
+Translated trait declarations:  [#############---------------------------] 2/6 ✔️
+[?25h[?25lTranslated trait impls:  [-----------------------------------------------] 0/6 ⠋
+Translated trait impls:  [-----------------------------------------------] 0/6 ✔️
+[?25h[?25lPost-processed translated opaque functions:  [---------------------------] 0/0 ⠋
+Post-processed translated opaque functions:  [---------------------------] 0/0 ✔️
+[?25h[?25lPost-processed translated transparent functions:  [----------------------] 0/6 ⠋
+
+Post-processed translated transparent functions:  [###-------------------] 1/6 ⠙
+Post-processed translated transparent functions:  [######################] 6/6 ✔️
+[?25h[[92mInfo[39m ] Generated: /tmp/tmp.e0aFp1pl7r/SchnorrCore.lean
+[[92mInfo[39m ] Total execution time: 0.773954 seconds
+Build completed successfully (3600 jobs).
+Audited 18 Schnorr endpoints; only standard Lean axioms occur.
+Schnorr proof and Blueprint have no DH imports or proof placeholders.
+Recorded Schnorr verification evidence.
+Schnorr checks passed (full).

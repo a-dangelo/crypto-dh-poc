@@ -1,0 +1,8 @@
+/vendor/
+**/.lake/
+**/target/
+/blueprint/_out/
+/evidence/*.llbc
+/evidence/initial-*.log
+__pycache__/
+*.py[cod]

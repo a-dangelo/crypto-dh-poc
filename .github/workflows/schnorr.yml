@@ -1,0 +1,86 @@
+name: Check independent Schnorr prototype
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: schnorr-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      LEAN_NUM_THREADS: '2'
+      MATHLIB_CACHE_DIR: ${{ github.workspace }}/schnorr/vendor/mathlib-cache
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Reserve space on the disposable hosted runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "${GITHUB_ACTIONS:-}" == true && "${RUNNER_ENVIRONMENT:-}" == github-hosted ]]
+          available_kib() { df --output=avail -k "$GITHUB_WORKSPACE" | tail -n 1 | tr -d ' '; }
+          required_kib=$((24 * 1024 * 1024))
+          # Only fixed SDK directories in the disposable image; no project data.
+          if (( $(available_kib) < required_kib )) && [[ -d /usr/local/lib/android/sdk ]]; then
+            [[ "$(realpath -e /usr/local/lib/android/sdk)" == /usr/local/lib/android/sdk ]]
+            [[ -d /usr/local/lib/android/sdk/platform-tools ]]
+            sudo rm -rf -- /usr/local/lib/android/sdk
+          fi
+          if (( $(available_kib) < required_kib )) && [[ -d /usr/share/dotnet ]]; then
+            [[ "$(realpath -e /usr/share/dotnet)" == /usr/share/dotnet ]]
+            [[ -x /usr/share/dotnet/dotnet && -d /usr/share/dotnet/sdk ]]
+            sudo rm -rf -- /usr/share/dotnet
+          fi
+          df -h "$GITHUB_WORKSPACE"
+          (( $(available_kib) >= required_kib ))
+      - name: Install pinned official elan
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            https://github.com/leanprover/elan/releases/download/v4.2.4/elan-x86_64-unknown-linux-gnu.tar.gz \
+            --output "$RUNNER_TEMP/elan.tar.gz"
+          echo "42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63  $RUNNER_TEMP/elan.tar.gz" | sha256sum --check
+          mkdir -p "$RUNNER_TEMP/elan-installer"
+          tar -xzf "$RUNNER_TEMP/elan.tar.gz" -C "$RUNNER_TEMP/elan-installer"
+          "$RUNNER_TEMP/elan-installer/elan-init" -y --default-toolchain none --no-modify-path
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore pinned build dependencies
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: cache
+        continue-on-error: true
+        with:
+          path: |
+            schnorr/vendor
+            schnorr/lean/.lake
+            schnorr/blueprint/.lake
+          key: schnorr-${{ runner.os }}-${{ hashFiles('schnorr/lean/lake-manifest.json', 'schnorr/blueprint/lake-manifest.json', 'schnorr/scripts/bootstrap.sh') }}-${{ hashFiles('schnorr/**/*.lean') }}
+          restore-keys: |
+            schnorr-${{ runner.os }}-${{ hashFiles('schnorr/lean/lake-manifest.json', 'schnorr/blueprint/lake-manifest.json', 'schnorr/scripts/bootstrap.sh') }}-
+      - name: Prepare independent dependencies
+        run: bash schnorr/scripts/bootstrap.sh
+      - name: Check Rust, extraction, Lean and axioms
+        run: bash schnorr/scripts/check.sh
+      - name: Build the separate editable Blueprint
+        working-directory: schnorr/blueprint
+        run: |
+          lake exe cache get
+          bash scripts/build.sh
+      - name: Save checked build cache
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        continue-on-error: true
+        with:
+          path: |
+            schnorr/vendor
+            schnorr/lean/.lake
+            schnorr/blueprint/.lake
+          key: ${{ steps.cache.outputs.cache-primary-key }}

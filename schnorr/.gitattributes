@@ -1,0 +1,2 @@
+# Preserve exact tool logs, including terminal progress and final blank lines.
+evidence/*.log -whitespace
