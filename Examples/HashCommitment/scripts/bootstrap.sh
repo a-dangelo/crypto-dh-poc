@@ -31,13 +31,35 @@ fi
 "$ROOT/scripts/check-toolchain.sh" runtime
 [[ "$MODE" == --runtime-only ]] && exit 0
 command -v opam >/dev/null || { echo 'Install OCaml/opam (OCaml 5.3.0) before full bootstrap.' >&2; exit 1; }
-(cd "$SRC" && make setup-charon)
+# Activate the selected switch in this process; workflow-step environments do
+# not persist CAML_LD_LIBRARY_PATH. Assignment separately preserves opam errors.
+OPAM_ENV=$(opam env --shell=bash --set-switch)
+eval "$OPAM_ENV"
+# Only the pinned Charon OCaml sources are needed for the Aeneas source build.
+# Upstream setup-charon also runs Rust tests and can mask their failures; the
+# matching Charon executables below instead come from a verified release.
+CHARON_REV=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["charon_revision"])' "$ROOT/patches/toolchain.json")
+if [[ ! -d "$SRC/charon/.git" ]]; then
+  git clone https://github.com/AeneasVerif/charon.git "$SRC/charon"
+  git -C "$SRC/charon" checkout --detach "$CHARON_REV"
+fi
+[[ "$(git -C "$SRC/charon" rev-parse HEAD)" == "$CHARON_REV" ]] || {
+  echo 'Existing Charon checkout does not match the pinned revision.' >&2
+  exit 1
+}
+(cd "$SRC/charon" && opam exec -- make charon-ml/src/CharonVersion.ml)
 opam install dune.3.17.2 -y --jobs="${BUILD_JOBS:-4}"
 opam pin add dune 3.17.2 -y --no-action
 opam install "$SRC/src" --deps-only -y --jobs="${BUILD_JOBS:-4}"
 (cd "$SRC/src" && opam exec -- dune build -j "${BUILD_JOBS:-4}" main.exe)
 mkdir -p "$SRC/bin"
-cp "$SRC/src/_build/default/main.exe" "$SRC/bin/aeneas"
+# Dune installs executables as mode 555. Replace the directory entry atomically
+# instead of opening an existing cached executable for writing.
+BINARY_TMP=$(mktemp "$SRC/bin/.aeneas-install.XXXXXX")
+trap 'rm -f "$BINARY_TMP"' EXIT
+install -m 755 "$SRC/src/_build/default/main.exe" "$BINARY_TMP"
+mv -f "$BINARY_TMP" "$SRC/bin/aeneas"
+trap - EXIT
 python3 - "$ROOT" <<'RECORD'
 import hashlib,json,pathlib,sys
 r=pathlib.Path(sys.argv[1]); lock=json.loads((r/'patches/toolchain.json').read_text())

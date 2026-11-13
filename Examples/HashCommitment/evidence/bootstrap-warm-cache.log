@@ -1,0 +1,17 @@
+Warm-cache bootstrap regression (cloud, Linux x86_64)
+Initial cached extractor mode: 555
+Initially unset: CAML_LD_LIBRARY_PATH OCAML_TOPLEVEL_PATH OCAMLLIB
+Selected OPAMROOT: existing cloud switch root
+Selected OPAMSWITCH: 5.3.0
+First run without OPAMNODEPEXTS: exited nonzero at opam dependency validation.
+Reason: cloud package-manager metadata lacks libgmp-dev/pkg-config/perl entries.
+Actual tools checked: /usr/bin/pkg-config, /usr/bin/perl; pkg-config gmp = 6.3.0.
+Second run: OPAMNODEPEXTS=true (test environment only; no script/CI bypass added).
+Opam dependency result: Nothing to do; no dependency changes required.
+Full bootstrap exit: 0
+Final extractor mode: 755 (new atomic installation; no chmod of cached binary).
+Runtime/source/patch/Charon/extractor identity checks: passed.
+check-extraction.sh rerun: exit 0; generated output unchanged.
+Fresh/reused/branch and duplicate/unused opaque-call regressions: passed.
+No Lean theorem, runtime patch, or generated source changed by this fix.
+No proof build or shared-documentation build rerun for this bootstrap-only change.

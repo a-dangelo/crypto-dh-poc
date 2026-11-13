@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "scope": "Endpoint axiom audit in the common book runtime; no extraction rerun.",
-  "standalone_manifest_sha256": "d9b27afeba176b6d15b3df5346ed3395fcf92f20748b531423ab642752f68328",
+  "standalone_manifest_sha256": "d09232c364367b253233cd2a9fc719262713263767d57e5eb282e4aaff00a26d",
   "aeneas_base": "de16f3cf877976e966906dc890f63dcb418884fa",
   "runtime_files": {
     "Aeneas/Std/Primitives.lean": "42335035e737e1bde57e6f38ec3bdaf0a8598377c5afbb9ce97d8d83b543caa1",

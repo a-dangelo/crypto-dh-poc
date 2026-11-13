@@ -21,7 +21,7 @@
     "lean/HashCommitment/RngComposition.lean": "d27cbb96924fa1f25fcc4d4aaf95a08c3f1121b290a8710be2168b6fcb8802a7",
     "lean/HashCommitment/Security.lean": "b9a577b15238c5bce6f69c79d304ed8deee6db874ce93a0382a1918d4abae7e0",
     "scripts/audit.sh": "23f5a3d204fc7083f00ddf1fa76ea289704a834f3e20abbab084bfc39b443bcd",
-    "scripts/bootstrap.sh": "119270f72317ebe7bb032cc0bf35e6a5375eb8524d5fb0a3acfa5f89c19c8b3b",
+    "scripts/bootstrap.sh": "a660d65c54c1ca5108bd7e3a8ebd6bc9f4fe86525178cfdf08858dcb423349b2",
     "scripts/check-extraction-regression.py": "2f963cced3cf33282350e868e25ec61a0baa0efdca6a8cd32b56b5b2122b8e48",
     "scripts/check-extraction.sh": "8fd1d07291c2cc806916d1c34a9326dce078f2325e24e849d14e27a8f4b32d76",
     "scripts/check-toolchain.sh": "738a9c1a70ba06bf0edec1349a609add0990347b6c824461948cf48ba3e8edd6",
@@ -35,6 +35,7 @@
     "patches/aeneas-probabilistic.patch": "55dc8f6398d513a5b1826b0936f4359c19b225a9182990467aed363c0971d58e",
     "patches/toolchain.json": "050a539cc740ca8cb8f4d9674e8acba2302ebdf3f476bc4cba77453707382072",
     "evidence/axioms.log": "7fdcc04bf0edabad866a01d7b26923a89d30a55f1c4c889e57d3dad9ebf7e17b",
+    "evidence/bootstrap-warm-cache.log": "a32d5bdfa2fcd494069ff113539fe10739f587109ceb96fb35f50f11a527e7a6",
     "evidence/extraction-regression.log": "5138cf9bd50eec53212f7d38f0133c6f08becf6c677aeb6ae3472162002ca11b",
     "evidence/extraction.log": "5904477e8f3aa18aedc6cea87cae94f69680cc19ffd493c142d0992c055adbbb",
     "evidence/extractor-build.log": "ec8518f92eb45b0c4e9d76f3b4d70ad1398f9acef5f94aedc212bd88616e8101",
@@ -55,6 +56,6 @@
     "lean/lake-manifest.json": "1ac49b312a7da1bd3ac9f8d410797ae9428d7582abd5ad85409905b04dfc3013",
     "lean/AxiomAudit.lean": "5ac33777184e61fbfeefb4734d6c578d80fea563fd0c5703b70c4557c5c375e2",
     "lean/HashCommitment.lean": "1c273ecf8aa7b6f744a32ddc0db018343676cdda484e20022fdc46a6ad789089",
-    "vendor/aeneas/.hash-commitment-build.json": "319dd6e3c106771a69f6f6dea4826d100b839c1f85a17e62c2afaf01ed9f0c51"
+    "vendor/aeneas/.hash-commitment-build.json": "22ba8780158e0aedeae36e7f2766c290468657cbcc45fcbe8684f8f341ac4085"
   }
 }
