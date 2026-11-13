@@ -66,6 +66,8 @@ for page in SITE.rglob('*.html'):
         href = html.unescape(re.search(r'href="([^"]+)"',tag)[1])
         name = html.unescape(re.search(r'data-declaration="([^"]+)"',tag)[1])
         base_href = href.split('#',1)[0]
+        if base_href.startswith('source/HashCommitment/'):
+            return tag  # This chapter resolves its own generated/runtime source namespace.
         example_root = ROOT.parent / 'Schnorr' if base_href.startswith('source/Schnorr/') else ROOT
         local_href = base_href.replace('source/DH/', 'source/').replace('source/Schnorr/', 'source/')
         source_file = declaration_source(local_href, example_root)

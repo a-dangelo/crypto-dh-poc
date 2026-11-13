@@ -1,0 +1,8 @@
+fresh_draws: 2 extracted fill_bytes call(s) retained
+reused_draw: 1 extracted fill_bytes call(s) retained
+branch_draw: 1 extracted fill_bytes call(s) retained
+duplicate_opaque: 2 monadic sample call(s) in probabilistic mode
+duplicate_opaque: 1 monadic sample call(s) in ordinary mode
+unused_opaque: 2 sample call(s) in probabilistic mode
+unused_opaque: 1 sample call(s) in ordinary mode
+Duplicate-call and unused-effect regressions passed.

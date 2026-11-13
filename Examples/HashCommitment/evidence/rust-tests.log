@@ -1,0 +1,16 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running unittests src/lib.rs (target/debug/build/hash_commitment/ef35f40726e2a988/out/hash_commitment-ef35f40726e2a988)
+
+running 3 tests
+test tests::branch_all_bytes ... ok
+test tests::commit_then_verify ... ok
+test tests::sampling_call_structure ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests hash_commitment
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

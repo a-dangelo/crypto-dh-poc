@@ -1,0 +1,13 @@
+[package]
+name = "hash_commitment"
+version = "0.1.0"
+edition = "2021"
+description = "Hash-based commitment scheme (case study for Aeneas + VCVio bridging)"
+publish = false
+
+[dependencies]
+# Pinned exactly: the Lean bridge is stated against this trait shape.
+rand_core = { version = "=0.9.5", default-features = false }
+
+[workspace]
+

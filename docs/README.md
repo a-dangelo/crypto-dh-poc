@@ -1,8 +1,10 @@
 # Verified cryptography examples
 
-One VersoBlueprint book, with Diffie–Hellman first and interactive Schnorr second.
+One VersoBlueprint book, with chapters for Diffie–Hellman, interactive Schnorr,
+and hash commitment.
 The book owns navigation, cross references, and a combined dependency graph.
-Source packages stay separate in `../Examples/DH` and `../Examples/Schnorr`.
+Source packages stay separate in `../Examples/DH`, `../Examples/Schnorr`, and
+`../Examples/HashCommitment`.
 
 ## Build
 
@@ -21,18 +23,27 @@ full source and evidence links target the exact repository revision.
 The export does not itself deploy anything.
 
 The build verifies the original DH snapshot, replays the current DH proofs and axiom
-closures, compiles both chapters, audits Schnorr in the shared Lake environment,
+closures, compiles all chapters, audits the examples in the shared Lake environment,
 and checks source excerpts, local links and hovers. A fresh validated DH replay may
 be reused by setting `DH_REPLAY_DIRECTORY` to its evidence directory.
+
+Fresh shared-runtime DH and Schnorr audit logs are kept in
+`docs/_out/shared-runtime-audit/`, separately from historical evidence.
+The new example records its shared audit in
+`Examples/HashCommitment/evidence/shared-audit.json`. This record references the
+standalone manifest without claiming that the documentation build reran extraction.
 
 ## Runtime boundary
 
 The independent examples retain their own extraction pins. Schnorr extraction used
 Aeneas `nightly-2026.11.08-c5eb4a2`; DH uses commit
-`de16f3cf877976e966906dc890f63dcb418884fa`. This shared book explicitly uses the latter
-Lean runtime. Both packages use the same VCVio and Mathlib pins. A successful book
-build checks the Schnorr proofs again under that shared runtime; it is not a claim
-that two full Aeneas releases are identical or that all extraction backends agree.
+`de16f3cf877976e966906dc890f63dcb418884fa`. This shared book uses that base with the hash-commitment example’s explicit
+probabilistic-effect patch, from `Examples/HashCommitment/vendor/aeneas`.
+The independent DH and Schnorr pins and historical evidence remain unchanged.
+The shared build checks compatibility with the patched runtime; it does not
+assert that different Aeneas releases or extraction backends are equivalent.
+The hash-commitment chapter distinguishes generated code, the ideal RNG
+interpretation, and the hash-refinement assumption.
 
 ## Add a chapter
 

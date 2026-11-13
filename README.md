@@ -2,7 +2,7 @@
 
 Small Rust programs, Aeneas extraction, and Lean security proofs connected to
 VCVio. The [shared verification blueprint](https://a-dangelo.com/crypto-dh-poc/)
-contains one chapter per example, with Diffie–Hellman first and Schnorr second.
+contains one chapter per example, with Diffie–Hellman, interactive Schnorr, and hash commitment in separate chapters.
 
 ## Examples
 
@@ -13,6 +13,11 @@ contains one chapter per example, with Diffie–Hellman first and Schnorr second
   control flow, conditional arithmetic refinement, special soundness and perfect
   honest-verifier zero knowledge. The stateful RNG interpretation is proved
   separately; no concrete RNG distribution or dalek arithmetic theorem is claimed.
+
+- [Hash commitment](Examples/HashCommitment/README.md): generic Rust randomness,
+  an explicit ideal-entropy interpretation, and implementation-to-model
+  correspondence. The binding bound reduces to keyed collision resistance; it
+  does not establish hiding or verify an operating-system RNG.
 
 Each example keeps its code, proofs, dependency pins, scripts and evidence under
 its own directory. Shared book sources, rendering and website checks live in

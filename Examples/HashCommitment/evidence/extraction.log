@@ -1,0 +1,14 @@
+Verified Aeneas source/patch/runtime/binary
+   Compiling hash_commitment v0.1.0 (/workspace/scratch/689300220974/hash-commitment-repo/Examples/HashCommitment/rust)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.11s
+[[92mInfo[39m ] Imported: /workspace/scratch/689300220974/hash-commitment-repo/Examples/HashCommitment/evidence/hash_commitment.llbc
+[?25lApplied prepasses:  [--------------------------------------------------]  0/33 ⠋Applied prepasses:  [#-------------------------------------------------]  1/33 ⠋Applied prepasses:  [##############################--------------------] 20/33 ⠋Applied prepasses:  [##################################################] 33/33 ✔️
+[?25h[?25lTranslated globals:  [---------------------------------------------------] 0/3 ⠋Translated globals:  [###################################################] 3/3 ✔️
+[?25h[?25lTranslated opaque functions:  [----------------------------------------]  0/13 ⠋Translated opaque functions:  [########################################] 13/13 ✔️
+[?25h[?25lTranslated transparent functions:  [-----------------------------------]  0/11 ⠋Translated transparent functions:  [###--------------------------------]  1/11 ⠙Translated transparent functions:  [###################----------------]  6/11 ⠙Translated transparent functions:  [###################################] 11/11 ⠹Translated transparent functions:  [###################################] 11/11 ✔️
+[?25h[?25lTranslated trait declarations:  [--------------------------------------]  0/10 ⠋Translated trait declarations:  [##############################--------]  8/10 ✔️
+[?25h[?25lTranslated trait impls:  [---------------------------------------------]  0/10 ⠋Translated trait impls:  [##################---------------------------]  4/10 ✔️
+[?25h[?25lPost-processed translated opaque functions:  [-------------------------]  0/13 ⠋Post-processed translated opaque functions:  [#------------------------]  1/13 ⠋Post-processed translated opaque functions:  [#########################] 13/13 ✔️
+[?25h[?25lPost-processed translated transparent functions:  [--------------------]  0/11 ⠋Post-processed translated transparent functions:  [#-------------------]  1/11 ⠋Post-processed translated transparent functions:  [################----]  9/11 ⠋Post-processed translated transparent functions:  [####################] 11/11 ✔️
+[?25h[[92mInfo[39m ] Generated: /tmp/tmp.cCwOedlVLn/probabilistic/HashCommitment.lean
+[[92mInfo[39m ] Total execution time: 0.484940 seconds

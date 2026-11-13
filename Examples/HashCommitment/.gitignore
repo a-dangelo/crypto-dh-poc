@@ -1,0 +1,5 @@
+/vendor/
+/rust/target/
+/lean/.lake/
+/evidence/*.llbc
+/scripts/__pycache__/

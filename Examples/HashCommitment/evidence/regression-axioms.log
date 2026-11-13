@@ -1,0 +1,8 @@
+'HashCommitment.Regressions.extracted_fresh' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HashCommitment.Regressions.extracted_reused' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HashCommitment.Regressions.extracted_branch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HashCommitment.Regressions.extracted_empty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HashCommitment.Regressions.extracted_fresh_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HashCommitment.Regressions.extracted_reused_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HashCommitment.Regressions.extracted_branch_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HashCommitment.Regressions.extracted_empty_probability' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,23 @@
+{
+  "repository": "https://github.com/Beneficial-AI-Foundation/toy-bridge",
+  "revision": "5212ebba2f937765c7ed4d1fb52f3e46e10dcea9",
+  "author": "Marco Stronati",
+  "files": {
+    "rust/src/lib.rs": {
+      "git_blob": "8040e47dccfa915f8fdbd52cd3b797346285d1a2",
+      "url": "https://github.com/Beneficial-AI-Foundation/toy-bridge/blob/5212ebba2f937765c7ed4d1fb52f3e46e10dcea9/rust/src/lib.rs"
+    },
+    "rust/Cargo.toml": {
+      "git_blob": "a4458c856c8affb875be619752155fecce7fb826",
+      "url": "https://github.com/Beneficial-AI-Foundation/toy-bridge/blob/5212ebba2f937765c7ed4d1fb52f3e46e10dcea9/rust/Cargo.toml"
+    },
+    "rust/Cargo.lock": {
+      "git_blob": "77db3321f545081a0ff2311574ab1b2ab808dd49",
+      "url": "https://github.com/Beneficial-AI-Foundation/toy-bridge/blob/5212ebba2f937765c7ed4d1fb52f3e46e10dcea9/rust/Cargo.lock"
+    },
+    "lean/Extracted/HashCommitment.lean": {
+      "git_blob": "44b2935a260718e428cb248dcbe282b9992d9dc7",
+      "url": "https://github.com/Beneficial-AI-Foundation/toy-bridge/blob/5212ebba2f937765c7ed4d1fb52f3e46e10dcea9/lean/Extracted/HashCommitment.lean"
+    }
+  }
+}

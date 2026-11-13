@@ -1,0 +1,156 @@
+diff --git a/backends/lean/Aeneas/Std/Primitives.lean b/backends/lean/Aeneas/Std/Primitives.lean
+index 2ea40410..a4834150 100644
+--- a/backends/lean/Aeneas/Std/Primitives.lean
++++ b/backends/lean/Aeneas/Std/Primitives.lean
+@@ -50,11 +50,13 @@ open Error
+ 
+ inductive RustEffect.Input : Type where
+ | fail : Error → RustEffect.Input
++| uniform : Nat → RustEffect.Input
+ 
+ @[implicit_reducible]
+ def RustEffect.Output (i : RustEffect.Input) : Type :=
+   match i with
+   | .fail _ => PEmpty
++  | .uniform n => Fin (n + 1)
+ 
+ @[implicit_reducible]
+ def RustEffect : Effect := {
+@@ -73,6 +75,10 @@ def Result.ok {α} (a : α) : Result α := .ret a
+ 
+ def Result.vis {α} (eff : RustEffect.Input) (k : RustEffect.Output eff → Result α) : Result α := ITree.vis eff k
+ 
++/-- Request one uniform choice. Probability semantics are supplied outside the runtime. -/
++def Result.uniform (n : Nat) : Result (Fin (n + 1)) :=
++  Result.vis (.uniform n) Result.ok
++
+ /- `Result.fail` is deliberately kept opaque: we do *not* mark it with `simp`/`grind` so that it
+    never gets unfolded to a `Result.vis`. All the reasoning about `fail` should go through the
+    dedicated lemmas below (`bind_fail`, `spec_fail`, ...). -/
+@@ -131,6 +137,7 @@ instance Result.reprInst {α : Type u} [Repr α] : Repr (Result α) where
+     | .ok a => "Aeneas.Std.Result.ok " ++ repr a
+     | .div => "Aeneas.Std.Result.div"
+     | .vis (.fail e) _ => "Aeneas.Std.Result.fail " ++ repr e
++    | .vis (.uniform n) _ => "Aeneas.Std.Result.uniform " ++ repr n
+ 
+ /-!
+ `Result` not being an inductive type it has no built-in constructor facts that grind
+diff --git a/backends/lean/Aeneas/Std/WP.lean b/backends/lean/Aeneas/Std/WP.lean
+index 25697abc..9fc52fc9 100644
+--- a/backends/lean/Aeneas/Std/WP.lean
++++ b/backends/lean/Aeneas/Std/WP.lean
+@@ -35,9 +35,7 @@ unseal Result
+ @[reducible]
+ def effectWP : EffectWP RustEffect where
+   State := Unit
+-  wp effect _ _ :=
+-    match effect with
+-    | .fail _ => False
++  wp _ _ _ := False
+ 
+ instance : EffectWP.Monotonic effectWP where
+   wp_monotonic _ := False.elim
+@@ -50,7 +48,7 @@ instance : EffectWP.Conjunctive effectWP where
+ 
+ instance : EffectWP.ExcludedMiracle effectWP where
+   wp_excludedMiracle := by
+-    rintro ⟨⟩ _ h
++    intro _ _ h
+     exact h
+ 
+ def spec (m : Result α) (p : Post α) : Prop :=
+@@ -696,6 +694,8 @@ instance Result.instWP : WP Result.{u} (.except (ULift Error) (.except PUnit (.e
+     conjunctiveRaw Q₁ Q₂ := by
+       apply SPred.bientails.of_eq
+       cases x <;> simp
++      rename_i i k
++      cases i <;> rfl
+   }
+ set_option match.ignoreUnusedAlts false
+ 
+@@ -709,23 +709,25 @@ instance Result.instWPMonad : WPMonad Result (.except (ULift Error) (.except PUn
+     · cbv
+     · simp
+       rename_i i k
+-      cases i; cbv
++      cases i <;> cbv
+     · cbv
+ 
+ 
+ theorem Result.of_wp {α : Type u} {x : Result α} (P : Result α → Prop) :
+     (⊢ₛ wp⟦x⟧ (fun a => ⌜P (.ok a)⌝,
+                   fun e => ⌜P (.fail e.down)⌝,
+-                  fun _ => ⌜False⌝, -- unreachable: `RustEffect` currently only has the `fail` effect.
++                  fun _ => ⌜False⌝, -- the deterministic specification rejects random effects.
+                   fun .unit => ⌜P .div⌝, .unit)) → P x := by
+     intro hspec
+     simp only [WP.wp, PredTrans.apply] at hspec
+     split at hspec <;> simp_all
+     rename_i x eff heq a
+-    cases eff
+-    have : heq = PEmpty.elim := by funext; contradiction
+-    simp [*] at *
+-    try trivial
++    cases eff with
++    | fail e =>
++      have : heq = PEmpty.elim := by funext; contradiction
++      simp [*] at *
++      exact hspec
++    | uniform n => simp_all
+ 
+ 
+ /-- Lift an Aeneas step spec to an mvcgen-compatible `Triple`. -/
+diff --git a/src/Config.ml b/src/Config.ml
+index 87e3469c..ff0f345a 100644
+--- a/src/Config.ml
++++ b/src/Config.ml
+@@ -625,3 +625,6 @@ let max_recdepth = ref 2048
+ (** If [false], evaluate [drop(p)] as [p := bottom]. Otherwise, evaluate it as a
+     no-op (which means that we do not borrow-check the drops). *)
+ let drop_as_no_op = ref true
++
++(** Preserve distinct monadic calls for effectful probabilistic interpretations. *)
++let probabilistic = ref false
+diff --git a/src/Main.ml b/src/Main.ml
+index 3ba4be58..f906eef7 100644
+--- a/src/Main.ml
++++ b/src/Main.ml
+@@ -101,6 +101,8 @@ let () =
+         Arg.String set_namespace,
+         " Set the namespace of the definitions in the pure model" );
+       ("-dest", Arg.Set_string dest_dir, " Specify the output directory");
++      ("-probabilistic", Arg.Set probabilistic,
++        " Preserve monadic call multiplicity for probabilistic interpretations");
+       ( "-subdir",
+         Arg.String set_subdir,
+         " Extract the files in a sub-folder; this option has an impact on the \
+diff --git a/src/pure/PureMicroPasses.ml b/src/pure/PureMicroPasses.ml
+index e2f2c4a0..edaaaac3 100644
+--- a/src/pure/PureMicroPasses.ml
++++ b/src/pure/PureMicroPasses.ml
+@@ -56,7 +56,7 @@ let passes :
+     (* Simplify some traits like [Clone::clone] for type [Box] *)
+     (None, "simplify_trait_calls", simplify_trait_calls);
+     (* Remove the duplicated function calls *)
+-    (None, "simplify_duplicate_calls", simplify_duplicate_calls);
++    (Some (fun _ -> not !Config.probabilistic), "simplify_duplicate_calls", simplify_duplicate_calls);
+     (* Merge let bindings which bind an expression then decompose a tuple *)
+     ( Some (fun _ -> !Config.merge_let_app_decompose_tuple),
+       "merge_let_app_then_decompose_tuple",
+diff --git a/src/pure/PureMicroPassesGeneral.ml b/src/pure/PureMicroPassesGeneral.ml
+index b85bb67f..f588cfee 100644
+--- a/src/pure/PureMicroPassesGeneral.ml
++++ b/src/pure/PureMicroPassesGeneral.ml
+@@ -1208,10 +1208,10 @@ let filter_useless (ctx : ctx) (def : fun_decl) : fun_decl =
+               if not monadic then
+                 (* Not a monadic let-binding: simple case *)
+                 (e.e, used)
+-              else if texpr_cannot_fail re then
++              else if (not !Config.probabilistic) && texpr_cannot_fail re then
+                 (* Monadic let-binding that always succeeds: safe to remove *)
+                 (e.e, used)
+-              else if texpr_failure_subsumed_by_cont re e then
++              else if (not !Config.probabilistic) && texpr_failure_subsumed_by_cont re e then
+                 (* Monadic let-binding whose outputs are unused ([all_dummies])
+                    and whose failure is subsumed by the expression which
+                    immediately follows it: safe to remove *)

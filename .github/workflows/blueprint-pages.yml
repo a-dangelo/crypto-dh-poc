@@ -18,6 +18,9 @@ jobs:
   schnorr-check:
     uses: ./.github/workflows/schnorr.yml
 
+  hash-commitment-check:
+    uses: ./.github/workflows/hash-commitment.yml
+
   build:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
@@ -90,6 +93,7 @@ jobs:
           key: examples-blueprint-${{ runner.os }}-${{ hashFiles('docs/lean-toolchain', 'Examples/DH/concrete/lake-manifest.json', 'docs/lake-manifest.json', 'docs/scripts/bootstrap.sh', 'docs/DH/scripts/bootstrap-docs.sh') }}-${{ hashFiles('Examples/**/*.lean', 'docs/**/*.lean') }}
           restore-keys: |
             examples-blueprint-${{ runner.os }}-${{ hashFiles('docs/lean-toolchain', 'Examples/DH/concrete/lake-manifest.json', 'docs/lake-manifest.json', 'docs/scripts/bootstrap.sh', 'docs/DH/scripts/bootstrap-docs.sh') }}-
+            examples-blueprint-${{ runner.os }}-
 
       # Cache versions include paths. Restore the pre-Examples layout separately.
       - name: Restore pre-reorganization DH cache when needed
@@ -134,6 +138,20 @@ jobs:
               print(f'Restored {source} to {destination}')
           # Bootstrap below verifies dependency origins, revisions and source hashes.
 
+      # Keep the old cache path list intact: GitHub versions caches by path list.
+      - name: Restore hash-commitment runtime and chapter cache
+        id: hash-cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        continue-on-error: true
+        with:
+          path: |
+            Examples/HashCommitment/vendor
+            Examples/HashCommitment/lean/.lake
+            docs/HashCommitment/.lake
+          key: hash-commitment-blueprint-${{ runner.os }}-${{ hashFiles('Examples/HashCommitment/patches/toolchain.json', 'Examples/HashCommitment/patches/**', 'Examples/HashCommitment/scripts/bootstrap.sh', 'docs/HashCommitment/lake-manifest.json') }}-${{ hashFiles('Examples/HashCommitment/**/*.lean', 'docs/HashCommitment/**/*.lean') }}
+          restore-keys: |
+            hash-commitment-blueprint-${{ runner.os }}-${{ hashFiles('Examples/HashCommitment/patches/toolchain.json', 'Examples/HashCommitment/patches/**', 'Examples/HashCommitment/scripts/bootstrap.sh', 'docs/HashCommitment/lake-manifest.json') }}-
+
       - name: Bootstrap pinned documentation dependencies
         run: bash docs/scripts/bootstrap.sh
 
@@ -148,7 +166,7 @@ jobs:
 
       - name: Compile proof and documentation targets
         run: |
-          (cd docs && lake build ExamplesBlueprint Schnorr vbp)
+          (cd docs && lake build ExamplesBlueprint Schnorr HashCommitment vbp)
 
       - name: Save compiled targets before rendering
         if: steps.lean-cache.outputs.cache-hit != 'true'
@@ -165,6 +183,17 @@ jobs:
             docs/DH/.lake
             docs/Schnorr/.lake
           key: ${{ steps.lean-cache.outputs.cache-primary-key }}
+
+      - name: Save hash-commitment runtime and chapter cache
+        if: steps.hash-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        continue-on-error: true
+        with:
+          path: |
+            Examples/HashCommitment/vendor
+            Examples/HashCommitment/lean/.lake
+            docs/HashCommitment/.lake
+          key: ${{ steps.hash-cache.outputs.cache-primary-key }}
 
       - name: Build and validate editable Blueprint
         working-directory: docs
@@ -198,6 +227,18 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
+      - name: Keep shared-runtime audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: blueprint-shared-runtime-audit
+          path: |
+            docs/_out/shared-runtime-audit
+            Examples/HashCommitment/evidence/shared-audit.json
+            Examples/HashCommitment/evidence/blueprint-axioms.log
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Enforce publication boundary
         shell: python
         run: |
@@ -227,7 +268,7 @@ jobs:
 
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: [build, schnorr-check]
+    needs: [build, schnorr-check, hash-commitment-check]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:

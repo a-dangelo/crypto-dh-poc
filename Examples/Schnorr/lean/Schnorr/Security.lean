@@ -29,17 +29,19 @@ def observeMessages (c : S) (out : Result (schnorr_core.Messages P S)) :
 
 /-- Run the extracted commitment before sampling the challenge, then run the
 extracted response. A failed or divergent commitment remains a failed or divergent
-observation, rather than being replaced by a successful transcript. -/
+observation, rather than being replaced by a successful transcript. The primitive
+contract proves that commitment returns successfully; hence an effect branch is
+unreachable. This argument is independent of the runtime's effect vocabulary. -/
 def rustTranscript (sk : F) : ProbComp (Result (P × S × S)) := do
   let r ← $ᵗ F
-  match (schnorr_core.commit M.ops (M.scalar r)).match with
+  match h : (schnorr_core.commit M.ops (M.scalar r)).match with
   | .ok R => do
     let c ← $ᵗ F
     pure (do
       let z ← schnorr_core.respond M.ops (M.scalar sk) (M.scalar r) (M.scalar c)
       pure (R, M.scalar c, z))
   | .div => pure .div
-  | .vis (.fail e) _ => pure (.fail e)
+  | .vis _ _ => False.elim (by simp [commit_eq] at h)
 
 /-- The extracted batch helper under the same ideal independent samples. -/
 def batchTranscript (sk : F) : ProbComp (Result (P × S × S)) := do
@@ -53,8 +55,15 @@ omit [SampleableType G] in
 under the explicit primitive contracts. -/
 theorem rustTranscript_eq_batch (sk : F) :
     rustTranscript M sk = batchTranscript M sk := by
-  simp [rustTranscript, batchTranscript, commit_eq, respond_eq, messages_eq,
-    observeMessages]
+  unfold rustTranscript batchTranscript
+  congr 1
+  funext r
+  split
+  · simp_all [commit_eq, respond_eq, messages_eq, observeMessages]
+  · rename_i heq
+    simp [commit_eq] at heq
+  · rename_i eff k heq
+    simp [commit_eq] at heq
 
 /-- Encode a complete mathematical transcript as a successful native observation. -/
 def encodeTranscript (t : G × F × F) : Result (P × S × S) :=
@@ -71,8 +80,9 @@ def encodedSimulator (pk : G) : ProbComp (Result (P × S × S)) :=
 side runs the extracted Rust `commit` and `respond`, not a replacement mathematical prover. -/
 theorem rustTranscript_eq_encodedReal (pk : G) (sk : F) :
     rustTranscript M sk = encodedRealTranscript M pk sk := by
-  simp [rustTranscript, encodedRealTranscript, ChallengeVerifyProtocol.realTranscript,
-    Schnorr.sigma, monad_norm, commit_eq, respond_eq, encodeTranscript]
+  rw [rustTranscript_eq_batch]
+  simp [batchTranscript, encodedRealTranscript, ChallengeVerifyProtocol.realTranscript,
+    Schnorr.sigma, monad_norm, messages_eq, observeMessages, encodeTranscript]
   rfl
 
 /-- The actual extracted `messages` helper also realizes the encoded VCVio

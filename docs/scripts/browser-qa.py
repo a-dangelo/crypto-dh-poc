@@ -18,6 +18,9 @@ SCREENSHOTS = {
     'DH-session-in-Rust/index.html': 'dh',
     'Interactive-Schnorr-in-Rust/index.html': 'schnorr',
     'Interactive-Schnorr-in-Rust/Sampled-transcripts-and-perfect-HVZK/index.html': 'schnorr-hvzk',
+    'Hash-commitment-in-Rust/index.html': 'hash-commitment',
+    'Hash-commitment-in-Rust/Sampling-effect-and-ideal-RNG/index.html': 'hash-rng',
+    'Hash-commitment-in-Rust/Joint-commitment-law/index.html': 'hash-joint-law',
     'Dependency-Graph/index.html': 'graph',
 }
 

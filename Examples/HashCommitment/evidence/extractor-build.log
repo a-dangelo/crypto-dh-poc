@@ -1,0 +1,10 @@
+Aeneas base: de16f3cf877976e966906dc890f63dcb418884fa
+Patch SHA256: 55dc8f6398d513a5b1826b0936f4359c19b225a9182990467aed363c0971d58e
+OCaml: 5.3.0
+Dune: 3.17.2
+Command (from vendor/aeneas/src): opam exec --switch=5.3.0 -- dune build -j 4 main.exe
+Exit code: 0
+Binary: vendor/aeneas/bin/aeneas (copied from source build)
+Identity check: source revision, complete tracked diff digest, runtime files,
+Charon revision and binary hashes, and built extractor hash all match.
+Extractor SHA256: 728811dcad6b095da4ceace6f58c4d9a223a601dddf1cbbd8d2f8a6f4f8f9bc0

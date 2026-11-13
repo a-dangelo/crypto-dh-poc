@@ -1,0 +1,10 @@
+{
+  "extractor_release": "nightly-2026.10.30-de16f3c",
+  "release_archive_sha256": "0963dc77cab890de16b213b903091721961afca6303b9b0ea05ff8d76013f624",
+  "rust_source_sha256": "93f97ea18999db25266d48834b18a5a9612d5be07005eab8bac082f3915f0860",
+  "llbc_sha256": "2c2c096ea5a7082abf327c4938c7db057f649cb729b02824169ba8f4dc73b034",
+  "generated_file_sha256": "a319f05bd9d9eb9b8228ce6fa5887065ce74a9cd974a6e44549f88f4bbed2882",
+  "duplicate_opaque": "def duplicate_opaque\n  {E : Type _} (OpaqueEntropyInst : OpaqueEntropy E) :\n  Result (Std.U8 \u00d7 Std.U8)\n  := do\n  let first \u2190 OpaqueEntropyInst.sample\n  ok (first, first)",
+  "extractor": "patched extractor, ordinary mode (both passes enabled)",
+  "unused_opaque": "def unused_opaque\n  {E : Type _} (OpaqueEntropyInst : OpaqueEntropy E) : Result Std.U8 := do\n  OpaqueEntropyInst.sample"
+}

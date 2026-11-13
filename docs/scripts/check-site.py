@@ -3,6 +3,7 @@
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 import hashlib, json, sys
+from chapter_registry import CHAPTERS, TITLES, expected_panels
 DOC = Path(__file__).resolve().parents[1]
 REPO = DOC.parent
 SITE = DOC / '_out/site/html-multi'
@@ -30,20 +31,20 @@ for path, page in pages.items():
         if file.startswith(VCVIO_SOURCE_URL):
             target = REPO / 'Examples/DH/vendor/VCVio' / file.removeprefix(VCVIO_SOURCE_URL)
         else:
-            assert file.startswith(('source/DH/', 'source/Schnorr/')), link
+            assert file.startswith(tuple(f'source/{chapter}/' for chapter in CHAPTERS)), link
             target = SITE / file.removesuffix('.html')
         assert source in target.read_text(), ('Declaration differs from source', link)
         assert hover > 0, ('Missing declaration hovers', link)
         hovers += hover
     cards += page.cards
-for example in ['DH', 'Schnorr']:
+for example in CHAPTERS:
     manifest = json.loads((SITE / f'source/{example}/manifest.json').read_text())
     entries = manifest['files'] if isinstance(manifest, dict) else manifest
     for entry in entries:
         assert hashlib.sha256((SITE / f'source/{example}' / entry['path']).read_bytes()).hexdigest() == entry['sha256']
 text = '\n'.join(p.read_text() for p in pages if 'source' not in p.relative_to(SITE).parts)
-assert 'DH session in Rust' in text and 'Interactive Schnorr in Rust' in text
+assert all(title in text for title in TITLES)
 assert 'katex-error' not in text
-assert cards == 48, cards
+assert cards == expected_panels(), cards
 assert 'tactic-state' in text
 print(json.dumps({'status':'passed', 'pages':len(pages), 'links':links, 'declaration_panels':cards, 'source_hovers':hovers}))

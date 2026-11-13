@@ -2,6 +2,7 @@
 """Export the shared book, keeping full source/evidence in the repository."""
 from pathlib import Path
 import argparse, html, json, re, shutil
+from chapter_registry import expected_panels
 DOC = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--repository-revision', required=True)
@@ -37,7 +38,7 @@ def repository_url(match):
 
 def rewrite(text):
     text = re.sub(r'(<a\b[^>]*href="source/DH/source-snapshot\.zip"[^>]*>)Download source(</a>)', r'\1Browse source\2', text)
-    text = re.sub(r'(?<![\w:/])source/(?:DH|Schnorr)/[A-Za-z0-9_./#-]+', repository_url, text)
+    text = re.sub(r'(?<![\w:/])source/(?:DH|Schnorr|HashCommitment)/[A-Za-z0-9_./#-]+', repository_url, text)
     text = text.replace(str(DOC.parent) + '/', '')
     return re.sub(r'\b(href|src)="/(?!/)', r'\1="', text)
 def walk(value):
@@ -84,7 +85,7 @@ for path, page in pages.items():
         assert hover > 0, link
         hovers += hover
     cards += page.cards
-assert cards == 48, cards
+assert cards == expected_panels(), cards
 assert not (dest / 'source').exists()
 for path in dest.rglob('*'):
     if path.is_file():

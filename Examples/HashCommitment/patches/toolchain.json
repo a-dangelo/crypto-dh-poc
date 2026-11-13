@@ -1,0 +1,16 @@
+{
+  "aeneas_revision": "de16f3cf877976e966906dc890f63dcb418884fa",
+  "charon_revision": "373d84044d80f6eb44285c2c349bae1453f5b6ca",
+  "lean_toolchain": "leanprover/lean4:v4.35.0",
+  "patch_sha256": "55dc8f6398d513a5b1826b0936f4359c19b225a9182990467aed363c0971d58e",
+  "runtime_files": {
+    "Aeneas/Std/Primitives.lean": "42335035e737e1bde57e6f38ec3bdaf0a8598377c5afbb9ce97d8d83b543caa1",
+    "Aeneas/Std/WP.lean": "472ea39d9166b37fa3357bd189bba3ac332bce4706d9f745bf5552302918696c"
+  },
+  "charon_binaries": {
+    "charon": "eef3bcb4557b155fe4a91cddc1b1a10386c581c1432d1e8c1240aaa30b172166",
+    "charon-driver": "5672aaa659988f4cbf7fb0295ff87595dd8723b8ce028cbd15686d09dd8e5afc"
+  },
+  "dune_version": "3.17.2",
+  "vcvio_revision": "88efe9715a9fa9e7d89635c38cf70259836766c2"
+}
