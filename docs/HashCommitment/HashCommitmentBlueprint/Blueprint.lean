@@ -10,12 +10,14 @@ open Verso.Genre Verso.Genre.Manual Informal
 #doc (Manual) "Hash commitment in Rust" =>
 
 This example separates a generic Rust program from the probability law used to
-analyse it. The program receives a mutable RNG. An ideal interpretation gives
-its sampling operations a probability distribution. The bridge relates this
+analyse it. The program receives a mutable RNG. An ideal interpretation assigns
+a probability distribution to its sampling operations. The bridge relates this
 interpretation of the generated Lean code to the commitment model.
 
-The Rust scheme and bridge start from
-[Marco Stronati’s toy-bridge](https://github.com/Beneficial-AI-Foundation/toy-bridge/tree/5212ebba2f937765c7ed4d1fb52f3e46e10dcea9).
+We thank the Beneficial AI Foundation (BAIF) team for its work on protocol
+bridging and probabilistic effects in Aeneas.
+The Rust scheme and bridge start from the team's
+[toy-bridge experiment](https://github.com/Beneficial-AI-Foundation/toy-bridge/tree/5212ebba2f937765c7ed4d1fb52f3e46e10dcea9).
 The model uses VCVio’s existing
 [commitment-scheme interface and games](https://github.com/Verified-zkEVM/VCVio/blob/88efe9715a9fa9e7d89635c38cf70259836766c2/VCVio/CryptoFoundations/CommitmentScheme.lean).
 
@@ -170,7 +172,7 @@ handle. It is hand-written. Its type alone does not connect it to Rust.
 ::::theorem "hc_representation" (lean := "HashCommitment.Bridge.commit_representation") (uses := "hc_extracted_commit, hc_ideal_rng, hc_hash_refines, hc_witness")
 :::HashCommitmentBlueprint.pair HashCommitment.Bridge.commit_representation -docstrings
 Under hash refinement, the complete generated commitment term equals the
-embedding of the finite witness. This equality is the implementation connection.
+embedding of the finite witness. This equality connects the implementation to the witness.
 It includes the generated array/slice write-back.
 :::
 ::::
@@ -185,7 +187,7 @@ Thirty-two byte-sampling events and a return node give a sufficient bound of 33.
 :::HashCommitmentBlueprint.pair HashCommitment.Bridge.commit_uniform_joint_law -docstrings
 Interpretation starts from the actual generated effect tree. The right-hand side
 samples a uniform 32-byte opening and returns the digest, encoded opening and
-unit handle together. At fuel at least 33, failure, divergence and cutoff have
+unit handle together. With fuel at least 33, failure, divergence and cutoff have
 zero probability.
 :::
 ::::
@@ -193,7 +195,7 @@ zero probability.
 # Correctness and composition
 
 Correctness asks whether an honestly generated commitment verifies. A composed
-experiment additionally passes the generated result to an observer or
+experiment passes the generated result to an observer or
 continuation. Its correspondence must therefore use the full generated
 commitment law, rather than only the deterministic verifier equation.
 
@@ -281,14 +283,14 @@ collision-finding advantage.
 The [source package](source/HashCommitment/README.md.html) records the Rust and
 dependency pins, [toolchain identity](source/HashCommitment/patches/toolchain.json.html),
 [Aeneas patch](source/HashCommitment/patches/aeneas-probabilistic.patch.html), generated
-files and reproduction commands. Generated files are regenerated into a temporary
-directory and compared with the checked-in files. The extraction mode must match
+files and reproduction commands. The extraction check regenerates these files in a
+temporary directory and compares them with the checked-in files. The extraction mode must match
 the patched Lean backend.
 
 The trust boundary includes the Rust-to-Lean translation, the ideal entropy
 interpretation and the abstract hash interface. A proof under this interface does
 not verify a concrete operating-system RNG or a concrete hash implementation.
-The shared book uses the patched runtime explicitly; the independent DH and
+The shared book uses the patched runtime explicitly. The independent DH and
 Schnorr extraction pins and historical evidence remain unchanged.
 
 The extraction regressions distinguish fresh sampling from reuse. They interpret
