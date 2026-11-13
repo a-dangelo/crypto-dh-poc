@@ -32,9 +32,9 @@ The caller supplies `&mut R`, with `R: RngCore + CryptoRng`. Commitment generati
 fills a 32-byte opening and computes the keyed hash of the message and opening. Verification
 recomputes that hash. The opening is returned with the commitment.
 
-The generated code retains the generic `fill_bytes` call. It does not replace
-the Rust RNG argument with a pre-sampled tape. This distinction separates
-extraction from the choice of a probabilistic interpretation.
+The generated code retains the generic `fill_bytes` call and the Rust RNG
+argument. It introduces no pre-sampled tape. We choose the probabilistic
+interpretation after extraction.
 
 ::::definition "hc_extracted_commit" (lean := "HashCommitment.Extracted.commit")
 :::HashCommitmentBlueprint.pair HashCommitment.Extracted.commit -docstrings
@@ -115,7 +115,7 @@ contents therefore do not affect the result.
 
 ::::theorem "hc_sequential_bytes" (lean := "HashCommitment.twoFills_interpret") (uses := "hc_ideal_rng")
 :::HashCommitmentBlueprint.pair HashCommitment.twoFills_interpret -docstrings
-Two actual `fill_bytes` calls have the product of their uniform slice laws.
+Two successive `fill_bytes` calls have the product of their uniform slice laws.
 The second call does not reuse the first call’s samples, even though both use
 the same unit handle.
 :::
@@ -129,7 +129,7 @@ An empty request returns the empty buffer without drawing randomness.
 
 ::::theorem "hc_fill_law" (lean := "HashCommitment.fill_interpret") (uses := "hc_ideal_rng, hc_interpret")
 :::HashCommitmentBlueprint.pair HashCommitment.fill_interpret -docstrings
-With sufficient fuel, the actual ideal `fill_bytes` result has the uniform
+With sufficient fuel, the ideal interpretation of `fill_bytes` has the uniform
 byte-vector law, preserves the unit handle and returns the entire replaced slice.
 :::
 ::::
@@ -143,8 +143,7 @@ agrees with interpretation of that tree once the fuel reaches its depth.
 
 ::::theorem "hc_stability" (lean := "HashCommitment.Probability.Program.interpret_stable") (uses := "hc_adequacy")
 :::HashCommitmentBlueprint.pair HashCommitment.Probability.Program.interpret_stable -docstrings
-Increasing sufficient fuel does not change the distribution. The result is
-therefore independent of an arbitrary larger interpreter bound.
+Once the fuel is sufficient, increasing it does not change the distribution.
 :::
 ::::
 
@@ -172,8 +171,7 @@ handle. It is hand-written. Its type alone does not connect it to Rust.
 ::::theorem "hc_representation" (lean := "HashCommitment.Bridge.commit_representation") (uses := "hc_extracted_commit, hc_ideal_rng, hc_hash_refines, hc_witness")
 :::HashCommitmentBlueprint.pair HashCommitment.Bridge.commit_representation -docstrings
 Under hash refinement, the complete generated commitment term equals the
-embedding of the finite witness. This equality connects the implementation to the witness.
-It includes the generated array/slice write-back.
+embedding of the finite witness, including the generated array/slice write-back.
 :::
 ::::
 
@@ -230,8 +228,8 @@ not discard exceptional outcomes: their probability is zero.
 ::::theorem "hc_continuation" (lean := "HashCommitment.Bridge.commit_continuation") (uses := "hc_joint_law")
 :::HashCommitmentBlueprint.pair HashCommitment.Bridge.commit_continuation -docstrings
 Any probabilistic continuation sees the same joint returned value in the
-implementation and its finite model. This experiment invokes the generated
-commitment. It is not merely a verifier-level statement.
+implementation and its finite model. The experiment invokes generated
+commitment generation, so this correspondence includes sampling.
 :::
 ::::
 
@@ -284,8 +282,8 @@ The [source package](source/HashCommitment/README.md.html) records the Rust and
 dependency pins, [toolchain identity](source/HashCommitment/patches/toolchain.json.html),
 [Aeneas patch](source/HashCommitment/patches/aeneas-probabilistic.patch.html), generated
 files and reproduction commands. The extraction check regenerates these files in a
-temporary directory and compares them with the checked-in files. The extraction mode must match
-the patched Lean backend.
+temporary directory and compares them with the checked-in files. The extraction
+mode must match the patched Lean backend.
 
 The trust boundary includes the Rust-to-Lean translation, the ideal entropy
 interpretation and the abstract hash interface. A proof under this interface does
